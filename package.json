@@ -7,8 +7,6 @@
     "npm": "6.13.4"
   },
   "scripts": {
-    "android": "react-native run-android",
-    "ios": "react-native run-ios",
     "prestart": "./scripts/check-node-version",
     "start": "react-native start",
     "lint": "eslint ."
