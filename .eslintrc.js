@@ -27,6 +27,9 @@ module.exports = {
       maxEOF: 0,
       maxBOF: 0,
     }],
+    eqeqeq: ['error', 'always', {
+      null: 'never',
+    }],
     'import/no-unresolved': [2, {
       commonjs: true,
     }],
