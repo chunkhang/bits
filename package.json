@@ -2,9 +2,14 @@
   "name": "Mews",
   "version": "0.0.1",
   "private": true,
+  "engines": {
+    "node": "12.16.0",
+    "npm": "6.13.4"
+  },
   "scripts": {
     "android": "react-native run-android",
     "ios": "react-native run-ios",
+    "prestart": "./scripts/check-node-version",
     "start": "react-native start",
     "test": "jest",
     "lint": "eslint ."
