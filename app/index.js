@@ -1,17 +1,16 @@
 import React from 'react'
-import {
-  SafeAreaView,
-  Text,
-} from 'react-native'
+import { NavigationContainer } from '@react-navigation/native'
 import { ThemeProvider } from 'react-native-elements'
+
+import RootScreen from './screens/RootScreen'
 
 const App = () => {
   return (
-    <ThemeProvider>
-      <SafeAreaView>
-        <Text>Hello World</Text>
-      </SafeAreaView>
-    </ThemeProvider>
+    <NavigationContainer>
+      <ThemeProvider>
+        <RootScreen />
+      </ThemeProvider>
+    </NavigationContainer>
   )
 }
 
