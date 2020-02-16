@@ -3,12 +3,15 @@ import {
   SafeAreaView,
   Text,
 } from 'react-native'
+import { ThemeProvider } from 'react-native-elements'
 
 const App = () => {
   return (
-    <SafeAreaView>
-      <Text>Hello World</Text>
-    </SafeAreaView>
+    <ThemeProvider>
+      <SafeAreaView>
+        <Text>Hello World</Text>
+      </SafeAreaView>
+    </ThemeProvider>
   )
 }
 
