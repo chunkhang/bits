@@ -12,7 +12,9 @@ module.exports = {
   plugins: [
     'import',
     'react',
+    'react-hooks',
   ],
+  parser: 'babel-eslint',
   rules: {
     indent: ['error', 2],
     quotes: ['error', 'single'],
@@ -32,14 +34,17 @@ module.exports = {
     eqeqeq: ['error', 'always', {
       null: 'never',
     }],
-    'import/no-unresolved': [2, {
-      commonjs: true,
-    }],
     'react/no-array-index-key': 1,
     'react/jsx-filename-extension': [1, {
       extensions: ['.js', '.jsx'],
     }],
     'react/jsx-one-expression-per-line': 0,
+    'react-hooks/rules-of-hooks': 'error',
+    'react-hooks/exhaustive-deps': 'warn',
+    'import/no-unresolved': [2, {
+      commonjs: true,
+    }],
+    'import/prefer-default-export': 0,
     'import/order': ['error', {
       'newlines-between': 'always-and-inside-groups',
       pathGroups: [
