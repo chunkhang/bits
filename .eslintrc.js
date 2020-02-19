@@ -42,6 +42,12 @@ module.exports = {
     'react/jsx-one-expression-per-line': 0,
     'import/order': ['error', {
       'newlines-between': 'always-and-inside-groups',
+      pathGroups: [
+        {
+          pattern: '~/**',
+          group: 'parent',
+        },
+      ],
     }],
     'import/no-extraneous-dependencies': ['error', {
       packageDir: path.resolve(__dirname),
