@@ -1,5 +1,7 @@
 #!/usr/bin/env node
 
+/* eslint-disable no-console */
+
 const packageJson = require('../package.json')
 
 const expectedVersion = packageJson.engines.node
