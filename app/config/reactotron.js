@@ -1,3 +1,5 @@
+/* eslint-disable no-console */
+
 import { NativeModules } from 'react-native'
 import Reactotron from 'reactotron-react-native'
 import AsyncStorage from '@react-native-community/async-storage'
@@ -17,4 +19,13 @@ if (__DEV__) {
   Reactotron.clear()
 
   console.tron = Reactotron
+} else {
+  console.tron = {
+    log: () => null,
+    logImportant: () => null,
+    warn: () => null,
+    error: () => null,
+    debug: () => null,
+    display: () => null,
+  }
 }
