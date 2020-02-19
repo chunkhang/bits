@@ -12,6 +12,7 @@ module.exports = {
   plugins: [
     'import',
     'react',
+    'react-hooks',
   ],
   parser: 'babel-eslint',
   rules: {
@@ -38,6 +39,8 @@ module.exports = {
       extensions: ['.js', '.jsx'],
     }],
     'react/jsx-one-expression-per-line': 0,
+    'react-hooks/rules-of-hooks': 'error',
+    'react-hooks/exhaustive-deps': 'warn',
     'import/no-unresolved': [2, {
       commonjs: true,
     }],
