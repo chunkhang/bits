@@ -1,5 +1,7 @@
 import React from 'react'
-import { View, Text } from 'react-native'
+import { View } from 'react-native'
+import { Button, Text } from 'react-native-elements'
+import { observer } from 'mobx-react'
 
 import { useStores } from '~/hooks'
 
@@ -8,9 +10,15 @@ const HomeScreen = () => {
 
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>{JSON.stringify(taskStore.list)}</Text>
+      <Button
+        title="Increment"
+        onPress={() => {
+          taskStore.increment()
+        }}
+      />
+      <Text>{taskStore.count}</Text>
     </View>
   )
 }
 
-export default HomeScreen
+export default observer(HomeScreen)
