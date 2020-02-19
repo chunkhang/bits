@@ -1,3 +1,5 @@
+const path = require('path')
+
 module.exports = {
   root: true,
   env: {
@@ -41,5 +43,20 @@ module.exports = {
     'import/order': ['error', {
       'newlines-between': 'always-and-inside-groups',
     }],
+    'import/no-extraneous-dependencies': ['error', {
+      packageDir: path.resolve(__dirname),
+    }],
+  },
+  settings: {
+    'import/resolver': {
+      alias: [
+        ['~', path.resolve(__dirname, 'app')],
+      ],
+      node: {
+        moduleDirectory: [
+          path.resolve(__dirname, 'node_modules'),
+        ],
+      },
+    },
   },
 }
