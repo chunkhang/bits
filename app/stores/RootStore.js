@@ -1,3 +1,6 @@
+import { create } from 'mobx-persist'
+import AsyncStorage from '@react-native-community/async-storage'
+
 import TaskStore from './TaskStore'
 
 class RootStore {
@@ -6,4 +9,19 @@ class RootStore {
   }
 }
 
+const hydrate = create({
+  storage: AsyncStorage,
+  jsonify: true,
+})
+
+const hydrateStore = (rootStore) => {
+  return Promise.all([
+    hydrate('taskStore', rootStore.taskStore),
+  ])
+}
+
 export default RootStore
+
+export {
+  hydrateStore,
+}
