@@ -16,6 +16,12 @@ const HomeScreen = () => {
           taskStore.increment()
         }}
       />
+      <Button
+        title="Reset"
+        onPress={() => {
+          taskStore.reset()
+        }}
+      />
       <Text>{taskStore.count}</Text>
     </View>
   )

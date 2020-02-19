@@ -13,6 +13,11 @@ class TaskStore {
   increment = () => {
     this.count += 1
   }
+
+  @action
+  reset = () => {
+    this.count = 0
+  }
 }
 
 export default TaskStore
