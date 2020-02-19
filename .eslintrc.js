@@ -15,6 +15,9 @@ module.exports = {
     'react-hooks',
   ],
   parser: 'babel-eslint',
+  globals: {
+    __DEV__: true,
+  },
   rules: {
     indent: ['error', 2],
     quotes: ['error', 'single'],

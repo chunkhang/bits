@@ -17,6 +17,7 @@ const App = () => {
   useEffect(() => {
     rehydrate(store).then(() => {
       setLoading(false)
+      console.tron.logImportant('Done loading')
     })
   }, [])
 
