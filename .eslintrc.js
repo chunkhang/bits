@@ -13,6 +13,7 @@ module.exports = {
     'import',
     'react',
   ],
+  parser: 'babel-eslint',
   rules: {
     indent: ['error', 2],
     quotes: ['error', 'single'],
