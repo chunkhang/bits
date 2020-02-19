@@ -1,7 +1,7 @@
 import React from 'react'
 import { Router, Stack, Scene } from 'react-native-router-flux'
 
-import HomeScreen from '../../screens/HomeScreen'
+import HomeScreen from '~/screens/HomeScreen'
 
 const RootRouter = () => {
   return (
