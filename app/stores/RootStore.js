@@ -14,7 +14,7 @@ const hydrate = create({
   jsonify: true,
 })
 
-const hydrateStore = (rootStore) => {
+const rehydrate = (rootStore) => {
   return Promise.all([
     hydrate('taskStore', rootStore.taskStore),
   ])
@@ -23,5 +23,5 @@ const hydrateStore = (rootStore) => {
 export default RootStore
 
 export {
-  hydrateStore,
+  rehydrate,
 }

@@ -3,7 +3,7 @@ import { NavigationContainer } from '@react-navigation/native'
 import { ThemeProvider } from 'react-native-elements'
 
 import { StoreContext } from '~/contexts'
-import RootStore, { hydrateStore } from '~/stores/RootStore'
+import RootStore, { rehydrate } from '~/stores/RootStore'
 import RootScreen from '~/screens/RootScreen'
 import LoadingScreen from '~/screens/LoadingScreen'
 
@@ -12,7 +12,7 @@ const store = new RootStore()
 const App = () => {
   const [hydrated, setHydrated] = useState(false)
   useEffect(() => {
-    hydrateStore(store).then(() => {
+    rehydrate(store).then(() => {
       setHydrated(true)
     })
   }, [])
