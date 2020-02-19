@@ -10,10 +10,10 @@ import LoadingScreen from '~/screens/LoadingScreen'
 const store = new RootStore()
 
 const App = () => {
-  const [hydrated, setHydrated] = useState(false)
+  const [loading, setLoading] = useState(true)
   useEffect(() => {
     rehydrate(store).then(() => {
-      setHydrated(true)
+      setLoading(false)
     })
   }, [])
 
@@ -21,7 +21,7 @@ const App = () => {
     <NavigationContainer>
       <StoreContext.Provider value={store}>
         <ThemeProvider>
-          {hydrated ? <RootScreen /> : <LoadingScreen />}
+          {loading ? <LoadingScreen /> : <RootScreen />}
         </ThemeProvider>
       </StoreContext.Provider>
     </NavigationContainer>
