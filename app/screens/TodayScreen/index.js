@@ -7,7 +7,7 @@ import { useStores, useStyles } from '~/hooks'
 
 import styles from './styles'
 
-const HomeScreen = () => {
+const TodayScreen = () => {
   const { taskStore } = useStores()
   const classes = useStyles(styles)
 
@@ -30,4 +30,4 @@ const HomeScreen = () => {
   )
 }
 
-export default observer(HomeScreen)
+export default observer(TodayScreen)
