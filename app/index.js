@@ -4,26 +4,25 @@ import { NavigationContainer } from '@react-navigation/native'
 import { ThemeProvider } from 'react-native-elements'
 
 import { StoreContext } from '~/contexts'
-import RootStore, { rehydrate } from '~/stores/RootStore'
+import RootStore from '~/stores/RootStore'
 import LoadingScreen from '~/screens/LoadingScreen'
 import RootRouter from '~/routers/RootRouter'
 
 import theme from './theme'
 
-const store = new RootStore()
+const rootStore = new RootStore()
 
 const App = () => {
   const [loading, setLoading] = useState(true)
   useEffect(() => {
-    rehydrate(store).then(() => {
+    rootStore.rehydrate().then(() => {
       setLoading(false)
-      console.tron.logImportant('Done loading')
     })
   }, [])
 
   return (
     <NavigationContainer>
-      <StoreContext.Provider value={store}>
+      <StoreContext.Provider value={rootStore}>
         <ThemeProvider theme={theme}>
           <SafeAreaView
             style={{
