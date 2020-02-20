@@ -12,7 +12,9 @@ if (__DEV__) {
   Reactotron
     .setAsyncStorageHandler(AsyncStorage)
     .configure({ host, name: 'Mews' })
-    .useReactNative()
+    .useReactNative({
+      asyncStorage: false,
+    })
     .connect()
 
   // Clear every time app reloads
