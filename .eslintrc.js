@@ -37,6 +37,7 @@ module.exports = {
     eqeqeq: ['error', 'always', {
       null: 'never',
     }],
+    'operator-linebreak': ['error', 'after'],
     'react/no-array-index-key': 1,
     'react/jsx-filename-extension': [1, {
       extensions: ['.js', '.jsx'],

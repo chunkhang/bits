@@ -3,13 +3,16 @@ import { View } from 'react-native'
 import { Button, Text } from 'react-native-elements'
 import { observer } from 'mobx-react'
 
-import { useStores } from '~/hooks'
+import { useStores, useStyles } from '~/hooks'
+
+import styles from './styles'
 
 const HomeScreen = () => {
   const { taskStore } = useStores()
+  const classes = useStyles(styles)
 
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+    <View style={classes.mainContainer}>
       <Button
         title="Increment"
         onPress={() => {
