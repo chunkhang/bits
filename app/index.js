@@ -8,7 +8,7 @@ import RootStore, { rehydrate } from '~/stores/RootStore'
 import LoadingScreen from '~/screens/LoadingScreen'
 import RootRouter from '~/routers/RootRouter'
 
-import styles from './styles'
+import theme from './theme'
 
 const store = new RootStore()
 
@@ -24,8 +24,13 @@ const App = () => {
   return (
     <NavigationContainer>
       <StoreContext.Provider value={store}>
-        <ThemeProvider>
-          <SafeAreaView style={styles.mainContainer}>
+        <ThemeProvider theme={theme}>
+          <SafeAreaView
+            style={{
+              flex: 1,
+              backgroundColor: theme.colors.black,
+            }}
+          >
             {loading ? <LoadingScreen /> : <RootRouter />}
           </SafeAreaView>
         </ThemeProvider>
