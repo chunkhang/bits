@@ -1,3 +1,3 @@
-# Mews
+# Bits
 
-[![Lint](https://github.com/chunkhang/mews/workflows/Lint/badge.svg?branch=master)](https://github.com/chunkhang/mews/actions)
+[![Lint](https://github.com/chunkhang/bits/workflows/Lint/badge.svg?branch=master)](https://github.com/chunkhang/bits/actions)
