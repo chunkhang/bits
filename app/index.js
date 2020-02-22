@@ -26,7 +26,7 @@ const App = () => {
           <SafeAreaView
             style={{
               flex: 1,
-              backgroundColor: theme.colors.black,
+              backgroundColor: theme.colors.white,
             }}
           >
             <AppRouter />
