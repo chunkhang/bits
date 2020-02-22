@@ -11,7 +11,7 @@ if (__DEV__) {
 
   Reactotron
     .setAsyncStorageHandler(AsyncStorage)
-    .configure({ host, name: 'Mews' })
+    .configure({ host, name: 'Bits' })
     .useReactNative({
       asyncStorage: false,
     })

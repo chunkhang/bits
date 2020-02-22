@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		00E356F31AD99517003FC87E /* MewsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* MewsTests.m */; };
+		00E356F31AD99517003FC87E /* BitsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* BitsTests.m */; };
 		13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB11A68108700A75B9A /* LaunchScreen.xib */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
@@ -15,11 +15,11 @@
 		2D02E4BC1E0B4A80006451C7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		2D02E4BD1E0B4A84006451C7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		2D02E4BF1E0B4AB3006451C7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
-		2DCD954D1E0B4F2C00145EB5 /* MewsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* MewsTests.m */; };
-		79051B1645A383B5C7DB7203 /* libPods-Mews-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D2082E311A9577BA74210C4D /* libPods-Mews-tvOS.a */; };
-		7DD2F2114EE82207B3DA0619 /* libPods-Mews-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C7A3998AE0E207A5609C265 /* libPods-Mews-tvOSTests.a */; };
-		8A9D4482E498769265A1826F /* libPods-MewsTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F8B416424E1DBDBA9BB796F /* libPods-MewsTests.a */; };
-		E60937EB3430F6BF86FD67A2 /* libPods-Mews.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FFCB2EBBF9526C9BD2C6EBC0 /* libPods-Mews.a */; };
+		2DCD954D1E0B4F2C00145EB5 /* BitsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* BitsTests.m */; };
+		46612AE5B34F5D7A4F4A9BDF /* libPods-Bits.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FD9239CA12326A36D62DF64 /* libPods-Bits.a */; };
+		49AED33EA55E968A1067B007 /* libPods-Bits-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F5F6457D3BC3930C15F3EF70 /* libPods-Bits-tvOSTests.a */; };
+		57F2A8BAE3A99375708F468B /* libPods-BitsTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F7EE88D8E81BDAC10E0FFBC9 /* libPods-BitsTests.a */; };
+		DE05862A8EBA52E849587771 /* libPods-Bits-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 95805314E470A0C377341D61 /* libPods-Bits-tvOS.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -28,45 +28,45 @@
 			containerPortal = 83CBB9F71A601CBA00E9B192 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 13B07F861A680F5B00A75B9A;
-			remoteInfo = Mews;
+			remoteInfo = Bits;
 		};
 		2D02E4911E0B4A5D006451C7 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 83CBB9F71A601CBA00E9B192 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 2D02E47A1E0B4A5D006451C7;
-			remoteInfo = "Mews-tvOS";
+			remoteInfo = "Bits-tvOS";
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		008F07F21AC5B25A0029DE68 /* main.jsbundle */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = main.jsbundle; sourceTree = "<group>"; };
-		00E356EE1AD99517003FC87E /* MewsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MewsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		00E356EE1AD99517003FC87E /* BitsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BitsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		00E356F21AD99517003FC87E /* MewsTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MewsTests.m; sourceTree = "<group>"; };
-		13B07F961A680F5B00A75B9A /* Mews.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Mews.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = Mews/AppDelegate.h; sourceTree = "<group>"; };
-		13B07FB01A68108700A75B9A /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = Mews/AppDelegate.m; sourceTree = "<group>"; };
+		00E356F21AD99517003FC87E /* BitsTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BitsTests.m; sourceTree = "<group>"; };
+		13B07F961A680F5B00A75B9A /* Bits.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Bits.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = Bits/AppDelegate.h; sourceTree = "<group>"; };
+		13B07FB01A68108700A75B9A /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = Bits/AppDelegate.m; sourceTree = "<group>"; };
 		13B07FB21A68108700A75B9A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = Mews/Images.xcassets; sourceTree = "<group>"; };
-		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = Mews/Info.plist; sourceTree = "<group>"; };
-		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = Mews/main.m; sourceTree = "<group>"; };
-		24322BD84C89573692B3634B /* Pods-Mews-tvOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Mews-tvOSTests.debug.xcconfig"; path = "Target Support Files/Pods-Mews-tvOSTests/Pods-Mews-tvOSTests.debug.xcconfig"; sourceTree = "<group>"; };
-		257B0A2931F88D9A64B2960D /* Pods-Mews-tvOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Mews-tvOSTests.release.xcconfig"; path = "Target Support Files/Pods-Mews-tvOSTests/Pods-Mews-tvOSTests.release.xcconfig"; sourceTree = "<group>"; };
-		2D02E47B1E0B4A5D006451C7 /* Mews-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Mews-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		2D02E4901E0B4A5D006451C7 /* Mews-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Mews-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		2F8B416424E1DBDBA9BB796F /* libPods-MewsTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MewsTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		50023F14E3CCFE3324E87D8A /* Pods-MewsTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MewsTests.debug.xcconfig"; path = "Target Support Files/Pods-MewsTests/Pods-MewsTests.debug.xcconfig"; sourceTree = "<group>"; };
-		51636AB78C14F415CB40E49E /* Pods-MewsTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MewsTests.release.xcconfig"; path = "Target Support Files/Pods-MewsTests/Pods-MewsTests.release.xcconfig"; sourceTree = "<group>"; };
-		591AF6FC9955F3C3FCE0A325 /* Pods-Mews-tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Mews-tvOS.release.xcconfig"; path = "Target Support Files/Pods-Mews-tvOS/Pods-Mews-tvOS.release.xcconfig"; sourceTree = "<group>"; };
-		6198903D8897DA2EADFE6000 /* Pods-Mews.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Mews.release.xcconfig"; path = "Target Support Files/Pods-Mews/Pods-Mews.release.xcconfig"; sourceTree = "<group>"; };
-		7C7A3998AE0E207A5609C265 /* libPods-Mews-tvOSTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Mews-tvOSTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		87146D1C9F1B1B1985CD0327 /* Pods-Mews.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Mews.debug.xcconfig"; path = "Target Support Files/Pods-Mews/Pods-Mews.debug.xcconfig"; sourceTree = "<group>"; };
-		CD50D935B6BD7FD367970134 /* Pods-Mews-tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Mews-tvOS.debug.xcconfig"; path = "Target Support Files/Pods-Mews-tvOS/Pods-Mews-tvOS.debug.xcconfig"; sourceTree = "<group>"; };
-		D2082E311A9577BA74210C4D /* libPods-Mews-tvOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Mews-tvOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = Bits/Images.xcassets; sourceTree = "<group>"; };
+		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = Bits/Info.plist; sourceTree = "<group>"; };
+		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = Bits/main.m; sourceTree = "<group>"; };
+		1A33C6098ED906FCB85E36D9 /* Pods-Bits-tvOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Bits-tvOSTests.debug.xcconfig"; path = "Target Support Files/Pods-Bits-tvOSTests/Pods-Bits-tvOSTests.debug.xcconfig"; sourceTree = "<group>"; };
+		2D02E47B1E0B4A5D006451C7 /* Bits-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Bits-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2D02E4901E0B4A5D006451C7 /* Bits-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Bits-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		6D795457837921D8602B68A7 /* Pods-Bits-tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Bits-tvOS.debug.xcconfig"; path = "Target Support Files/Pods-Bits-tvOS/Pods-Bits-tvOS.debug.xcconfig"; sourceTree = "<group>"; };
+		6FD9239CA12326A36D62DF64 /* libPods-Bits.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Bits.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		85378E263E82FE9439E6A23C /* Pods-Bits.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Bits.debug.xcconfig"; path = "Target Support Files/Pods-Bits/Pods-Bits.debug.xcconfig"; sourceTree = "<group>"; };
+		95805314E470A0C377341D61 /* libPods-Bits-tvOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Bits-tvOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		9F5590782CB8B019634085AE /* Pods-Bits-tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Bits-tvOS.release.xcconfig"; path = "Target Support Files/Pods-Bits-tvOS/Pods-Bits-tvOS.release.xcconfig"; sourceTree = "<group>"; };
+		AEBC9C2095D9E008B1EF932E /* Pods-Bits-tvOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Bits-tvOSTests.release.xcconfig"; path = "Target Support Files/Pods-Bits-tvOSTests/Pods-Bits-tvOSTests.release.xcconfig"; sourceTree = "<group>"; };
+		C1E0AF4E7EE75AEB6097DF8E /* Pods-BitsTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BitsTests.release.xcconfig"; path = "Target Support Files/Pods-BitsTests/Pods-BitsTests.release.xcconfig"; sourceTree = "<group>"; };
+		E09690F5F53D6D152F5BDEB1 /* Pods-Bits.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Bits.release.xcconfig"; path = "Target Support Files/Pods-Bits/Pods-Bits.release.xcconfig"; sourceTree = "<group>"; };
+		ECC648DAB79E7EDC5C3C4E24 /* Pods-BitsTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BitsTests.debug.xcconfig"; path = "Target Support Files/Pods-BitsTests/Pods-BitsTests.debug.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		ED2971642150620600B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
-		FFCB2EBBF9526C9BD2C6EBC0 /* libPods-Mews.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Mews.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		F5F6457D3BC3930C15F3EF70 /* libPods-Bits-tvOSTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Bits-tvOSTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		F7EE88D8E81BDAC10E0FFBC9 /* libPods-BitsTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-BitsTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,7 +74,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8A9D4482E498769265A1826F /* libPods-MewsTests.a in Frameworks */,
+				57F2A8BAE3A99375708F468B /* libPods-BitsTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -82,7 +82,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E60937EB3430F6BF86FD67A2 /* libPods-Mews.a in Frameworks */,
+				46612AE5B34F5D7A4F4A9BDF /* libPods-Bits.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -90,7 +90,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				79051B1645A383B5C7DB7203 /* libPods-Mews-tvOS.a in Frameworks */,
+				DE05862A8EBA52E849587771 /* libPods-Bits-tvOS.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -98,20 +98,20 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7DD2F2114EE82207B3DA0619 /* libPods-Mews-tvOSTests.a in Frameworks */,
+				49AED33EA55E968A1067B007 /* libPods-Bits-tvOSTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		00E356EF1AD99517003FC87E /* MewsTests */ = {
+		00E356EF1AD99517003FC87E /* BitsTests */ = {
 			isa = PBXGroup;
 			children = (
-				00E356F21AD99517003FC87E /* MewsTests.m */,
+				00E356F21AD99517003FC87E /* BitsTests.m */,
 				00E356F01AD99517003FC87E /* Supporting Files */,
 			);
-			path = MewsTests;
+			path = BitsTests;
 			sourceTree = "<group>";
 		};
 		00E356F01AD99517003FC87E /* Supporting Files */ = {
@@ -122,7 +122,7 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		13B07FAE1A68108700A75B9A /* Mews */ = {
+		13B07FAE1A68108700A75B9A /* Bits */ = {
 			isa = PBXGroup;
 			children = (
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
@@ -133,7 +133,7 @@
 				13B07FB11A68108700A75B9A /* LaunchScreen.xib */,
 				13B07FB71A68108700A75B9A /* main.m */,
 			);
-			name = Mews;
+			name = Bits;
 			sourceTree = "<group>";
 		};
 		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
@@ -141,25 +141,25 @@
 			children = (
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
 				ED2971642150620600B7C4FE /* JavaScriptCore.framework */,
-				FFCB2EBBF9526C9BD2C6EBC0 /* libPods-Mews.a */,
-				D2082E311A9577BA74210C4D /* libPods-Mews-tvOS.a */,
-				7C7A3998AE0E207A5609C265 /* libPods-Mews-tvOSTests.a */,
-				2F8B416424E1DBDBA9BB796F /* libPods-MewsTests.a */,
+				6FD9239CA12326A36D62DF64 /* libPods-Bits.a */,
+				95805314E470A0C377341D61 /* libPods-Bits-tvOS.a */,
+				F5F6457D3BC3930C15F3EF70 /* libPods-Bits-tvOSTests.a */,
+				F7EE88D8E81BDAC10E0FFBC9 /* libPods-BitsTests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		546129AEDD48129706CB3324 /* Pods */ = {
+		78760E0CB99E4D68F316F2E0 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				87146D1C9F1B1B1985CD0327 /* Pods-Mews.debug.xcconfig */,
-				6198903D8897DA2EADFE6000 /* Pods-Mews.release.xcconfig */,
-				CD50D935B6BD7FD367970134 /* Pods-Mews-tvOS.debug.xcconfig */,
-				591AF6FC9955F3C3FCE0A325 /* Pods-Mews-tvOS.release.xcconfig */,
-				24322BD84C89573692B3634B /* Pods-Mews-tvOSTests.debug.xcconfig */,
-				257B0A2931F88D9A64B2960D /* Pods-Mews-tvOSTests.release.xcconfig */,
-				50023F14E3CCFE3324E87D8A /* Pods-MewsTests.debug.xcconfig */,
-				51636AB78C14F415CB40E49E /* Pods-MewsTests.release.xcconfig */,
+				85378E263E82FE9439E6A23C /* Pods-Bits.debug.xcconfig */,
+				E09690F5F53D6D152F5BDEB1 /* Pods-Bits.release.xcconfig */,
+				6D795457837921D8602B68A7 /* Pods-Bits-tvOS.debug.xcconfig */,
+				9F5590782CB8B019634085AE /* Pods-Bits-tvOS.release.xcconfig */,
+				1A33C6098ED906FCB85E36D9 /* Pods-Bits-tvOSTests.debug.xcconfig */,
+				AEBC9C2095D9E008B1EF932E /* Pods-Bits-tvOSTests.release.xcconfig */,
+				ECC648DAB79E7EDC5C3C4E24 /* Pods-BitsTests.debug.xcconfig */,
+				C1E0AF4E7EE75AEB6097DF8E /* Pods-BitsTests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -174,12 +174,12 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
-				13B07FAE1A68108700A75B9A /* Mews */,
+				13B07FAE1A68108700A75B9A /* Bits */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
-				00E356EF1AD99517003FC87E /* MewsTests */,
+				00E356EF1AD99517003FC87E /* BitsTests */,
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
-				546129AEDD48129706CB3324 /* Pods */,
+				78760E0CB99E4D68F316F2E0 /* Pods */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -189,10 +189,10 @@
 		83CBBA001A601CBA00E9B192 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				13B07F961A680F5B00A75B9A /* Mews.app */,
-				00E356EE1AD99517003FC87E /* MewsTests.xctest */,
-				2D02E47B1E0B4A5D006451C7 /* Mews-tvOS.app */,
-				2D02E4901E0B4A5D006451C7 /* Mews-tvOSTests.xctest */,
+				13B07F961A680F5B00A75B9A /* Bits.app */,
+				00E356EE1AD99517003FC87E /* BitsTests.xctest */,
+				2D02E47B1E0B4A5D006451C7 /* Bits-tvOS.app */,
+				2D02E4901E0B4A5D006451C7 /* Bits-tvOSTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -200,11 +200,11 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		00E356ED1AD99517003FC87E /* MewsTests */ = {
+		00E356ED1AD99517003FC87E /* BitsTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "MewsTests" */;
+			buildConfigurationList = 00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "BitsTests" */;
 			buildPhases = (
-				6C0589ADB55A0AFFD0ED893A /* [CP] Check Pods Manifest.lock */,
+				E5F34E07CCDF7AC8D5AA6DA6 /* [CP] Check Pods Manifest.lock */,
 				00E356EA1AD99517003FC87E /* Sources */,
 				00E356EB1AD99517003FC87E /* Frameworks */,
 				00E356EC1AD99517003FC87E /* Resources */,
@@ -214,37 +214,37 @@
 			dependencies = (
 				00E356F51AD99517003FC87E /* PBXTargetDependency */,
 			);
-			name = MewsTests;
-			productName = MewsTests;
-			productReference = 00E356EE1AD99517003FC87E /* MewsTests.xctest */;
+			name = BitsTests;
+			productName = BitsTests;
+			productReference = 00E356EE1AD99517003FC87E /* BitsTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		13B07F861A680F5B00A75B9A /* Mews */ = {
+		13B07F861A680F5B00A75B9A /* Bits */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "Mews" */;
+			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "Bits" */;
 			buildPhases = (
-				F8AC1C353B52107F6BA1045D /* [CP] Check Pods Manifest.lock */,
+				E1182E76B7B2E5BAB559C107 /* [CP] Check Pods Manifest.lock */,
 				FD10A7F022414F080027D42C /* Start Packager */,
 				13B07F871A680F5B00A75B9A /* Sources */,
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
-				A887DDA358DEBF9E31DFA339 /* [CP] Copy Pods Resources */,
+				51F1FA30F7716AE507F0F50C /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = Mews;
-			productName = Mews;
-			productReference = 13B07F961A680F5B00A75B9A /* Mews.app */;
+			name = Bits;
+			productName = Bits;
+			productReference = 13B07F961A680F5B00A75B9A /* Bits.app */;
 			productType = "com.apple.product-type.application";
 		};
-		2D02E47A1E0B4A5D006451C7 /* Mews-tvOS */ = {
+		2D02E47A1E0B4A5D006451C7 /* Bits-tvOS */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 2D02E4BA1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "Mews-tvOS" */;
+			buildConfigurationList = 2D02E4BA1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "Bits-tvOS" */;
 			buildPhases = (
-				B292C82ECC375919E9E90FF8 /* [CP] Check Pods Manifest.lock */,
+				1505339839AE4F56B14DA40F /* [CP] Check Pods Manifest.lock */,
 				FD10A7F122414F3F0027D42C /* Start Packager */,
 				2D02E4771E0B4A5D006451C7 /* Sources */,
 				2D02E4781E0B4A5D006451C7 /* Frameworks */,
@@ -255,16 +255,16 @@
 			);
 			dependencies = (
 			);
-			name = "Mews-tvOS";
-			productName = "Mews-tvOS";
-			productReference = 2D02E47B1E0B4A5D006451C7 /* Mews-tvOS.app */;
+			name = "Bits-tvOS";
+			productName = "Bits-tvOS";
+			productReference = 2D02E47B1E0B4A5D006451C7 /* Bits-tvOS.app */;
 			productType = "com.apple.product-type.application";
 		};
-		2D02E48F1E0B4A5D006451C7 /* Mews-tvOSTests */ = {
+		2D02E48F1E0B4A5D006451C7 /* Bits-tvOSTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 2D02E4BB1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "Mews-tvOSTests" */;
+			buildConfigurationList = 2D02E4BB1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "Bits-tvOSTests" */;
 			buildPhases = (
-				E9F74025FE171CD1E6C54EA2 /* [CP] Check Pods Manifest.lock */,
+				A70C5BEFBC5035EE2415D48C /* [CP] Check Pods Manifest.lock */,
 				2D02E48C1E0B4A5D006451C7 /* Sources */,
 				2D02E48D1E0B4A5D006451C7 /* Frameworks */,
 				2D02E48E1E0B4A5D006451C7 /* Resources */,
@@ -274,9 +274,9 @@
 			dependencies = (
 				2D02E4921E0B4A5D006451C7 /* PBXTargetDependency */,
 			);
-			name = "Mews-tvOSTests";
-			productName = "Mews-tvOSTests";
-			productReference = 2D02E4901E0B4A5D006451C7 /* Mews-tvOSTests.xctest */;
+			name = "Bits-tvOSTests";
+			productName = "Bits-tvOSTests";
+			productReference = 2D02E4901E0B4A5D006451C7 /* Bits-tvOSTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -307,7 +307,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "Mews" */;
+			buildConfigurationList = 83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "Bits" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -321,10 +321,10 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				13B07F861A680F5B00A75B9A /* Mews */,
-				00E356ED1AD99517003FC87E /* MewsTests */,
-				2D02E47A1E0B4A5D006451C7 /* Mews-tvOS */,
-				2D02E48F1E0B4A5D006451C7 /* Mews-tvOSTests */,
+				13B07F861A680F5B00A75B9A /* Bits */,
+				00E356ED1AD99517003FC87E /* BitsTests */,
+				2D02E47A1E0B4A5D006451C7 /* Bits-tvOS */,
+				2D02E48F1E0B4A5D006451C7 /* Bits-tvOSTests */,
 			);
 		};
 /* End PBXProject section */
@@ -378,21 +378,7 @@
 			shellPath = /bin/sh;
 			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh";
 		};
-		2D02E4CB1E0B4B27006451C7 /* Bundle React Native Code And Images */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Bundle React Native Code And Images";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh";
-		};
-		6C0589ADB55A0AFFD0ED893A /* [CP] Check Pods Manifest.lock */ = {
+		1505339839AE4F56B14DA40F /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -407,20 +393,34 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-MewsTests-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-Bits-tvOS-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		A887DDA358DEBF9E31DFA339 /* [CP] Copy Pods Resources */ = {
+		2D02E4CB1E0B4B27006451C7 /* Bundle React Native Code And Images */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Mews/Pods-Mews-resources.sh",
+			);
+			name = "Bundle React Native Code And Images";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh";
+		};
+		51F1FA30F7716AE507F0F50C /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Bits/Pods-Bits-resources.sh",
 				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/AntDesign.ttf",
 				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Entypo.ttf",
 				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/EvilIcons.ttf",
@@ -459,10 +459,10 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Mews/Pods-Mews-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Bits/Pods-Bits-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		B292C82ECC375919E9E90FF8 /* [CP] Check Pods Manifest.lock */ = {
+		A70C5BEFBC5035EE2415D48C /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -477,14 +477,14 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-Mews-tvOS-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-Bits-tvOSTests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		E9F74025FE171CD1E6C54EA2 /* [CP] Check Pods Manifest.lock */ = {
+		E1182E76B7B2E5BAB559C107 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -499,14 +499,14 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-Mews-tvOSTests-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-Bits-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		F8AC1C353B52107F6BA1045D /* [CP] Check Pods Manifest.lock */ = {
+		E5F34E07CCDF7AC8D5AA6DA6 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -521,7 +521,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-Mews-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-BitsTests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -573,7 +573,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				00E356F31AD99517003FC87E /* MewsTests.m in Sources */,
+				00E356F31AD99517003FC87E /* BitsTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -599,7 +599,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2DCD954D1E0B4F2C00145EB5 /* MewsTests.m in Sources */,
+				2DCD954D1E0B4F2C00145EB5 /* BitsTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -608,12 +608,12 @@
 /* Begin PBXTargetDependency section */
 		00E356F51AD99517003FC87E /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 13B07F861A680F5B00A75B9A /* Mews */;
+			target = 13B07F861A680F5B00A75B9A /* Bits */;
 			targetProxy = 00E356F41AD99517003FC87E /* PBXContainerItemProxy */;
 		};
 		2D02E4921E0B4A5D006451C7 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 2D02E47A1E0B4A5D006451C7 /* Mews-tvOS */;
+			target = 2D02E47A1E0B4A5D006451C7 /* Bits-tvOS */;
 			targetProxy = 2D02E4911E0B4A5D006451C7 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -625,7 +625,7 @@
 				13B07FB21A68108700A75B9A /* Base */,
 			);
 			name = LaunchScreen.xib;
-			path = Mews;
+			path = Bits;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -633,7 +633,7 @@
 /* Begin XCBuildConfiguration section */
 		00E356F61AD99517003FC87E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 50023F14E3CCFE3324E87D8A /* Pods-MewsTests.debug.xcconfig */;
+			baseConfigurationReference = ECC648DAB79E7EDC5C3C4E24 /* Pods-BitsTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				DEVELOPMENT_TEAM = 78C7P3WM63;
@@ -641,7 +641,7 @@
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = MewsTests/Info.plist;
+				INFOPLIST_FILE = BitsTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				OTHER_LDFLAGS = (
@@ -651,18 +651,18 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Mews.app/Mews";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Bits.app/Bits";
 			};
 			name = Debug;
 		};
 		00E356F71AD99517003FC87E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 51636AB78C14F415CB40E49E /* Pods-MewsTests.release.xcconfig */;
+			baseConfigurationReference = C1E0AF4E7EE75AEB6097DF8E /* Pods-BitsTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
 				DEVELOPMENT_TEAM = 78C7P3WM63;
-				INFOPLIST_FILE = MewsTests/Info.plist;
+				INFOPLIST_FILE = BitsTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				OTHER_LDFLAGS = (
@@ -672,19 +672,19 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Mews.app/Mews";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Bits.app/Bits";
 			};
 			name = Release;
 		};
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 87146D1C9F1B1B1985CD0327 /* Pods-Mews.debug.xcconfig */;
+			baseConfigurationReference = 85378E263E82FE9439E6A23C /* Pods-Bits.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = 78C7P3WM63;
-				INFOPLIST_FILE = Mews/Info.plist;
+				INFOPLIST_FILE = Bits/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
@@ -692,19 +692,19 @@
 					"-lc++",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = Mews;
+				PRODUCT_NAME = Bits;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
 		};
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6198903D8897DA2EADFE6000 /* Pods-Mews.release.xcconfig */;
+			baseConfigurationReference = E09690F5F53D6D152F5BDEB1 /* Pods-Bits.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 78C7P3WM63;
-				INFOPLIST_FILE = Mews/Info.plist;
+				INFOPLIST_FILE = Bits/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
@@ -712,14 +712,14 @@
 					"-lc++",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = Mews;
+				PRODUCT_NAME = Bits;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;
 		};
 		2D02E4971E0B4A5E006451C7 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = CD50D935B6BD7FD367970134 /* Pods-Mews-tvOS.debug.xcconfig */;
+			baseConfigurationReference = 6D795457837921D8602B68A7 /* Pods-Bits-tvOS.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -731,14 +731,14 @@
 				DEVELOPMENT_TEAM = "";
 				ENABLE_TESTABILITY = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = "Mews-tvOS/Info.plist";
+				INFOPLIST_FILE = "Bits-tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.facebook.REACT.Mews-tvOS";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.facebook.REACT.Bits-tvOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
 				TARGETED_DEVICE_FAMILY = 3;
@@ -748,7 +748,7 @@
 		};
 		2D02E4981E0B4A5E006451C7 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 591AF6FC9955F3C3FCE0A325 /* Pods-Mews-tvOS.release.xcconfig */;
+			baseConfigurationReference = 9F5590782CB8B019634085AE /* Pods-Bits-tvOS.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -760,14 +760,14 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = "";
 				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = "Mews-tvOS/Info.plist";
+				INFOPLIST_FILE = "Bits-tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.facebook.REACT.Mews-tvOS";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.facebook.REACT.Bits-tvOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
 				TARGETED_DEVICE_FAMILY = 3;
@@ -777,7 +777,7 @@
 		};
 		2D02E4991E0B4A5E006451C7 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 24322BD84C89573692B3634B /* Pods-Mews-tvOSTests.debug.xcconfig */;
+			baseConfigurationReference = 1A33C6098ED906FCB85E36D9 /* Pods-Bits-tvOSTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ANALYZER_NONNULL = YES;
@@ -785,27 +785,26 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = "";
 				ENABLE_TESTABILITY = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = "Mews-tvOSTests/Info.plist";
+				INFOPLIST_FILE = "Bits-tvOSTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.facebook.REACT.Mews-tvOSTests";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.facebook.REACT.Bits-tvOSTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Mews-tvOS.app/Mews-tvOS";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Bits-tvOS.app/Bits-tvOS";
 				TVOS_DEPLOYMENT_TARGET = 10.1;
 			};
 			name = Debug;
 		};
 		2D02E49A1E0B4A5E006451C7 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 257B0A2931F88D9A64B2960D /* Pods-Mews-tvOSTests.release.xcconfig */;
+			baseConfigurationReference = AEBC9C2095D9E008B1EF932E /* Pods-Bits-tvOSTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ANALYZER_NONNULL = YES;
@@ -814,19 +813,18 @@
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = "";
 				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = "Mews-tvOSTests/Info.plist";
+				INFOPLIST_FILE = "Bits-tvOSTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.facebook.REACT.Mews-tvOSTests";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.facebook.REACT.Bits-tvOSTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Mews-tvOS.app/Mews-tvOS";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Bits-tvOS.app/Bits-tvOS";
 				TVOS_DEPLOYMENT_TARGET = 10.1;
 			};
 			name = Release;
@@ -933,7 +931,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "MewsTests" */ = {
+		00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "BitsTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				00E356F61AD99517003FC87E /* Debug */,
@@ -942,7 +940,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "Mews" */ = {
+		13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "Bits" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				13B07F941A680F5B00A75B9A /* Debug */,
@@ -951,7 +949,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		2D02E4BA1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "Mews-tvOS" */ = {
+		2D02E4BA1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "Bits-tvOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				2D02E4971E0B4A5E006451C7 /* Debug */,
@@ -960,7 +958,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		2D02E4BB1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "Mews-tvOSTests" */ = {
+		2D02E4BB1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "Bits-tvOSTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				2D02E4991E0B4A5E006451C7 /* Debug */,
@@ -969,7 +967,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "Mews" */ = {
+		83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "Bits" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				83CBBA201A601CBA00E9B192 /* Debug */,
