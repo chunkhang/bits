@@ -9,10 +9,13 @@ import {
   ActionConst,
 } from 'react-native-router-flux'
 
-import LoadingScreen from '~/screens/LoadingScreen'
-import UpcomingScreen from '~/screens/UpcomingScreen'
-import TodayScreen from '~/screens/TodayScreen'
-import DoneScreen from '~/screens/DoneScreen'
+import {
+  LoadingScreen,
+  UpcomingScreen,
+  TodayScreen,
+  DoneScreen,
+} from '~/screens'
+import { TabBar } from '~/components'
 
 const AppRouter = () => {
   return (
@@ -30,6 +33,7 @@ const AppRouter = () => {
             key="tabs"
             tabBarPosition="top"
             type={ActionConst.REPLACE}
+            tabBarComponent={TabBar}
           >
 
             <Stack
