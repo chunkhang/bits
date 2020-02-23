@@ -43,6 +43,9 @@ module.exports = {
       extensions: ['.js', '.jsx'],
     }],
     'react/jsx-one-expression-per-line': 0,
+    'react/forbid-prop-types': [2, {
+      forbid: ['any'],
+    }],
     'react-hooks/rules-of-hooks': 'error',
     'react-hooks/exhaustive-deps': 'warn',
     'import/no-unresolved': [2, {
