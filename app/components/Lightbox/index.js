@@ -11,7 +11,8 @@ const Lightbox = ({
   children,
   canTapToDismiss,
   onDismiss,
-  duration,
+  enterDuration,
+  exitDuration,
 }) => {
   const classes = useStyles(styles)
 
@@ -20,7 +21,7 @@ const Lightbox = ({
   useEffect(() => {
     Animated.timing(opacity, {
       toValue: 1,
-      duration,
+      duration: enterDuration,
       useNativeDriver: true,
     }).start()
   }, [])
@@ -29,7 +30,7 @@ const Lightbox = ({
     onDismiss()
     Animated.timing(opacity, {
       toValue: 0,
-      duration,
+      duration: exitDuration,
       useNativeDriver: true,
     }).start(Actions.pop)
   }
@@ -60,13 +61,15 @@ Lightbox.propTypes = {
   children: PropTypes.func.isRequired,
   canTapToDismiss: PropTypes.bool,
   onDismiss: PropTypes.func,
-  duration: PropTypes.number,
+  enterDuration: PropTypes.number,
+  exitDuration: PropTypes.number,
 }
 
 Lightbox.defaultProps = {
   canTapToDismiss: false,
   onDismiss: () => null,
-  duration: 250,
+  enterDuration: 0,
+  exitDuration: 0,
 }
 
 export default Lightbox
