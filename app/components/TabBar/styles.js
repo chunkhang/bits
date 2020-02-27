@@ -1,9 +1,8 @@
 const styles = () => {
   return {
     mainContainer: {
-      marginHorizontal: 24,
-      marginTop: 24,
-      marginBottom: 12,
+      paddingHorizontal: 24,
+      paddingTop: 24,
     },
 
     header: {
@@ -43,7 +42,7 @@ const styles = () => {
 
     divider: {
       height: 1,
-      marginVertical: 12,
+      marginTop: 12,
     },
   }
 }

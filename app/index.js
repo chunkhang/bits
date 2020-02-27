@@ -15,7 +15,7 @@ const rootStore = new RootStore()
 const App = () => {
   useEffect(() => {
     rootStore.rehydrate().then(() => {
-      Actions.tabs()
+      Actions.home()
     })
   }, [])
 

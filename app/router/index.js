@@ -15,48 +15,40 @@ import {
   TodayScreen,
   DoneScreen,
 } from '~/screens'
-import { TabBar } from '~/components'
+import { TabBar, ActionBar } from '~/components'
 
 const AppRouter = () => {
   return (
     <Router>
-      <Overlay key="overlay">
-        <Modal key="modal" hideNavBar>
+      <Modal hideNavBar>
 
-          <Scene
-            initial
-            key="loadingScreen"
-            component={LoadingScreen}
-          />
+        <Scene
+          initial
+          key="loading"
+          component={LoadingScreen}
+        />
 
+        <Overlay
+          key="home"
+          type={ActionConst.REPLACE}
+        >
           <Tabs
-            key="tabs"
             tabBarPosition="top"
-            type={ActionConst.REPLACE}
             tabBarComponent={TabBar}
           >
-
             <Stack
-              key="upcomingStack"
-              title="Upcoming"
+              key="upcoming"
               hideNavBar
             >
-              <Scene
-                key="upcomingScreen"
-                component={UpcomingScreen}
-              />
+              <Scene component={UpcomingScreen} />
             </Stack>
 
             <Stack
               initial
-              key="todayStack"
-              title="Today"
+              key="today"
               hideNavBar
             >
-              <Scene
-                key="todayScreen"
-                component={TodayScreen}
-              />
+              <Scene component={TodayScreen} />
             </Stack>
 
             <Stack
@@ -64,16 +56,14 @@ const AppRouter = () => {
               title="Done"
               hideNavBar
             >
-              <Scene
-                key="doneScreen"
-                component={DoneScreen}
-              />
+              <Scene component={DoneScreen} />
             </Stack>
 
           </Tabs>
 
-        </Modal>
-      </Overlay>
+          <Scene component={ActionBar} />
+        </Overlay>
+      </Modal>
     </Router>
   )
 }
