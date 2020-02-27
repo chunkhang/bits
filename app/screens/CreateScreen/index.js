@@ -23,8 +23,6 @@ const CreateScreen = () => {
 
   return (
     <Lightbox
-      enterDuration={100}
-      exitDuration={250}
       canTapToDismiss
       onDismiss={() => {
         Keyboard.dismiss()

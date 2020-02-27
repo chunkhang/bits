@@ -68,8 +68,8 @@ Lightbox.propTypes = {
 Lightbox.defaultProps = {
   canTapToDismiss: false,
   onDismiss: () => null,
-  enterDuration: 0,
-  exitDuration: 0,
+  enterDuration: 100,
+  exitDuration: 100,
 }
 
 export default Lightbox
