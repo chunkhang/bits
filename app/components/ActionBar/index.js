@@ -1,6 +1,7 @@
 import React from 'react'
 import { View } from 'react-native'
 import { Button } from 'react-native-elements'
+import { Actions } from 'react-native-router-flux'
 
 import { useStyles } from '~/hooks'
 
@@ -11,17 +12,24 @@ import styles from './styles'
 const ActionBar = () => {
   const classes = useStyles(styles)
 
+  const hitSlop = 42
+
+  const handlePress = () => {
+    Actions.createTask()
+  }
+
   return (
     <View style={classes.mainContainer}>
       <Button
         icon={<PlusIcon size={16} />}
         buttonStyle={classes.buttonStyle}
         hitSlop={{
-          top: 42,
-          bottom: 42,
-          left: 42,
-          right: 42,
+          top: hitSlop,
+          bottom: hitSlop,
+          left: hitSlop,
+          right: hitSlop,
         }}
+        onPress={handlePress}
       />
     </View>
   )

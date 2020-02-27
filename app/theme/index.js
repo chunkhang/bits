@@ -6,6 +6,7 @@ const theme = {
     red: '#e15554',
     yellow: '#e1bc29',
     green: '#8cae68',
+    whiteTranslucent: 'rgba(255, 255, 255, 0.75)',
   },
 }
 
