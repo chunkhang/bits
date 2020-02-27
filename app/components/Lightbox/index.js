@@ -7,7 +7,12 @@ import { useStyles } from '~/hooks'
 
 import styles from './styles'
 
-const Lightbox = ({ children, dismissable, duration }) => {
+const Lightbox = ({
+  children,
+  canTapToDismiss,
+  onDismiss,
+  duration,
+}) => {
   const classes = useStyles(styles)
 
   const [opacity] = useState(new Animated.Value(0))
@@ -20,14 +25,19 @@ const Lightbox = ({ children, dismissable, duration }) => {
     }).start()
   }, [])
 
-  const handlePress = () => {
-    if (!dismissable) return
-
+  const dismiss = () => {
+    onDismiss()
     Animated.timing(opacity, {
       toValue: 0,
       duration,
       useNativeDriver: true,
     }).start(Actions.pop)
+  }
+
+  const handlePress = () => {
+    if (canTapToDismiss) {
+      dismiss()
+    }
   }
 
   return (
@@ -39,7 +49,7 @@ const Lightbox = ({ children, dismissable, duration }) => {
         ]}
       >
         <TouchableWithoutFeedback>
-          {children}
+          {children(dismiss)}
         </TouchableWithoutFeedback>
       </Animated.View>
     </TouchableWithoutFeedback>
@@ -47,13 +57,15 @@ const Lightbox = ({ children, dismissable, duration }) => {
 }
 
 Lightbox.propTypes = {
-  children: PropTypes.node.isRequired,
-  dismissable: PropTypes.bool,
+  children: PropTypes.func.isRequired,
+  canTapToDismiss: PropTypes.bool,
+  onDismiss: PropTypes.func,
   duration: PropTypes.number,
 }
 
 Lightbox.defaultProps = {
-  dismissable: false,
+  canTapToDismiss: false,
+  onDismiss: () => null,
   duration: 250,
 }
 
