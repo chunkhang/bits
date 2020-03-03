@@ -50,7 +50,8 @@ const Lightbox = ({
         ]}
       >
         <TouchableWithoutFeedback>
-          {children(dismiss)}
+          {typeof children === 'function' ?
+            children(dismiss) : children}
         </TouchableWithoutFeedback>
       </Animated.View>
     </TouchableWithoutFeedback>
@@ -58,7 +59,10 @@ const Lightbox = ({
 }
 
 Lightbox.propTypes = {
-  children: PropTypes.func.isRequired,
+  children: PropTypes.oneOfType([
+    PropTypes.func,
+    PropTypes.node,
+  ]).isRequired,
   canTapToDismiss: PropTypes.bool,
   onDismiss: PropTypes.func,
   enterDuration: PropTypes.number,

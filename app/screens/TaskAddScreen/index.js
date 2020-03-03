@@ -24,53 +24,49 @@ const TaskAddScreen = () => {
   }
 
   const handleSubmit = () => {
-    taskStore.addTask({
-      name: value.trim(),
-    })
+    const name = value.trim()
+    if (!name) return
+
+    taskStore.addTask({ name })
+
     setValue('')
+  }
+
+  const handleDismiss = () => {
+    Keyboard.dismiss()
   }
 
   return (
     <Lightbox
       canTapToDismiss
-      onDismiss={() => {
-        Keyboard.dismiss()
-      }}
+      onDismiss={handleDismiss}
     >
-      {(dismiss) => (
-        <KeyboardAvoidingView
-          style={classes.mainContainer}
-          keyboardVerticalOffset={44}
-          behavior="padding"
-        >
-          <Header
-            color={theme.colors.yellow}
-            title="Add Task"
-          />
-          <View style={classes.body}>
-            <View style={classes.task}>
-              <View style={classes.dot} />
-              <Input
-                value={value}
-                onChangeText={handleInput}
-                ref={inputRef}
-                containerStyle={classes.containerStyle}
-                inputContainerStyle={classes.inputContainerStyle}
-                inputStyle={classes.inputStyle}
-                returnKeyType="next"
-                blurOnSubmit={false}
-                onSubmitEditing={() => {
-                  if (!value.trim()) {
-                    dismiss()
-                    return
-                  }
-                  handleSubmit()
-                }}
-              />
-            </View>
+      <KeyboardAvoidingView
+        style={classes.mainContainer}
+        keyboardVerticalOffset={44}
+        behavior="padding"
+      >
+        <Header
+          color={theme.colors.yellow}
+          title="Add Task"
+        />
+        <View style={classes.body}>
+          <View style={classes.task}>
+            <View style={classes.dot} />
+            <Input
+              value={value}
+              onChangeText={handleInput}
+              ref={inputRef}
+              containerStyle={classes.containerStyle}
+              inputContainerStyle={classes.inputContainerStyle}
+              inputStyle={classes.inputStyle}
+              returnKeyType="next"
+              blurOnSubmit={false}
+              onSubmitEditing={handleSubmit}
+            />
           </View>
-        </KeyboardAvoidingView>
-      )}
+        </View>
+      </KeyboardAvoidingView>
     </Lightbox>
   )
 }
