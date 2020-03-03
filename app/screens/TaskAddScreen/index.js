@@ -7,7 +7,7 @@ import { Lightbox } from '~/components'
 
 import styles from './styles'
 
-const CreateScreen = () => {
+const TaskAddScreen = () => {
   const classes = useStyles(styles)
 
   const inputRef = useRef(null)
@@ -54,4 +54,4 @@ const CreateScreen = () => {
   )
 }
 
-export default CreateScreen
+export default TaskAddScreen

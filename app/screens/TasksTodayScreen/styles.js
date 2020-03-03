@@ -2,8 +2,9 @@ const styles = () => {
   return {
     mainContainer: {
       flex: 1,
-      alignItems: 'center',
-      justifyContent: 'center',
+      backgroundColor: 'blue',
+      paddingHorizontal: 24,
+      paddingVertical: 12,
     },
   }
 }

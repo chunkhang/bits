@@ -15,7 +15,7 @@ const ActionBar = () => {
   const hitSlop = 42
 
   const handlePress = () => {
-    Actions.createTask()
+    Actions.addTask()
   }
 
   return (

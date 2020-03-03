@@ -1,13 +1,13 @@
-import LoadingScreen from './LoadingScreen'
-import UpcomingScreen from './UpcomingScreen'
-import TodayScreen from './TodayScreen'
-import DoneScreen from './DoneScreen'
-import CreateScreen from './CreateScreen'
+import AppLoadingScreen from './AppLoadingScreen'
+import TasksUpcomingScreen from './TasksUpcomingScreen'
+import TasksTodayScreen from './TasksTodayScreen'
+import TasksDoneScreen from './TasksDoneScreen'
+import TaskAddScreen from './TaskAddScreen'
 
 export {
-  LoadingScreen,
-  UpcomingScreen,
-  TodayScreen,
-  DoneScreen,
-  CreateScreen,
+  AppLoadingScreen,
+  TasksUpcomingScreen,
+  TasksTodayScreen,
+  TasksDoneScreen,
+  TaskAddScreen,
 }

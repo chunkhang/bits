@@ -11,11 +11,11 @@ import {
 } from 'react-native-router-flux'
 
 import {
-  LoadingScreen,
-  UpcomingScreen,
-  TodayScreen,
-  DoneScreen,
-  CreateScreen,
+  AppLoadingScreen,
+  TasksUpcomingScreen,
+  TasksTodayScreen,
+  TasksDoneScreen,
+  TaskAddScreen,
 } from '~/screens'
 import { TabBar, ActionBar } from '~/components'
 
@@ -26,7 +26,7 @@ const AppRouter = () => {
         <Scene
           initial
           key="loading"
-          component={LoadingScreen}
+          component={AppLoadingScreen}
         />
         <Lightbox
           key="home"
@@ -41,28 +41,28 @@ const AppRouter = () => {
                 key="upcoming"
                 hideNavBar
               >
-                <Scene component={UpcomingScreen} />
+                <Scene component={TasksUpcomingScreen} />
               </Stack>
               <Stack
                 initial
                 key="today"
                 hideNavBar
               >
-                <Scene component={TodayScreen} />
+                <Scene component={TasksTodayScreen} />
               </Stack>
               <Stack
                 key="doneStack"
                 title="Done"
                 hideNavBar
               >
-                <Scene component={DoneScreen} />
+                <Scene component={TasksDoneScreen} />
               </Stack>
             </Tabs>
             <Scene component={ActionBar} />
           </Overlay>
           <Scene
-            key="createTask"
-            component={CreateScreen}
+            key="addTask"
+            component={TaskAddScreen}
           />
         </Lightbox>
       </Modal>

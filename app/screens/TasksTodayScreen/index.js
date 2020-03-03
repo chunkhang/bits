@@ -7,27 +7,15 @@ import { useStores, useStyles } from '~/hooks'
 
 import styles from './styles'
 
-const TodayScreen = () => {
+const TasksTodayScreen = () => {
   const { taskStore } = useStores()
   const classes = useStyles(styles)
 
   return (
     <View style={classes.mainContainer}>
-      <Button
-        title="Increment"
-        onPress={() => {
-          taskStore.increment()
-        }}
-      />
-      <Button
-        title="Reset"
-        onPress={() => {
-          taskStore.reset()
-        }}
-      />
-      <Text>{taskStore.count}</Text>
+      <View style={{ backgroundColor: 'red', flex: 1 }} />
     </View>
   )
 }
 
-export default observer(TodayScreen)
+export default observer(TasksTodayScreen)

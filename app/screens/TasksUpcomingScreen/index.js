@@ -2,7 +2,7 @@ import React from 'react'
 import { View } from 'react-native'
 import { Text } from 'react-native-elements'
 
-const UpcomingScreen = () => {
+const TasksUpcomingScreen = () => {
   return (
     <View>
       <Text>Upcoming</Text>
@@ -10,4 +10,4 @@ const UpcomingScreen = () => {
   )
 }
 
-export default UpcomingScreen
+export default TasksUpcomingScreen

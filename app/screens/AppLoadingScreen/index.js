@@ -5,7 +5,7 @@ import { useStyles } from '~/hooks'
 
 import styles from './styles'
 
-const LoadingScreen = () => {
+const AppLoadingScreen = () => {
   const classes = useStyles(styles)
 
   return (
@@ -15,4 +15,4 @@ const LoadingScreen = () => {
   )
 }
 
-export default LoadingScreen
+export default AppLoadingScreen

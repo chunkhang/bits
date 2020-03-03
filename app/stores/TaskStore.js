@@ -6,17 +6,12 @@ class TaskStore {
     this.rootStore = rootStore
   }
 
-  @persist
-  @observable count = 0
+  @persist('list')
+  @observable tasks = []
 
   @action
-  increment = () => {
-    this.count += 1
-  }
-
-  @action
-  reset = () => {
-    this.count = 0
+  addTask = (task) => {
+    this.tasks.push(task)
   }
 }
 
