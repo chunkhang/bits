@@ -4,8 +4,7 @@ import { Button } from 'react-native-elements'
 import { Actions } from 'react-native-router-flux'
 
 import { useStyles } from '~/hooks'
-
-import PlusIcon from '../PlusIcon'
+import { PlusIcon } from '~/components'
 
 import styles from './styles'
 

@@ -1,11 +1,7 @@
-import TabBar from './TabBar'
-import ActionBar from './ActionBar'
-import PlusIcon from './PlusIcon'
 import Lightbox from './Lightbox'
+import PlusIcon from './PlusIcon'
 
 export {
-  TabBar,
-  ActionBar,
-  PlusIcon,
   Lightbox,
+  PlusIcon,
 }

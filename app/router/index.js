@@ -17,7 +17,7 @@ import {
   TasksDoneScreen,
   TaskAddScreen,
 } from '~/screens'
-import { TabBar, ActionBar } from '~/components'
+import { TabBar, ActionBar } from '~/containers'
 
 const AppRouter = () => {
   return (
