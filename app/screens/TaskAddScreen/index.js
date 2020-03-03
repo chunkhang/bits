@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { KeyboardAvoidingView, View, Keyboard } from 'react-native'
-import { Text, Input } from 'react-native-elements'
+import { Input } from 'react-native-elements'
 
 import { useStores, useTheme, useStyles } from '~/hooks'
 import { Lightbox, Header } from '~/components'
@@ -47,24 +47,27 @@ const TaskAddScreen = () => {
             color={theme.colors.yellow}
             title="Add Task"
           />
-          <View style={classes.container}>
-            <Input
-              value={value}
-              onChangeText={handleInput}
-              ref={inputRef}
-              containerStyle={classes.containerStyle}
-              inputContainerStyle={classes.inputContainerStyle}
-              inputStyle={classes.inputStyle}
-              returnKeyType="next"
-              blurOnSubmit={false}
-              onSubmitEditing={() => {
-                if (!value.trim()) {
-                  dismiss()
-                  return
-                }
-                handleSubmit()
-              }}
-            />
+          <View style={classes.body}>
+            <View style={classes.task}>
+              <View style={classes.dot} />
+              <Input
+                value={value}
+                onChangeText={handleInput}
+                ref={inputRef}
+                containerStyle={classes.containerStyle}
+                inputContainerStyle={classes.inputContainerStyle}
+                inputStyle={classes.inputStyle}
+                returnKeyType="next"
+                blurOnSubmit={false}
+                onSubmitEditing={() => {
+                  if (!value.trim()) {
+                    dismiss()
+                    return
+                  }
+                  handleSubmit()
+                }}
+              />
+            </View>
           </View>
         </KeyboardAvoidingView>
       )}
