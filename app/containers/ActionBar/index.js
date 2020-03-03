@@ -14,6 +14,7 @@ const ActionBar = () => {
   const hitSlop = 42
 
   const handlePress = () => {
+    Actions.todayTasks()
     Actions.addTask()
   }
 

@@ -38,20 +38,20 @@ const AppRouter = () => {
               tabBarComponent={TabBar}
             >
               <Stack
-                key="upcoming"
+                key="upcomingTasks"
                 hideNavBar
               >
                 <Scene component={TasksUpcomingScreen} />
               </Stack>
               <Stack
                 initial
-                key="today"
+                key="todayTasks"
                 hideNavBar
               >
                 <Scene component={TasksTodayScreen} />
               </Stack>
               <Stack
-                key="doneStack"
+                key="doneTasks"
                 title="Done"
                 hideNavBar
               >
