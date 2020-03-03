@@ -1,5 +1,6 @@
 import 'react-native-gesture-handler'
 import { AppRegistry } from 'react-native'
+import 'react-native-get-random-values'
 
 import './app/config/reactotron'
 import App from './app/index'
