@@ -2,12 +2,13 @@ import React, { useState, useEffect, useRef } from 'react'
 import { KeyboardAvoidingView, View, Keyboard } from 'react-native'
 import { Input } from 'react-native-elements'
 
-import { useStyles } from '~/hooks'
+import { useStores, useStyles } from '~/hooks'
 import { Lightbox } from '~/components'
 
 import styles from './styles'
 
 const TaskAddScreen = () => {
+  const { taskStore } = useStores()
   const classes = useStyles(styles)
 
   const inputRef = useRef(null)
@@ -19,6 +20,12 @@ const TaskAddScreen = () => {
 
   const handleInput = (input) => {
     setValue(input)
+  }
+
+  const handleSubmit = () => {
+    taskStore.addTask({
+      name: value,
+    })
   }
 
   return (
@@ -44,6 +51,7 @@ const TaskAddScreen = () => {
               inputStyle={classes.inputStyle}
               returnKeyType="done"
               onSubmitEditing={() => {
+                handleSubmit()
                 dismiss()
               }}
             />

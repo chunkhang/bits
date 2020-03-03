@@ -11,7 +11,10 @@ class TaskStore {
 
   @action
   addTask = (task) => {
-    this.tasks.push(task)
+    const { name } = task
+    this.tasks.push({
+      name,
+    })
   }
 }
 
