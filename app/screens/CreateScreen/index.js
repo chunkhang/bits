@@ -31,7 +31,7 @@ const CreateScreen = () => {
       {(dismiss) => (
         <KeyboardAvoidingView
           style={classes.mainContainer}
-          keyboardVerticalOffset={48}
+          keyboardVerticalOffset={44}
           behavior="padding"
         >
           <View style={classes.container}>
