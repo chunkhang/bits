@@ -2,14 +2,16 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { View } from 'react-native'
 import { Text, Divider } from 'react-native-elements'
+import { observer } from 'mobx-react'
 
-import { useTheme, useStyles } from '~/hooks'
+import { useStores, useTheme, useStyles } from '~/hooks'
 
 import styles from './styles'
 
 const TabBar = ({ navigation }) => {
   const { routes, index } = navigation.state
 
+  const { taskStore } = useStores()
   const theme = useTheme()
   const classes = useStyles(styles)
 
@@ -64,7 +66,9 @@ const TabBar = ({ navigation }) => {
             classes.headerItemCount,
           ]}
         >
-          <Text style={classes.tabCount}>0 total</Text>
+          <Text style={classes.tabCount}>
+            {`${taskStore.count} total`}
+          </Text>
         </View>
       </View>
       <Divider
@@ -81,4 +85,4 @@ TabBar.propTypes = {
   navigation: PropTypes.object.isRequired,
 }
 
-export default TabBar
+export default observer(TabBar)

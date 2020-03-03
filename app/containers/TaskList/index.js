@@ -14,9 +14,12 @@ const TaskList = () => {
       {taskStore.tasks.map((task) => {
         return (
           <TaskItem
-            key={task.name}
+            key={task.id}
             task={task}
             containerStyle={{ marginBottom: 12 }}
+            onPress={() => {
+              taskStore.removeTask(task.id)
+            }}
           />
         )
       })}

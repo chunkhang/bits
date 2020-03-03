@@ -24,8 +24,9 @@ const TaskAddScreen = () => {
 
   const handleSubmit = () => {
     taskStore.addTask({
-      name: value,
+      name: value.trim(),
     })
+    setValue('')
   }
 
   return (
@@ -49,10 +50,14 @@ const TaskAddScreen = () => {
               containerStyle={classes.containerStyle}
               inputContainerStyle={classes.inputContainerStyle}
               inputStyle={classes.inputStyle}
-              returnKeyType="done"
+              returnKeyType="next"
+              blurOnSubmit={false}
               onSubmitEditing={() => {
+                if (!value.trim()) {
+                  dismiss()
+                  return
+                }
                 handleSubmit()
-                dismiss()
               }}
             />
           </View>
