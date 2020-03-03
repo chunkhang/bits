@@ -1,10 +1,10 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { View } from 'react-native'
-import { Text, Divider } from 'react-native-elements'
 import { observer } from 'mobx-react'
 
 import { useStores, useTheme, useStyles } from '~/hooks'
+import { Header } from '~/components'
 
 import styles from './styles'
 
@@ -30,17 +30,12 @@ const TabBar = ({ navigation }) => {
   const color = tabColors[index]
 
   return (
-    <View style={classes.mainContainer}>
-      <View style={classes.header}>
-        <View style={classes.headerItem}>
-          <Text style={classes.tabName}>{name}</Text>
-        </View>
-        <View
-          style={[
-            classes.headerItem,
-            classes.headerItemTabs,
-          ]}
-        >
+    <Header
+      color={color}
+      title={name}
+      subtitle={`${taskStore.count} total`}
+      content={(
+        <View style={classes.content}>
           {routes.map((route, i) => {
             const marginRight = i === routes.length - 1 ? 0 : 12
             const size = index === i ? 24 : 18
@@ -60,24 +55,8 @@ const TabBar = ({ navigation }) => {
             )
           })}
         </View>
-        <View
-          style={[
-            classes.headerItem,
-            classes.headerItemCount,
-          ]}
-        >
-          <Text style={classes.tabCount}>
-            {`${taskStore.count} total`}
-          </Text>
-        </View>
-      </View>
-      <Divider
-        style={[
-          classes.divider,
-          { backgroundColor: color },
-        ]}
-      />
-    </View>
+      )}
+    />
   )
 }
 

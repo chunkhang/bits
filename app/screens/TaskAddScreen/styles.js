@@ -9,7 +9,6 @@ const styles = () => {
     container: {
       paddingHorizontal: 24,
       paddingVertical: 24,
-      backgroundColor: 'black',
     },
 
     containerStyle: {
@@ -22,7 +21,7 @@ const styles = () => {
     },
 
     inputStyle: {
-      color: 'white',
+      fontSize: 15,
     },
   }
 }
