@@ -1,4 +1,4 @@
-const styles = () => {
+const styles = (theme) => {
   return {
     mainContainer: {
       paddingHorizontal: 24,
@@ -26,7 +26,7 @@ const styles = () => {
     },
 
     tabName: {
-      fontWeight: '500',
+      fontWeight: theme.weights.medium,
       textTransform: 'uppercase',
       fontSize: 12,
     },
@@ -36,7 +36,7 @@ const styles = () => {
     },
 
     tabCount: {
-      fontWeight: '300',
+      fontWeight: theme.weights.light,
       fontSize: 12,
     },
 

@@ -8,6 +8,12 @@ const theme = {
     green: '#8cae68',
     whiteTranslucent: 'rgba(255, 255, 255, 0.75)',
   },
+
+  weights: {
+    light: '300',
+    regular: '400',
+    medium: '500',
+  },
 }
 
 export default theme

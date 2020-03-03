@@ -10,12 +10,13 @@ const TaskList = () => {
   const { taskStore } = useStores()
 
   return (
-    <View style={{ backgroundColor: 'green', flex: 1 }}>
+    <View style={{ flex: 1 }}>
       {taskStore.tasks.map((task) => {
         return (
           <TaskItem
             key={task.name}
             task={task}
+            containerStyle={{ marginBottom: 12 }}
           />
         )
       })}
