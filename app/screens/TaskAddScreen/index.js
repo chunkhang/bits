@@ -38,7 +38,7 @@ const TaskAddScreen = () => {
 
   return (
     <Lightbox
-      canTapToDismiss
+      tapToDismiss
       onDismiss={handleDismiss}
     >
       <KeyboardAvoidingView

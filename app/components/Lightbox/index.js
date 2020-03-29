@@ -9,10 +9,8 @@ import styles from './styles'
 
 const Lightbox = ({
   children,
-  canTapToDismiss,
+  tapToDismiss,
   onDismiss,
-  enterDuration,
-  exitDuration,
 }) => {
   const classes = useStyles(styles)
 
@@ -21,7 +19,7 @@ const Lightbox = ({
   useEffect(() => {
     Animated.timing(opacity, {
       toValue: 1,
-      duration: enterDuration,
+      duration: 100,
       useNativeDriver: true,
     }).start()
   }, [])
@@ -30,19 +28,19 @@ const Lightbox = ({
     onDismiss()
     Animated.timing(opacity, {
       toValue: 0,
-      duration: exitDuration,
+      duration: 100,
       useNativeDriver: true,
     }).start(Actions.pop)
   }
 
-  const handlePress = () => {
-    if (canTapToDismiss) {
+  const onPress = () => {
+    if (tapToDismiss) {
       dismiss()
     }
   }
 
   return (
-    <TouchableWithoutFeedback onPress={handlePress}>
+    <TouchableWithoutFeedback onPress={onPress}>
       <Animated.View
         style={[
           classes.mainContainer,
@@ -50,8 +48,7 @@ const Lightbox = ({
         ]}
       >
         <TouchableWithoutFeedback>
-          {typeof children === 'function' ?
-            children(dismiss) : children}
+          {children}
         </TouchableWithoutFeedback>
       </Animated.View>
     </TouchableWithoutFeedback>
@@ -59,21 +56,14 @@ const Lightbox = ({
 }
 
 Lightbox.propTypes = {
-  children: PropTypes.oneOfType([
-    PropTypes.func,
-    PropTypes.node,
-  ]).isRequired,
-  canTapToDismiss: PropTypes.bool,
+  children: PropTypes.node.isRequired,
+  tapToDismiss: PropTypes.bool,
   onDismiss: PropTypes.func,
-  enterDuration: PropTypes.number,
-  exitDuration: PropTypes.number,
 }
 
 Lightbox.defaultProps = {
-  canTapToDismiss: false,
+  tapToDismiss: false,
   onDismiss: () => null,
-  enterDuration: 100,
-  exitDuration: 100,
 }
 
 export default Lightbox
