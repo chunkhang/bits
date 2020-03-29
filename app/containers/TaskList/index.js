@@ -14,6 +14,10 @@ const TaskList = () => {
   const theme = useTheme()
   const classes = useStyles(styles)
 
+  // TODO: Use PanResponder
+  // https://reactnative.dev/docs/panresponder
+  // https://medium.com/handlebar-labs/intro-to-gestures-in-react-native-e9b63dd3305
+
   const [threshold] = useState(72)
   const [initialOpacity] = useState(0.25)
   const [finalOpacity] = useState(1)
@@ -50,12 +54,14 @@ const TaskList = () => {
     )
   }
 
-  const onSwipeableLeftWillOpen = () => {
-    console.tron.logImportant('left open')
+  const onSwipeableLeftOpen = (task) => {
+    console.tron.logImportant(task.id)
+    Actions.doneTasks()
   }
 
-  const onSwipeableRightWillOpen = () => {
-    console.tron.logImportant('right open')
+  const onSwipeableRightOpen = (task) => {
+    console.tron.logImportant(task.id)
+    Actions.upcomingTasks()
   }
 
   const onPress = (task) => {
@@ -64,7 +70,7 @@ const TaskList = () => {
   }
 
   return (
-    <ScrollView style={{ flex: 1 }}>
+    <ScrollView style={classes.mainContainer}>
       {taskStore.tasks.map((task) => {
         return (
           <Swipeable
@@ -73,8 +79,12 @@ const TaskList = () => {
             renderRightActions={renderRightActions}
             leftThreshold={threshold}
             rightThreshold={threshold}
-            onSwipeableLeftWillOpen={onSwipeableLeftWillOpen}
-            onSwipeableRightWillOpen={onSwipeableRightWillOpen}
+            onSwipeableLeftOpen={() => {
+              onSwipeableLeftOpen(task)
+            }}
+            onSwipeableRightOpen={() => {
+              onSwipeableRightOpen(task)
+            }}
           >
             <ListItem
               value={task.name}
