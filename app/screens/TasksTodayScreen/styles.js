@@ -4,6 +4,7 @@ const styles = () => {
       flex: 1,
       paddingHorizontal: 24,
       paddingVertical: 12,
+      marginBottom: 60,
     },
   }
 }

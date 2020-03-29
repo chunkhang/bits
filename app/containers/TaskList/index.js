@@ -1,5 +1,5 @@
 import React from 'react'
-import { View } from 'react-native'
+import { ScrollView } from 'react-native'
 import { observer } from 'mobx-react'
 
 import { useStores } from '~/hooks'
@@ -10,7 +10,7 @@ const TaskList = () => {
   const { taskStore } = useStores()
 
   return (
-    <View style={{ flex: 1 }}>
+    <ScrollView style={{ flex: 1 }}>
       {taskStore.tasks.map((task) => {
         return (
           <TaskItem
@@ -23,7 +23,7 @@ const TaskList = () => {
           />
         )
       })}
-    </View>
+    </ScrollView>
   )
 }
 
