@@ -1,6 +1,7 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useEffect, useRef } from 'react'
 import { KeyboardAvoidingView, View, Keyboard } from 'react-native'
 import { Text } from 'react-native-elements'
+import { observer } from 'mobx-react'
 
 import { useStores, useTheme, useStyles } from '~/hooks'
 import { Lightbox, Header, ListItem } from '~/components'
@@ -8,7 +9,7 @@ import { Lightbox, Header, ListItem } from '~/components'
 import styles from './styles'
 
 const TaskAddScreen = () => {
-  const { taskStore } = useStores()
+  const { layoutStore, taskStore } = useStores()
   const theme = useTheme()
   const classes = useStyles(styles)
 
@@ -17,19 +18,17 @@ const TaskAddScreen = () => {
     inputRef.current.focus()
   }, [])
 
-  const [value, setValue] = useState('')
-
   const onChangeText = (input) => {
-    setValue(input)
+    layoutStore.setAddTaskInput(input)
   }
 
   const onSubmitEditing = () => {
-    const name = value.trim()
+    const name = layoutStore.addTaskInput.trim()
     if (!name) return
 
     taskStore.addTask({ name })
 
-    setValue('')
+    layoutStore.setAddTaskInput('')
   }
 
   const handleDismiss = () => {
@@ -54,7 +53,7 @@ const TaskAddScreen = () => {
         <View style={classes.body}>
           <ListItem
             editable
-            value={value}
+            value={layoutStore.addTaskInput}
             onChangeText={onChangeText}
             onSubmitEditing={onSubmitEditing}
             returnKeyType="next"
@@ -68,4 +67,4 @@ const TaskAddScreen = () => {
   )
 }
 
-export default TaskAddScreen
+export default observer(TaskAddScreen)
