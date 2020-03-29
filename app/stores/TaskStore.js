@@ -13,6 +13,7 @@ class TaskStore {
   @observable index = null
 
   @computed get task() {
+    if (this.index >= this.count) return null
     return this.tasks[this.index]
   }
 

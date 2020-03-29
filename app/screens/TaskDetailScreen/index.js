@@ -14,8 +14,15 @@ const TaskDetailScreen = () => {
   const theme = useTheme()
   const classes = useStyles(styles)
 
-  const [originalValue] = useState(taskStore.task.name)
-  const [value, setValue] = useState(taskStore.task.name)
+  const [originalValue, setOriginalValue] = useState('')
+  const [value, setValue] = useState('')
+
+  useEffect(() => {
+    if (taskStore.task) {
+      setOriginalValue(taskStore.task.name)
+      setValue(taskStore.task.name)
+    }
+  }, [])
 
   useEffect(() => {
     if (!value.trim()) return
@@ -23,8 +30,10 @@ const TaskDetailScreen = () => {
   }, [value])
 
   useEffect(() => {
-    setValue(taskStore.task.name)
-  }, [taskStore.task.name])
+    if (taskStore.task) {
+      setValue(taskStore.task.name)
+    }
+  }, [taskStore.task])
 
   const onChangeText = (input) => {
     setValue(input)
