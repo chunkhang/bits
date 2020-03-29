@@ -37,7 +37,7 @@ const styles = (theme) => {
     },
 
     inputStyle: {
-      fontSize: 15,
+      fontSize: 16,
     },
   }
 }

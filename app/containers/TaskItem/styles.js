@@ -15,7 +15,7 @@ const styles = (theme) => {
     },
 
     text: {
-      fontSize: 15,
+      fontSize: 16,
       fontWeight: theme.weights.regular,
     },
   }
