@@ -3,7 +3,9 @@ const styles = (theme) => {
     mainContainer: {
       flexDirection: 'row',
       alignItems: 'center',
-      height: 32,
+      height: 48,
+      paddingHorizontal: 24,
+      backgroundColor: theme.colors.white,
     },
 
     dot: {

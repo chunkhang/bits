@@ -6,11 +6,6 @@ const styles = (theme) => {
       width: '100%',
       backgroundColor: theme.colors.white,
     },
-
-    body: {
-      paddingHorizontal: 24,
-      paddingVertical: 12,
-    },
   }
 }
 
