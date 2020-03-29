@@ -1,10 +1,12 @@
 import { create } from 'mobx-persist'
 import AsyncStorage from '@react-native-community/async-storage'
 
+import LayoutStore from './LayoutStore'
 import TaskStore from './TaskStore'
 
 class RootStore {
   constructor() {
+    this.layoutStore = new LayoutStore(this)
     this.taskStore = new TaskStore(this)
   }
 
