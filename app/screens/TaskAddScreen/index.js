@@ -19,11 +19,11 @@ const TaskAddScreen = () => {
 
   const [value, setValue] = useState('')
 
-  const handleInput = (input) => {
+  const onChangeText = (input) => {
     setValue(input)
   }
 
-  const handleSubmit = () => {
+  const onSubmitEditing = () => {
     const name = value.trim()
     if (!name) return
 
@@ -55,8 +55,8 @@ const TaskAddScreen = () => {
           <ListItem
             editable
             value={value}
-            onChangeText={handleInput}
-            onSubmitEditing={handleSubmit}
+            onChangeText={onChangeText}
+            onSubmitEditing={onSubmitEditing}
             returnKeyType="next"
             blurOnSubmit={false}
             color={theme.colors.yellow}

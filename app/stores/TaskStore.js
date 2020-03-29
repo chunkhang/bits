@@ -10,7 +10,11 @@ class TaskStore {
   @persist('list')
   @observable tasks = []
 
-  @observable task = null
+  @observable index = null
+
+  @computed get task() {
+    return this.tasks[this.index]
+  }
 
   @computed get count() {
     return this.tasks.length
@@ -27,6 +31,17 @@ class TaskStore {
   }
 
   @action
+  updateTask = (id, updates) => {
+    this.tasks = this.tasks.map((task) => {
+      if (task.id !== id) return task
+      return {
+        ...task,
+        ...updates,
+      }
+    })
+  }
+
+  @action
   removeTask = (id) => {
     this.tasks = this.tasks.filter((task) => {
       return task.id !== id
@@ -35,7 +50,7 @@ class TaskStore {
 
   @action
   selectTask = (id) => {
-    this.task = this.tasks.find((task) => {
+    this.index = this.tasks.findIndex((task) => {
       return task.id === id
     })
   }

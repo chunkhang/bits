@@ -73,7 +73,7 @@ ListItem.defaultProps = {
   editable: false,
   onChangeText: null,
   onSubmitEditing: null,
-  returnKeyType: null,
+  returnKeyType: 'done',
   blurOnSubmit: true,
   containerStyle: null,
 }

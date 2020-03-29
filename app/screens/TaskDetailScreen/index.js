@@ -1,5 +1,6 @@
 import React from 'react'
 import { View } from 'react-native'
+import { observer } from 'mobx-react'
 
 import { useStores, useTheme, useStyles } from '~/hooks'
 import { ListItem } from '~/components'
@@ -11,14 +12,20 @@ const TaskDetailScreen = () => {
   const theme = useTheme()
   const classes = useStyles(styles)
 
+  const onChangeText = (input) => {
+    taskStore.task.name = input
+  }
+
   return (
     <View style={classes.mainContainer}>
       <ListItem
+        editable
         value={taskStore.task.name}
-        color={theme.colors.green}
+        onChangeText={onChangeText}
+        color={theme.colors.yellow}
       />
     </View>
   )
 }
 
-export default TaskDetailScreen
+export default observer(TaskDetailScreen)
