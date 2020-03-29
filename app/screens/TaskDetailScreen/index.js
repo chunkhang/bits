@@ -13,6 +13,7 @@ const TaskDetailScreen = () => {
   const classes = useStyles(styles)
 
   const onChangeText = (input) => {
+    if (!input.trim()) return
     taskStore.task.name = input
   }
 
