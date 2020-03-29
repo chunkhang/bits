@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { View, TouchableOpacity } from 'react-native'
+import { Text } from 'react-native-elements'
 import { observer } from 'mobx-react'
 import { Actions } from 'react-native-router-flux'
 
@@ -33,12 +34,14 @@ const TabBar = ({ navigation }) => {
   const hitSlop = 24
 
   return (
-    <Header
-      color={color}
-      title={name}
-      subtitle={`${taskStore.count} total`}
-      content={(
-        <View style={classes.content}>
+    <Header color={color}>
+      <View style={classes.item}>
+        <Text style={theme.classes.title}>
+          {name}
+        </Text>
+      </View>
+      <View style={[classes.item, classes.middleItem]}>
+        <View style={classes.tabIconsContainer}>
           {routes.map((route, i) => {
             const marginRight = i === routes.length - 1 ? 0 : 12
             const size = index === i ? 24 : 18
@@ -68,8 +71,13 @@ const TabBar = ({ navigation }) => {
             )
           })}
         </View>
-      )}
-    />
+      </View>
+      <View style={[classes.item, classes.rightItem]}>
+        <Text style={theme.classes.subtitle}>
+          {`${taskStore.count} total`}
+        </Text>
+      </View>
+    </Header>
   )
 }
 

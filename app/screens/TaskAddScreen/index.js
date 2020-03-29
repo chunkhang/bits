@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { KeyboardAvoidingView, View, Keyboard } from 'react-native'
-import { Input } from 'react-native-elements'
+import { Text, Input } from 'react-native-elements'
 
 import { useStores, useTheme, useStyles } from '~/hooks'
 import { Lightbox, Header } from '~/components'
@@ -46,10 +46,11 @@ const TaskAddScreen = () => {
         keyboardVerticalOffset={44}
         behavior="padding"
       >
-        <Header
-          color={theme.colors.yellow}
-          title="Add Task"
-        />
+        <Header color={theme.colors.yellow}>
+          <Text style={theme.classes.title}>
+            Add Task
+          </Text>
+        </Header>
         <View style={classes.body}>
           <View style={classes.task}>
             <View style={classes.dot} />

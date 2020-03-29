@@ -16,8 +16,9 @@ import {
   TasksTodayScreen,
   TasksDoneScreen,
   TaskAddScreen,
+  TaskDetailScreen,
 } from '~/screens'
-import { TabBar, ActionBar } from '~/containers'
+import { TabBar, NavBar, ActionBar } from '~/containers'
 
 const AppRouter = () => {
   return (
@@ -32,34 +33,41 @@ const AppRouter = () => {
           key="home"
           type={ActionConst.REPLACE}
         >
-          <Overlay>
-            <Tabs
-              tabBarPosition="top"
-              tabBarComponent={TabBar}
-            >
-              <Stack
-                key="upcomingTasks"
-                hideNavBar
+          <Stack headerMode="screen">
+            <Overlay hideNavBar>
+              <Tabs
+                tabBarPosition="top"
+                tabBarComponent={TabBar}
               >
-                <Scene component={TasksUpcomingScreen} />
-              </Stack>
-              <Stack
-                initial
-                key="todayTasks"
-                hideNavBar
-              >
-                <Scene component={TasksTodayScreen} />
-              </Stack>
-              <Stack
-                key="doneTasks"
-                title="Done"
-                hideNavBar
-              >
-                <Scene component={TasksDoneScreen} />
-              </Stack>
-            </Tabs>
-            <Scene component={ActionBar} />
-          </Overlay>
+                <Stack
+                  key="upcomingTasks"
+                  hideNavBar
+                >
+                  <Scene component={TasksUpcomingScreen} />
+                </Stack>
+                <Stack
+                  initial
+                  key="todayTasks"
+                  hideNavBar
+                >
+                  <Scene component={TasksTodayScreen} />
+                </Stack>
+                <Stack
+                  key="doneTasks"
+                  hideNavBar
+                >
+                  <Scene component={TasksDoneScreen} />
+                </Stack>
+              </Tabs>
+              <Scene component={ActionBar} />
+            </Overlay>
+            <Scene
+              key="taskDetail"
+              component={TaskDetailScreen}
+              navBar={NavBar}
+              title="Task"
+            />
+          </Stack>
           <Scene
             key="addTask"
             component={TaskAddScreen}

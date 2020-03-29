@@ -1,6 +1,20 @@
 const styles = () => {
   return {
-    content: {
+    item: {
+      flex: 1,
+      height: '100%',
+      justifyContent: 'flex-end',
+    },
+
+    middleItem: {
+      alignItems: 'center',
+    },
+
+    rightItem: {
+      alignItems: 'flex-end',
+    },
+
+    tabIconsContainer: {
       flexDirection: 'row',
       alignItems: 'flex-end',
     },
@@ -8,6 +22,7 @@ const styles = () => {
     tabIcon: {
       borderRadius: 2,
     },
+
   }
 }
 
