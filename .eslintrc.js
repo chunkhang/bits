@@ -47,7 +47,6 @@ module.exports = {
       forbid: ['any'],
     }],
     'react-hooks/rules-of-hooks': 'error',
-    'react-hooks/exhaustive-deps': 'warn',
     'import/no-unresolved': [2, {
       commonjs: true,
     }],
