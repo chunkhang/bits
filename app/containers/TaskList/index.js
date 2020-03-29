@@ -3,14 +3,15 @@ import { ScrollView } from 'react-native'
 import { observer } from 'mobx-react'
 import { Actions } from 'react-native-router-flux'
 
-import { useStores } from '~/hooks'
-
-import TaskItem from '../TaskItem'
+import { useStores, useTheme } from '~/hooks'
+import { ListItem } from '~/components'
 
 const TaskList = () => {
   const { taskStore } = useStores()
+  const theme = useTheme()
 
-  const onPress = () => {
+  const onPress = (task) => {
+    taskStore.selectTask(task.id)
     Actions.taskDetail()
   }
 
@@ -18,11 +19,14 @@ const TaskList = () => {
     <ScrollView style={{ flex: 1 }}>
       {taskStore.tasks.map((task) => {
         return (
-          <TaskItem
+          <ListItem
             key={task.id}
-            task={task}
+            value={task.name}
+            onPress={() => {
+              onPress(task)
+            }}
+            color={theme.colors.yellow}
             containerStyle={{ marginBottom: 12 }}
-            onPress={onPress}
           />
         )
       })}

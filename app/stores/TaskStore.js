@@ -10,6 +10,8 @@ class TaskStore {
   @persist('list')
   @observable tasks = []
 
+  @observable task = null
+
   @computed get count() {
     return this.tasks.length
   }
@@ -28,6 +30,13 @@ class TaskStore {
   removeTask = (id) => {
     this.tasks = this.tasks.filter((task) => {
       return task.id !== id
+    })
+  }
+
+  @action
+  selectTask = (id) => {
+    this.task = this.tasks.find((task) => {
+      return task.id === id
     })
   }
 }

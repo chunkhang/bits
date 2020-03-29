@@ -3,7 +3,7 @@ import { KeyboardAvoidingView, View, Keyboard } from 'react-native'
 import { Text, Input } from 'react-native-elements'
 
 import { useStores, useTheme, useStyles } from '~/hooks'
-import { Lightbox, Header } from '~/components'
+import { Lightbox, Header, ListItem } from '~/components'
 
 import styles from './styles'
 
@@ -12,10 +12,10 @@ const TaskAddScreen = () => {
   const theme = useTheme()
   const classes = useStyles(styles)
 
-  const inputRef = useRef(null)
-  useEffect(() => {
-    inputRef.current.focus()
-  }, [])
+  // const inputRef = useRef(null)
+  // useEffect(() => {
+  //   inputRef.current.focus()
+  // }, [])
 
   const [value, setValue] = useState('')
 
@@ -52,20 +52,15 @@ const TaskAddScreen = () => {
           </Text>
         </Header>
         <View style={classes.body}>
-          <View style={classes.task}>
-            <View style={classes.dot} />
-            <Input
-              value={value}
-              onChangeText={handleInput}
-              ref={inputRef}
-              containerStyle={classes.containerStyle}
-              inputContainerStyle={classes.inputContainerStyle}
-              inputStyle={classes.inputStyle}
-              returnKeyType="next"
-              blurOnSubmit={false}
-              onSubmitEditing={handleSubmit}
-            />
-          </View>
+          <ListItem
+            editable
+            value={value}
+            onChangeText={handleInput}
+            onSubmitEditing={handleSubmit}
+            returnKeyType="next"
+            blurOnSubmit={false}
+            color={theme.colors.yellow}
+          />
         </View>
       </KeyboardAvoidingView>
     </Lightbox>
