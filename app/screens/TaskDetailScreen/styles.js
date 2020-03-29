@@ -6,8 +6,10 @@ const styles = () => {
       paddingVertical: 12,
     },
 
-    iconContainer: {
+    actionContainer: {
       marginTop: 24,
+      justifyContent: 'center',
+      alignItems: 'center',
     },
   }
 }

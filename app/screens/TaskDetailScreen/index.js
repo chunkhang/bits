@@ -65,15 +65,14 @@ const TaskDetailScreen = () => {
         onSubmitEditing={onSubmitEditing}
         color={theme.colors.yellow}
       />
-      <TouchableOpacity
-        style={classes.iconContainer}
-        onPress={onPress}
-      >
-        <Icon
-          name="trash-2"
-          type="feather"
-        />
-      </TouchableOpacity>
+      <View style={classes.actionContainer}>
+        <TouchableOpacity onPress={onPress}>
+          <Icon
+            name="trash-2"
+            type="feather"
+          />
+        </TouchableOpacity>
+      </View>
     </View>
   )
 }
