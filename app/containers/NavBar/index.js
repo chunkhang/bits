@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { View } from 'react-native'
+import { View, TouchableOpacity } from 'react-native'
 import { Text, Icon } from 'react-native-elements'
 import { Actions } from 'react-native-router-flux'
 
@@ -19,13 +19,15 @@ const NavBar = ({ title }) => {
 
   return (
     <Header color={theme.colors.yellow}>
-      <View style={classes.iconContainer}>
+      <TouchableOpacity
+        style={classes.iconContainer}
+        onPress={onPress}
+      >
         <Icon
           name="arrow-left"
           type="feather"
-          onPress={onPress}
         />
-      </View>
+      </TouchableOpacity>
       <View style={classes.titleContainer}>
         <Text style={theme.classes.title}>
           {title}
