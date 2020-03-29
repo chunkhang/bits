@@ -14,6 +14,9 @@ if (__DEV__) {
     .configure({ host, name: 'Bits' })
     .useReactNative({
       asyncStorage: false,
+      networking: {
+        ignoreUrls: /symbolicate/,
+      },
     })
     .connect()
 

@@ -15,7 +15,7 @@ const rootStore = new RootStore()
 const App = () => {
   useEffect(() => {
     rootStore.rehydrate().then(() => {
-      Actions.tabs()
+      Actions.home()
     })
   }, [])
 
@@ -26,7 +26,7 @@ const App = () => {
           <SafeAreaView
             style={{
               flex: 1,
-              backgroundColor: theme.colors.black,
+              backgroundColor: theme.colors.white,
             }}
           >
             <AppRouter />
