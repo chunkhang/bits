@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { View, TouchableOpacity, Alert } from 'react-native'
 import { observer } from 'mobx-react'
 import { Icon } from 'react-native-elements'
@@ -14,9 +14,26 @@ const TaskDetailScreen = () => {
   const theme = useTheme()
   const classes = useStyles(styles)
 
+  const [originalValue] = useState(taskStore.task.name)
+  const [value, setValue] = useState(taskStore.task.name)
+
+  useEffect(() => {
+    if (!value.trim()) return
+    taskStore.task.name = value
+  }, [value])
+
+  useEffect(() => {
+    setValue(taskStore.task.name)
+  }, [taskStore.task.name])
+
   const onChangeText = (input) => {
-    if (!input.trim()) return
-    taskStore.task.name = input
+    setValue(input)
+  }
+
+  const onSubmitEditing = () => {
+    if (!value.trim()) {
+      setValue(originalValue)
+    }
   }
 
   const onPress = () => {
@@ -43,8 +60,9 @@ const TaskDetailScreen = () => {
     <View style={classes.mainContainer}>
       <ListItem
         editable
-        value={taskStore.task.name}
+        value={value}
         onChangeText={onChangeText}
+        onSubmitEditing={onSubmitEditing}
         color={theme.colors.yellow}
       />
       <TouchableOpacity
