@@ -5,6 +5,10 @@ const styles = () => {
       paddingHorizontal: 24,
       paddingVertical: 12,
     },
+
+    iconContainer: {
+      marginTop: 24,
+    },
   }
 }
 
