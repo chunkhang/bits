@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { forwardRef } from 'react'
 import PropTypes from 'prop-types'
 import { TouchableOpacity, View } from 'react-native'
 import { Input, Text } from 'react-native-elements'
@@ -7,17 +7,19 @@ import { useStyles } from '~/hooks'
 
 import styles from './styles'
 
-const ListItem = ({
-  value,
-  onPress,
-  editable,
-  onChangeText,
-  onSubmitEditing,
-  returnKeyType,
-  blurOnSubmit,
-  color,
-  containerStyle,
-}) => {
+const ListItem = forwardRef((props, ref) => {
+  const {
+    value,
+    onPress,
+    editable,
+    onChangeText,
+    onSubmitEditing,
+    returnKeyType,
+    blurOnSubmit,
+    color,
+    containerStyle,
+  } = props
+
   const classes = useStyles(styles)
 
   return (
@@ -40,6 +42,7 @@ const ListItem = ({
           containerStyle={classes.containerStyle}
           inputContainerStyle={classes.inputContainerStyle}
           inputStyle={classes.inputStyle}
+          ref={ref}
         />
       ) : (
         <View style={classes.textContainer}>
@@ -50,7 +53,7 @@ const ListItem = ({
       )}
     </TouchableOpacity>
   )
-}
+})
 
 ListItem.propTypes = {
   value: PropTypes.string,

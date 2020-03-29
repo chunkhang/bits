@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { KeyboardAvoidingView, View, Keyboard } from 'react-native'
-import { Text, Input } from 'react-native-elements'
+import { Text } from 'react-native-elements'
 
 import { useStores, useTheme, useStyles } from '~/hooks'
 import { Lightbox, Header, ListItem } from '~/components'
@@ -12,10 +12,10 @@ const TaskAddScreen = () => {
   const theme = useTheme()
   const classes = useStyles(styles)
 
-  // const inputRef = useRef(null)
-  // useEffect(() => {
-  //   inputRef.current.focus()
-  // }, [])
+  const inputRef = useRef(null)
+  useEffect(() => {
+    inputRef.current.focus()
+  }, [])
 
   const [value, setValue] = useState('')
 
@@ -60,6 +60,7 @@ const TaskAddScreen = () => {
             returnKeyType="next"
             blurOnSubmit={false}
             color={theme.colors.yellow}
+            ref={inputRef}
           />
         </View>
       </KeyboardAvoidingView>
