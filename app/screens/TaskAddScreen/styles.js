@@ -4,6 +4,7 @@ const styles = (theme) => {
       position: 'absolute',
       bottom: 0,
       width: '100%',
+      backgroundColor: theme.colors.white,
     },
 
     body: {

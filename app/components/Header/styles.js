@@ -1,9 +1,8 @@
-const styles = (theme) => {
+const styles = () => {
   return {
     mainContainer: {
       paddingHorizontal: 24,
       paddingTop: 24,
-      backgroundColor: theme.colors.white,
     },
 
     header: {
