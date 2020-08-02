@@ -1,7 +1,8 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import PropTypes from 'prop-types'
 import {
   View,
+  FlatList,
   ScrollView,
   PanResponder,
   Animated,
@@ -25,11 +26,12 @@ const TaskItem = ({ task }) => {
   const [opacity, setOpacity] = useState(null)
 
   const [threshold] = useState(80)
-  const [pan] = useState(new Animated.Value(0))
 
+  const [pan] = useState(new Animated.Value(0))
   const [panResponder] = useState(PanResponder.create({
-    onMoveShouldSetPanResponder: () => {
-      return true
+    onMoveShouldSetPanResponder: (event, gestureState) => {
+      const { dx, dy } = gestureState
+      return (Math.abs(dx) > Math.abs(dy))
     },
     onPanResponderMove: (event, gestureState) => {
       const { dx } = gestureState
@@ -115,14 +117,14 @@ const TaskList = () => {
   const classes = useStyles(styles)
 
   return (
-    <ScrollView style={classes.mainContainer}>
-      {taskStore.tasks.map((task) => (
-        <TaskItem
-          key={task.id}
-          task={task}
-        />
-      ))}
-    </ScrollView>
+    <FlatList
+      style={classes.mainContainer}
+      data={taskStore.tasks}
+      renderItem={({ item }) => (
+        <TaskItem task={item} />
+      )}
+      keyExtractor={(item) => item.id}
+    />
   )
 }
 
