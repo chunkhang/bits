@@ -1,9 +1,8 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import {
   View,
   FlatList,
-  ScrollView,
   PanResponder,
   Animated,
   Dimensions,
