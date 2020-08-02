@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react'
-import { KeyboardAvoidingView, View, Keyboard } from 'react-native'
+import { KeyboardAvoidingView, Keyboard } from 'react-native'
 import { Text } from 'react-native-elements'
 import { observer } from 'mobx-react'
 
@@ -50,18 +50,16 @@ const TaskAddScreen = () => {
             Add Task
           </Text>
         </Header>
-        <View style={classes.body}>
-          <ListItem
-            editable
-            value={layoutStore.addTaskInput}
-            onChangeText={onChangeText}
-            onSubmitEditing={onSubmitEditing}
-            returnKeyType="next"
-            blurOnSubmit={false}
-            color={theme.colors.yellow}
-            ref={inputRef}
-          />
-        </View>
+        <ListItem
+          editable
+          value={layoutStore.addTaskInput}
+          onChangeText={onChangeText}
+          onSubmitEditing={onSubmitEditing}
+          returnKeyType="next"
+          blurOnSubmit={false}
+          color={theme.colors.yellow}
+          ref={inputRef}
+        />
       </KeyboardAvoidingView>
     </Lightbox>
   )

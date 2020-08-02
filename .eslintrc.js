@@ -38,11 +38,13 @@ module.exports = {
       null: 'never',
     }],
     'operator-linebreak': ['error', 'after'],
+    'no-underscore-dangle': 0,
     'react/no-array-index-key': 1,
     'react/jsx-filename-extension': [1, {
       extensions: ['.js', '.jsx'],
     }],
     'react/jsx-one-expression-per-line': 0,
+    'react/jsx-props-no-spreading': 0,
     'react/forbid-prop-types': [2, {
       forbid: ['any'],
     }],

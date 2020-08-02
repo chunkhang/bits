@@ -1,6 +1,6 @@
 import React, { forwardRef } from 'react'
 import PropTypes from 'prop-types'
-import { TouchableOpacity, View } from 'react-native'
+import { TouchableWithoutFeedback, View } from 'react-native'
 import { Input, Text } from 'react-native-elements'
 
 import { useStyles } from '~/hooks'
@@ -23,35 +23,33 @@ const ListItem = forwardRef((props, ref) => {
   const classes = useStyles(styles)
 
   return (
-    <TouchableOpacity
-      style={[
-        classes.mainContainer,
-        containerStyle,
-      ]}
+    <TouchableWithoutFeedback
       onPress={onPress}
       disabled={!onPress}
     >
-      <View style={[classes.dot, { backgroundColor: color }]} />
-      {editable ? (
-        <Input
-          value={value}
-          onChangeText={onChangeText}
-          onSubmitEditing={onSubmitEditing}
-          returnKeyType={returnKeyType}
-          blurOnSubmit={blurOnSubmit}
-          containerStyle={classes.containerStyle}
-          inputContainerStyle={classes.inputContainerStyle}
-          inputStyle={classes.inputStyle}
-          ref={ref}
-        />
-      ) : (
-        <View style={classes.textContainer}>
-          <Text style={classes.inputStyle}>
-            {value}
-          </Text>
-        </View>
-      )}
-    </TouchableOpacity>
+      <View style={[classes.mainContainer, containerStyle]}>
+        <View style={[classes.dot, { backgroundColor: color }]} />
+        {editable ? (
+          <Input
+            value={value}
+            onChangeText={onChangeText}
+            onSubmitEditing={onSubmitEditing}
+            returnKeyType={returnKeyType}
+            blurOnSubmit={blurOnSubmit}
+            containerStyle={classes.containerStyle}
+            inputContainerStyle={classes.inputContainerStyle}
+            inputStyle={classes.inputStyle}
+            ref={ref}
+          />
+        ) : (
+          <View style={classes.textContainer}>
+            <Text style={classes.inputStyle}>
+              {value}
+            </Text>
+          </View>
+        )}
+      </View>
+    </TouchableWithoutFeedback>
   )
 })
 
