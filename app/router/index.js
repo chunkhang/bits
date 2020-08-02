@@ -38,6 +38,7 @@ const AppRouter = () => {
               <Tabs
                 tabBarPosition="top"
                 tabBarComponent={TabBar}
+                swipeEnabled={false}
               >
                 <Stack
                   key="upcomingTasks"
