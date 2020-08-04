@@ -1,4 +1,4 @@
-import { useContext } from 'react'
+import { useContext, useRef, useEffect } from 'react'
 import { StyleSheet } from 'react-native'
 import { ThemeContext } from 'react-native-elements'
 
@@ -21,8 +21,17 @@ const useStyles = (makeStyles) => {
   return classes
 }
 
+const usePrevious = (value) => {
+  const ref = useRef()
+  useEffect(() => {
+    ref.current = value
+  }, [value])
+  return ref.current
+}
+
 export {
   useStores,
   useTheme,
   useStyles,
+  usePrevious,
 }

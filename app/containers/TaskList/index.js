@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import PropTypes from 'prop-types'
 import {
   View,
@@ -10,7 +10,7 @@ import {
 import { observer } from 'mobx-react'
 import { Actions } from 'react-native-router-flux'
 
-import { useStores, useTheme, useStyles } from '~/hooks'
+import { useStores, useTheme, useStyles, usePrevious } from '~/hooks'
 import { ListItem } from '~/components'
 
 import styles from './styles'
@@ -24,7 +24,36 @@ const TaskItem = ({ task }) => {
   const [backgroundColor, setBackgroundColor] = useState(null)
   const [opacity, setOpacity] = useState(null)
 
-  const [threshold] = useState(80)
+  const [currentDx, setCurrentDx] = useState(0)
+  const prevDx = usePrevious(currentDx)
+
+  const [popThreshold] = useState(80)
+  const swipingRightRef = useRef(false)
+  const shouldPopRef = useRef(false)
+  useEffect(() => {
+    const deltaX = currentDx - prevDx
+    const swipingRight = currentDx > 0
+    const exceedThreshold = Math.abs(currentDx) >= popThreshold
+    let shouldPop = false
+    if (swipingRight) {
+      setBackgroundColor(theme.colors.green)
+      if (exceedThreshold && deltaX > 0) {
+        shouldPop = true
+      }
+    } else {
+      setBackgroundColor(theme.colors.red)
+      if (exceedThreshold && deltaX < 0) {
+        shouldPop = true
+      }
+    }
+    if (shouldPop) {
+      setOpacity(1)
+    } else {
+      setOpacity(0.25)
+    }
+    swipingRightRef.current = swipingRight
+    shouldPopRef.current = shouldPop
+  }, [currentDx])
 
   const [pan] = useState(new Animated.Value(0))
   const [panResponder] = useState(PanResponder.create({
@@ -34,25 +63,15 @@ const TaskItem = ({ task }) => {
     },
     onPanResponderMove: (event, gestureState) => {
       const { dx } = gestureState
-      if (dx > 0) {
-        setBackgroundColor(theme.colors.green)
-      } else {
-        setBackgroundColor(theme.colors.red)
-      }
-      if (Math.abs(dx) >= threshold) {
-        setOpacity(1)
-      } else {
-        setOpacity(0.25)
-      }
       pan.setValue(dx)
+      setCurrentDx(dx)
     },
-    onPanResponderRelease: (event, gestureState) => {
-      const { dx } = gestureState
+    onPanResponderRelease: () => {
       const restSpeedThreshold = 20
       const restDisplacementThreshold = 20
-      if (Math.abs(dx) >= threshold) {
+      if (shouldPopRef.current) {
         Animated.spring(pan, {
-          toValue: dx > 0 ? width : -width,
+          toValue: swipingRightRef.current ? width : -width,
           restSpeedThreshold,
           restDisplacementThreshold,
           useNativeDriver: true,
