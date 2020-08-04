@@ -1,8 +1,9 @@
-const styles = () => {
+const styles = (theme) => {
+  const { bottomGutter, tabBarHeight } = theme.globals
   return {
     mainContainer: {
       flex: 1,
-      marginBottom: 60,
+      marginBottom: bottomGutter + tabBarHeight,
     },
   }
 }

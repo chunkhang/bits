@@ -1,28 +1,32 @@
-const styles = () => {
+const styles = (theme) => {
   return {
-    item: {
-      flex: 1,
-      height: '100%',
-      justifyContent: 'flex-end',
-    },
-
-    middleItem: {
-      alignItems: 'center',
-    },
-
-    rightItem: {
+    mainContainer: {
+      position: 'absolute',
+      bottom: theme.globals.bottomGutter,
+      paddingHorizontal: theme.globals.horizontalGutter,
+      height: theme.globals.tabBarHeight,
+      width: '100%',
+      flexDirection: 'row',
+      justifyContent: 'space-between',
       alignItems: 'flex-end',
     },
 
-    tabIconsContainer: {
+    iconsContainer: {
       flexDirection: 'row',
       alignItems: 'flex-end',
     },
 
-    tabIcon: {
+    icon: {
       borderRadius: 2,
+      width: 18,
+      height: 18,
     },
 
+    addButton: {
+      borderRadius: 2,
+      width: 36,
+      height: 36,
+    },
   }
 }
 

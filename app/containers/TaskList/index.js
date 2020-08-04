@@ -20,6 +20,7 @@ const { width } = Dimensions.get('window')
 const TaskItem = ({ task }) => {
   const { taskStore } = useStores()
   const theme = useTheme()
+  const classes = useStyles(styles)
 
   const [backgroundColor, setBackgroundColor] = useState(null)
   const [opacity, setOpacity] = useState(null)
@@ -107,20 +108,13 @@ const TaskItem = ({ task }) => {
         <ListItem
           value={task.name}
           onPress={onPress}
-          color={theme.colors.yellow}
         />
       </Animated.View>
       <View
-        style={{
-          backgroundColor,
-          opacity,
-          position: 'absolute',
-          left: 0,
-          top: 0,
-          right: 0,
-          bottom: 0,
-          zIndex: -1,
-        }}
+        style={[
+          classes.swipeBackground,
+          { backgroundColor, opacity },
+        ]}
       />
     </View>
   )

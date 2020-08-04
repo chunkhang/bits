@@ -6,12 +6,6 @@ const styles = () => {
       left: 0,
       zIndex: 1,
     },
-
-    titleContainer: {
-      flex: 1,
-      flexDirection: 'row',
-      justifyContent: 'center',
-    },
   }
 }
 

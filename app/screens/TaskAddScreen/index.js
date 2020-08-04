@@ -1,16 +1,14 @@
 import React, { useEffect, useRef } from 'react'
 import { KeyboardAvoidingView, Keyboard } from 'react-native'
-import { Text } from 'react-native-elements'
 import { observer } from 'mobx-react'
 
-import { useStores, useTheme, useStyles } from '~/hooks'
+import { useStores, useStyles } from '~/hooks'
 import { Lightbox, Header, ListItem } from '~/components'
 
 import styles from './styles'
 
 const TaskAddScreen = () => {
   const { layoutStore, taskStore } = useStores()
-  const theme = useTheme()
   const classes = useStyles(styles)
 
   const inputRef = useRef(null)
@@ -45,11 +43,7 @@ const TaskAddScreen = () => {
         keyboardVerticalOffset={44}
         behavior="padding"
       >
-        <Header color={theme.colors.yellow}>
-          <Text style={theme.classes.title}>
-            Add Task
-          </Text>
-        </Header>
+        <Header title="Add Task" />
         <ListItem
           editable
           value={layoutStore.addTaskInput}
@@ -57,7 +51,6 @@ const TaskAddScreen = () => {
           onSubmitEditing={onSubmitEditing}
           returnKeyType="next"
           blurOnSubmit={false}
-          color={theme.colors.yellow}
           ref={inputRef}
         />
       </KeyboardAvoidingView>

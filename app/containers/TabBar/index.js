@@ -1,83 +1,101 @@
-import React from 'react'
+import React, { useState } from 'react'
 import PropTypes from 'prop-types'
-import { View, TouchableOpacity } from 'react-native'
-import { Text } from 'react-native-elements'
+import {
+  View,
+  TouchableOpacity,
+} from 'react-native'
+import { Icon, Button } from 'react-native-elements'
 import { observer } from 'mobx-react'
 import { Actions } from 'react-native-router-flux'
 
-import { useStores, useTheme, useStyles } from '~/hooks'
-import { Header } from '~/components'
+import { useTheme, useStyles } from '~/hooks'
+import { PlusIcon } from '~/components'
 
 import styles from './styles'
 
 const TabBar = ({ navigation }) => {
   const { routes, index } = navigation.state
 
-  const { taskStore } = useStores()
   const theme = useTheme()
   const classes = useStyles(styles)
 
-  const tabNames = [
-    'Upcoming',
-    'Today',
-    'Done',
-  ]
-  const tabColors = [
-    theme.colors.red,
-    theme.colors.yellow,
-    theme.colors.green,
-  ]
+  const [iconMargin] = useState(12)
+  const [hitSlop] = useState(30)
 
-  const name = tabNames[index]
-  const color = tabColors[index]
+  const onPressAdd = () => {
+    Actions.todayTasks()
+    setTimeout(() => {
+      Actions.addTask()
+    })
+  }
 
-  const hitSlop = 24
+  const navigateToTab = (i) => {
+    const route = routes[i]
+    const navigate = Actions[route.key]
+    navigate()
+  }
+
+  const onPressLeft = () => {
+    if (index === 0) return
+    navigateToTab(index - 1)
+  }
+
+  const onPressRight = () => {
+    if (index === routes.length - 1) return
+    navigateToTab(index + 1)
+  }
 
   return (
-    <Header color={color}>
-      <View style={classes.item}>
-        <Text style={theme.classes.title}>
-          {name}
-        </Text>
+    <View
+      style={classes.mainContainer}
+    >
+      <TouchableOpacity
+        onPress={onPressLeft}
+      >
+        <Icon
+          name="chevron-left"
+          type="feather"
+        />
+      </TouchableOpacity>
+      <View style={classes.iconsContainer}>
+        {routes.map((route, i) => {
+          const backgroundColor = theme.globals.tabs[i].color
+          const marginRight = i !== routes.length - 1 ? iconMargin : 0
+
+          return index === i ? (
+            <Button
+              key={route.key}
+              icon={<PlusIcon size={16} />}
+              buttonStyle={[
+                classes.addButton,
+                { backgroundColor, marginRight },
+              ]}
+              hitSlop={{
+                left: hitSlop,
+                right: hitSlop,
+              }}
+              onPress={onPressAdd}
+            />
+          ) : (
+            <View
+              key={route.key}
+              style={[
+                classes.icon,
+                { backgroundColor, marginRight },
+              ]}
+            />
+          )
+        })}
       </View>
-      <View style={[classes.item, classes.middleItem]}>
-        <View style={classes.tabIconsContainer}>
-          {routes.map((route, i) => {
-            const marginRight = i === routes.length - 1 ? 0 : 12
-            const size = index === i ? 24 : 18
-            return (
-              <TouchableOpacity
-                key={route.key}
-                style={[
-                  classes.tabIcon,
-                  {
-                    backgroundColor: tabColors[i],
-                    marginRight,
-                    width: size,
-                    height: size,
-                  },
-                ]}
-                hitSlop={{
-                  top: hitSlop,
-                  bottom: hitSlop,
-                  left: hitSlop,
-                  right: hitSlop,
-                }}
-                onPress={() => {
-                  const navigate = Actions[route.key]
-                  navigate()
-                }}
-              />
-            )
-          })}
-        </View>
-      </View>
-      <View style={[classes.item, classes.rightItem]}>
-        <Text style={theme.classes.subtitle}>
-          {`${taskStore.count} total`}
-        </Text>
-      </View>
-    </Header>
+      <TouchableOpacity
+        onPress={onPressRight}
+      >
+        <Icon
+          name="chevron-right"
+          type="feather"
+        />
+      </TouchableOpacity>
+    </View>
   )
 }
 

@@ -1,9 +1,10 @@
-import React, { forwardRef } from 'react'
+import React, { useState, useEffect, forwardRef } from 'react'
 import PropTypes from 'prop-types'
 import { TouchableWithoutFeedback, View } from 'react-native'
 import { Input, Text } from 'react-native-elements'
+import { observer } from 'mobx-react'
 
-import { useStyles } from '~/hooks'
+import { useStyles, useStores } from '~/hooks'
 
 import styles from './styles'
 
@@ -21,6 +22,16 @@ const ListItem = forwardRef((props, ref) => {
   } = props
 
   const classes = useStyles(styles)
+  const { layoutStore } = useStores()
+
+  const [backgroundColor, setBackgroundColor] = useState(color)
+  useEffect(() => {
+    if (color) {
+      setBackgroundColor(color)
+    } else {
+      setBackgroundColor(layoutStore.tabColor)
+    }
+  }, [color, layoutStore.tabColor])
 
   return (
     <TouchableWithoutFeedback
@@ -28,7 +39,7 @@ const ListItem = forwardRef((props, ref) => {
       disabled={!onPress}
     >
       <View style={[classes.mainContainer, containerStyle]}>
-        <View style={[classes.dot, { backgroundColor: color }]} />
+        <View style={[classes.dot, { backgroundColor }]} />
         {editable ? (
           <Input
             value={value}
@@ -61,7 +72,7 @@ ListItem.propTypes = {
   onSubmitEditing: PropTypes.func,
   returnKeyType: PropTypes.string,
   blurOnSubmit: PropTypes.bool,
-  color: PropTypes.string.isRequired,
+  color: PropTypes.string,
   containerStyle: PropTypes.object,
 }
 
@@ -73,7 +84,8 @@ ListItem.defaultProps = {
   onSubmitEditing: null,
   returnKeyType: 'done',
   blurOnSubmit: true,
+  color: null,
   containerStyle: null,
 }
 
-export default ListItem
+export default observer(ListItem)
