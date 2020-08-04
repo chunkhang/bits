@@ -137,7 +137,7 @@ const TaskList = () => {
   return (
     <FlatList
       style={classes.mainContainer}
-      data={taskStore.tasks}
+      data={taskStore.tasks.slice()}
       renderItem={({ item }) => (
         <TaskItem task={item} />
       )}
