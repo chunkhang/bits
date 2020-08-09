@@ -11,8 +11,8 @@ const colors = {
 const globals = {
   horizontalGutter: 24,
   topGutter: 24,
-  bottomGutter: 36,
-  tabBarHeight: 36,
+  bottomGutter: 24,
+  tabBarHeight: 48,
   tabs: [
     { color: colors.red },
     { color: colors.yellow },

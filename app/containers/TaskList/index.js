@@ -5,7 +5,7 @@ import {
   FlatList,
   PanResponder,
   Animated,
-  Dimensions,
+  useWindowDimensions,
 } from 'react-native'
 import { observer } from 'mobx-react'
 import { Actions } from 'react-native-router-flux'
@@ -15,12 +15,11 @@ import { ListItem } from '~/components'
 
 import styles from './styles'
 
-const { width } = Dimensions.get('window')
-
 const TaskItem = ({ task }) => {
   const { taskStore } = useStores()
   const theme = useTheme()
   const classes = useStyles(styles)
+  const window = useWindowDimensions()
 
   const [backgroundColor, setBackgroundColor] = useState(null)
   const [opacity, setOpacity] = useState(null)
@@ -72,7 +71,7 @@ const TaskItem = ({ task }) => {
       const restDisplacementThreshold = 20
       if (shouldPopRef.current) {
         Animated.spring(pan, {
-          toValue: swipingRightRef.current ? width : -width,
+          toValue: swipingRightRef.current ? window.width : -window.width,
           restSpeedThreshold,
           restDisplacementThreshold,
           useNativeDriver: true,
