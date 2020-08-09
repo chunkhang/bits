@@ -1,83 +1,157 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
-import { View, TouchableOpacity } from 'react-native'
-import { Text } from 'react-native-elements'
+import {
+  View,
+  PanResponder,
+  Animated,
+  TouchableWithoutFeedback,
+  useWindowDimensions,
+} from 'react-native'
+import { Button } from 'react-native-elements'
 import { observer } from 'mobx-react'
 import { Actions } from 'react-native-router-flux'
 
-import { useStores, useTheme, useStyles } from '~/hooks'
-import { Header } from '~/components'
+import { useTheme, useStyles } from '~/hooks'
+import { PlusIcon } from '~/components'
 
 import styles from './styles'
 
 const TabBar = ({ navigation }) => {
-  const { routes, index } = navigation.state
-
-  const { taskStore } = useStores()
   const theme = useTheme()
   const classes = useStyles(styles)
+  const window = useWindowDimensions()
 
-  const tabNames = [
-    'Upcoming',
-    'Today',
-    'Done',
-  ]
-  const tabColors = [
-    theme.colors.red,
-    theme.colors.yellow,
-    theme.colors.green,
-  ]
+  const navigateToTab = (i) => {
+    if (i < 0 || i > navigation.state.routes.length - 1) return
+    const route = navigation.state.routes[i]
+    const navigate = Actions[route.key]
+    navigate()
+  }
 
-  const name = tabNames[index]
-  const color = tabColors[index]
+  const [scrubIndex, setScrubIndex] = useState(navigation.state.index)
+  useEffect(() => {
+    setScrubIndex(navigation.state.index)
+  }, [navigation.state.index])
+  useEffect(() => {
+    if (scrubIndex !== navigation.state.index) {
+      navigateToTab(scrubIndex)
+    }
+  }, [scrubIndex])
 
-  const hitSlop = 24
+  const [scrubbing, setScrubbing] = useState(false)
+
+  const [breakpoints, setBreakpoints] = useState([])
+  useEffect(() => {
+    if (window.width) {
+      const unitWidth = window.width / navigation.state.routes.length
+      setBreakpoints(navigation.state.routes.reduce((acc, route, i) => {
+        acc.push(unitWidth * i)
+        return acc
+      }, []))
+    }
+  }, [window])
+
+  const [currentX, setCurrentX] = useState(0)
+  useEffect(() => {
+    const newIndex = breakpoints.reduce((acc, breakpoint) => {
+      if (currentX > breakpoint) {
+        return acc + 1
+      }
+      return acc
+    }, -1)
+    setScrubIndex(newIndex)
+  }, [currentX])
+
+  const [panResponder] = useState(PanResponder.create({
+    onMoveShouldSetPanResponder: () => {
+      return true
+    },
+    onPanResponderMove: (event, gestureState) => {
+      setScrubbing(true)
+      setCurrentX(gestureState.moveX)
+    },
+    onPanResponderRelease: () => {
+      setScrubbing(false)
+    },
+  }))
+
+  const onPressAdd = () => {
+    Actions.todayTasks()
+    setTimeout(() => {
+      Actions.addTask()
+    })
+  }
+
+  const onPressTab = (i) => {
+    navigateToTab(i)
+  }
 
   return (
-    <Header color={color}>
-      <View style={classes.item}>
-        <Text style={theme.classes.title}>
-          {name}
-        </Text>
-      </View>
-      <View style={[classes.item, classes.middleItem]}>
-        <View style={classes.tabIconsContainer}>
-          {routes.map((route, i) => {
-            const marginRight = i === routes.length - 1 ? 0 : 12
-            const size = index === i ? 24 : 18
+    <Animated.View
+      style={classes.mainContainer}
+      {...panResponder.panHandlers}
+    >
+      {scrubbing ? (
+        <View style={classes.scrubsContainer}>
+          {navigation.state.routes.map((route, i) => {
+            const backgroundColor = theme.globals.tabs[i].color
+            const opacity = scrubIndex === i ? 1 : 0.25
+
             return (
-              <TouchableOpacity
+              <View
                 key={route.key}
                 style={[
-                  classes.tabIcon,
-                  {
-                    backgroundColor: tabColors[i],
-                    marginRight,
-                    width: size,
-                    height: size,
-                  },
+                  classes.scrub,
+                  { backgroundColor, opacity },
                 ]}
-                hitSlop={{
-                  top: hitSlop,
-                  bottom: hitSlop,
-                  left: hitSlop,
-                  right: hitSlop,
-                }}
-                onPress={() => {
-                  const navigate = Actions[route.key]
-                  navigate()
-                }}
               />
             )
           })}
         </View>
-      </View>
-      <View style={[classes.item, classes.rightItem]}>
-        <Text style={theme.classes.subtitle}>
-          {`${taskStore.count} total`}
-        </Text>
-      </View>
-    </Header>
+      ) : (
+        <View style={classes.tabsContainer}>
+          {navigation.state.routes.map((route, i) => {
+            const backgroundColor = theme.globals.tabs[i].color
+            const opacity = navigation.state.index === i ? 1 : 0.25
+
+            return (
+              <TouchableWithoutFeedback
+                key={route.key}
+                onPress={() => {
+                  onPressTab(i)
+                }}
+              >
+                <View style={classes.tabContainer}>
+                  {i === 1 ? (
+                    <Button
+                      icon={(
+                        <PlusIcon
+                          size={theme.globals.tabBarHeight / 2}
+                        />
+                      )}
+                      buttonStyle={[
+                        classes.addButton,
+                        { backgroundColor, opacity },
+                      ]}
+                      onPress={onPressAdd}
+                      disabled={navigation.state.index !== i}
+                      disabledStyle={{ backgroundColor }}
+                    />
+                  ) : (
+                    <View
+                      style={[
+                        classes.icon,
+                        { backgroundColor, opacity },
+                      ]}
+                    />
+                  )}
+                </View>
+              </TouchableWithoutFeedback>
+            )
+          })}
+        </View>
+      )}
+    </Animated.View>
   )
 }
 

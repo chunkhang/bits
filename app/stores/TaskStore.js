@@ -23,11 +23,9 @@ class TaskStore {
 
   @action
   addTask = (task) => {
-    const { name } = task
-
     this.tasks.push({
       id: uuidv4(),
-      name,
+      name: task.name,
     })
   }
 

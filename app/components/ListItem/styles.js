@@ -4,7 +4,7 @@ const styles = (theme) => {
       flexDirection: 'row',
       alignItems: 'center',
       height: 48,
-      paddingHorizontal: 24,
+      paddingHorizontal: theme.globals.horizontalGutter,
       backgroundColor: theme.colors.white,
     },
 

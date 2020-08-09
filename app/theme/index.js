@@ -8,29 +8,26 @@ const colors = {
   whiteTranslucent: 'rgba(255, 255, 255, 0.75)',
 }
 
+const globals = {
+  horizontalGutter: 24,
+  topGutter: 24,
+  bottomGutter: 24,
+  tabBarHeight: 48,
+  tabs: [
+    { color: colors.red },
+    { color: colors.yellow },
+    { color: colors.green },
+  ],
+}
+
 const weights = {
   light: '300',
   regular: '400',
   medium: '500',
 }
 
-const classes = {
-  title: {
-    fontWeight: weights.medium,
-    textTransform: 'uppercase',
-    fontSize: 12,
-  },
-
-  subtitle: {
-    fontWeight: weights.light,
-    fontSize: 12,
-  },
-}
-
-const theme = {
+export default {
+  globals,
   colors,
   weights,
-  classes,
 }
-
-export default theme

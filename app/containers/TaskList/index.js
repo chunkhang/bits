@@ -1,57 +1,77 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import PropTypes from 'prop-types'
 import {
   View,
-  ScrollView,
+  FlatList,
   PanResponder,
   Animated,
-  Dimensions,
+  useWindowDimensions,
 } from 'react-native'
 import { observer } from 'mobx-react'
 import { Actions } from 'react-native-router-flux'
 
-import { useStores, useTheme, useStyles } from '~/hooks'
+import { useStores, useTheme, useStyles, usePrevious } from '~/hooks'
 import { ListItem } from '~/components'
 
 import styles from './styles'
 
-const { width } = Dimensions.get('window')
-
 const TaskItem = ({ task }) => {
   const { taskStore } = useStores()
   const theme = useTheme()
+  const classes = useStyles(styles)
+  const window = useWindowDimensions()
 
   const [backgroundColor, setBackgroundColor] = useState(null)
   const [opacity, setOpacity] = useState(null)
 
-  const [threshold] = useState(80)
-  const [pan] = useState(new Animated.Value(0))
+  const [currentDx, setCurrentDx] = useState(0)
+  const prevDx = usePrevious(currentDx)
 
+  const [popThreshold] = useState(80)
+  const swipingRightRef = useRef(false)
+  const shouldPopRef = useRef(false)
+  useEffect(() => {
+    const deltaX = currentDx - prevDx
+    const swipingRight = currentDx > 0
+    const exceedThreshold = Math.abs(currentDx) >= popThreshold
+    let shouldPop = false
+    if (swipingRight) {
+      setBackgroundColor(theme.colors.green)
+      if (exceedThreshold && deltaX > 0) {
+        shouldPop = true
+      }
+    } else {
+      setBackgroundColor(theme.colors.red)
+      if (exceedThreshold && deltaX < 0) {
+        shouldPop = true
+      }
+    }
+    if (shouldPop) {
+      setOpacity(1)
+    } else {
+      setOpacity(0.25)
+    }
+    swipingRightRef.current = swipingRight
+    shouldPopRef.current = shouldPop
+  }, [currentDx])
+
+  const [pan] = useState(new Animated.Value(0))
   const [panResponder] = useState(PanResponder.create({
-    onMoveShouldSetPanResponder: () => {
-      return true
+    onMoveShouldSetPanResponder: (event, gestureState) => {
+      const { dx, dy } = gestureState
+      return (Math.abs(dx) > Math.abs(dy))
     },
     onPanResponderMove: (event, gestureState) => {
       const { dx } = gestureState
-      if (dx > 0) {
-        setBackgroundColor(theme.colors.green)
-      } else {
-        setBackgroundColor(theme.colors.red)
-      }
-      if (Math.abs(dx) >= threshold) {
-        setOpacity(1)
-      } else {
-        setOpacity(0.25)
-      }
       pan.setValue(dx)
+      setCurrentDx(dx)
     },
-    onPanResponderRelease: (event, gestureState) => {
-      const { dx } = gestureState
+    onPanResponderRelease: () => {
       const restSpeedThreshold = 20
       const restDisplacementThreshold = 20
-      if (Math.abs(dx) >= threshold) {
+      if (shouldPopRef.current) {
         Animated.spring(pan, {
-          toValue: dx > 0 ? width : -width,
+          toValue: swipingRightRef.current ? window.width : -window.width,
           restSpeedThreshold,
           restDisplacementThreshold,
           useNativeDriver: true,
@@ -87,20 +107,13 @@ const TaskItem = ({ task }) => {
         <ListItem
           value={task.name}
           onPress={onPress}
-          color={theme.colors.yellow}
         />
       </Animated.View>
       <View
-        style={{
-          backgroundColor,
-          opacity,
-          position: 'absolute',
-          left: 0,
-          top: 0,
-          right: 0,
-          bottom: 0,
-          zIndex: -1,
-        }}
+        style={[
+          classes.swipeBackground,
+          { backgroundColor, opacity },
+        ]}
       />
     </View>
   )
@@ -115,14 +128,14 @@ const TaskList = () => {
   const classes = useStyles(styles)
 
   return (
-    <ScrollView style={classes.mainContainer}>
-      {taskStore.tasks.map((task) => (
-        <TaskItem
-          key={task.id}
-          task={task}
-        />
-      ))}
-    </ScrollView>
+    <FlatList
+      style={classes.mainContainer}
+      data={taskStore.tasks.slice()}
+      renderItem={({ item }) => (
+        <TaskItem task={item} />
+      )}
+      keyExtractor={(item) => item.id}
+    />
   )
 }
 

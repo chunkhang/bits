@@ -6,11 +6,9 @@ import { Actions } from 'react-native-router-flux'
 
 import { StoreContext } from '~/contexts'
 import AppRouter from '~/router'
-import RootStore from '~/stores/RootStore'
+import rootStore from '~/stores'
 
 import theme from './theme'
-
-const rootStore = new RootStore()
 
 const App = () => {
   useEffect(() => {

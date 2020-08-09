@@ -18,7 +18,8 @@ import {
   TaskAddScreen,
   TaskDetailScreen,
 } from '~/screens'
-import { TabBar, NavBar, ActionBar } from '~/containers'
+import { TabBar, NavBar } from '~/containers'
+import rootStore from '~/stores'
 
 const AppRouter = () => {
   return (
@@ -36,30 +37,51 @@ const AppRouter = () => {
           <Stack headerMode="screen">
             <Overlay hideNavBar>
               <Tabs
-                tabBarPosition="top"
+                tabBarPosition="bottom"
                 tabBarComponent={TabBar}
+                swipeEnabled={false}
               >
                 <Stack
                   key="upcomingTasks"
-                  hideNavBar
+                  navBar={NavBar}
+                  title="Upcoming"
+                  hideBackButton
                 >
-                  <Scene component={TasksUpcomingScreen} />
+                  <Scene
+                    component={TasksUpcomingScreen}
+                    onEnter={() => {
+                      rootStore.layoutStore.setTab(0)
+                    }}
+                  />
                 </Stack>
                 <Stack
                   initial
                   key="todayTasks"
-                  hideNavBar
+                  navBar={NavBar}
+                  title="Today"
+                  hideBackButton
                 >
-                  <Scene component={TasksTodayScreen} />
+                  <Scene
+                    component={TasksTodayScreen}
+                    onEnter={() => {
+                      rootStore.layoutStore.setTab(1)
+                    }}
+                  />
                 </Stack>
                 <Stack
                   key="doneTasks"
-                  hideNavBar
+                  navBar={NavBar}
+                  title="Done"
+                  hideBackButton
                 >
-                  <Scene component={TasksDoneScreen} />
+                  <Scene
+                    component={TasksDoneScreen}
+                    onEnter={() => {
+                      rootStore.layoutStore.setTab(2)
+                    }}
+                  />
                 </Stack>
               </Tabs>
-              <Scene component={ActionBar} />
             </Overlay>
             <Scene
               key="taskDetail"

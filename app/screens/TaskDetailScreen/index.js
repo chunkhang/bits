@@ -4,14 +4,13 @@ import { observer } from 'mobx-react'
 import { Icon } from 'react-native-elements'
 import { Actions } from 'react-native-router-flux'
 
-import { useStores, useTheme, useStyles } from '~/hooks'
+import { useStores, useStyles } from '~/hooks'
 import { ListItem } from '~/components'
 
 import styles from './styles'
 
 const TaskDetailScreen = () => {
   const { taskStore } = useStores()
-  const theme = useTheme()
   const classes = useStyles(styles)
 
   const [originalValue, setOriginalValue] = useState('')
@@ -72,7 +71,6 @@ const TaskDetailScreen = () => {
         value={value}
         onChangeText={onChangeText}
         onSubmitEditing={onSubmitEditing}
-        color={theme.colors.yellow}
       />
       <View style={classes.actionContainer}>
         <TouchableOpacity onPress={onPress}>
