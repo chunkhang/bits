@@ -100,7 +100,7 @@ const TaskItem = observer(({ taskType, task }) => {
   /* Swipe logic */
 
   // How much distance to drag before popping and handling swipe
-  const [popThreshold] = useState(80)
+  const [popThreshold] = useState(64)
 
   // Horizontal translation of view
   const [pan] = useState(new Animated.Value(0))
