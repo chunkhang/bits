@@ -29,20 +29,7 @@ const TaskItem = observer(({ taskType, task }) => {
 
   /* Swipe config */
 
-  const [swipe, setSwipe] = useState({
-    left: {
-      enabled: false,
-      color: null,
-      handler: () => null,
-    },
-    right: {
-      enabled: false,
-      color: null,
-      handler: () => null,
-    },
-  })
-
-  const [swipeMap] = useState({
+  const swipeMap = {
     upcoming: {
       left: {
         enabled: false,
@@ -91,11 +78,9 @@ const TaskItem = observer(({ taskType, task }) => {
         handler: () => null,
       },
     },
-  })
+  }
 
-  useEffect(() => {
-    setSwipe(swipeMap[taskType])
-  }, [taskType])
+  const swipe = swipeMap[taskType]
 
   /* Swipe logic */
 
