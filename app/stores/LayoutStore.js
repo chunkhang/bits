@@ -13,20 +13,17 @@ class LayoutStore {
     return theme.globals.tabs[this.tabIndex].color
   }
 
-  @action
-  setTab = (tab) => {
+  @action setTab = (tab) => {
     this.tabIndex = tab
   }
 
-  @action
-  setTabColor = (color) => {
+  @action setTabColor = (color) => {
     this.tabColor = color
   }
 
   @observable addTaskInput = ''
 
-  @action
-  setAddTaskInput = (input) => {
+  @action setAddTaskInput = (input) => {
     this.addTaskInput = input
   }
 }

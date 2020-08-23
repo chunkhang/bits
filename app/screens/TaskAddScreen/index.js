@@ -8,7 +8,7 @@ import { Lightbox, Header, ListItem } from '~/components'
 import styles from './styles'
 
 const TaskAddScreen = () => {
-  const { layoutStore, taskStore } = useStores()
+  const { layoutStore, todayStore } = useStores()
   const classes = useStyles(styles)
 
   const inputRef = useRef(null)
@@ -24,7 +24,7 @@ const TaskAddScreen = () => {
     const name = layoutStore.addTaskInput.trim()
     if (!name) return
 
-    taskStore.addTask({ name })
+    todayStore.addTask({ name })
 
     layoutStore.setAddTaskInput('')
   }

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import PropTypes from 'prop-types'
 import { View, TouchableOpacity, Alert } from 'react-native'
 import { observer } from 'mobx-react'
 import { Icon } from 'react-native-elements'
@@ -9,30 +10,37 @@ import { ListItem } from '~/components'
 
 import styles from './styles'
 
-const TaskDetailScreen = () => {
-  const { taskStore } = useStores()
+const TaskDetailScreen = ({ taskType, task }) => {
+  const { upcomingStore, todayStore, doneStore } = useStores()
   const classes = useStyles(styles)
+
+  const storeMap = {
+    upcoming: upcomingStore,
+    today: todayStore,
+    done: doneStore,
+  }
+  const store = storeMap[taskType]
 
   const [originalValue, setOriginalValue] = useState('')
   const [value, setValue] = useState('')
 
   useEffect(() => {
-    if (taskStore.task) {
-      setOriginalValue(taskStore.task.name)
-      setValue(taskStore.task.name)
+    if (task) {
+      setOriginalValue(task.name)
+      setValue(task.name)
     }
   }, [])
 
   useEffect(() => {
     if (!value.trim()) return
-    taskStore.task.name = value
+    store.updateTask(task.id, { name: value })
   }, [value])
 
   useEffect(() => {
-    if (taskStore.task) {
-      setValue(taskStore.task.name)
+    if (task) {
+      setValue(task.name)
     }
-  }, [taskStore.task])
+  }, [task])
 
   const onChangeText = (input) => {
     setValue(input)
@@ -57,7 +65,7 @@ const TaskDetailScreen = () => {
           text: 'Yes',
           onPress: () => {
             Actions.pop()
-            taskStore.removeTask(taskStore.task.id)
+            store.removeTask(task.id)
           },
         },
       ],
@@ -82,6 +90,11 @@ const TaskDetailScreen = () => {
       </View>
     </View>
   )
+}
+
+TaskDetailScreen.propTypes = {
+  taskType: PropTypes.string.isRequired,
+  task: PropTypes.object.isRequired,
 }
 
 export default observer(TaskDetailScreen)

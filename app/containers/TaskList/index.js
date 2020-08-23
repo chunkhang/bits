@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import {
   View,
@@ -10,65 +10,162 @@ import {
 import { observer } from 'mobx-react'
 import { Actions } from 'react-native-router-flux'
 
-import { useStores, useTheme, useStyles, usePrevious } from '~/hooks'
+import {
+  useStores,
+  useTheme,
+  useStyles,
+  usePrevious,
+  useTrackingRef,
+} from '~/hooks'
 import { ListItem } from '~/components'
 
 import styles from './styles'
 
-const TaskItem = ({ task }) => {
-  const { taskStore } = useStores()
+const TaskItem = observer(({ taskType, task }) => {
   const theme = useTheme()
   const classes = useStyles(styles)
   const window = useWindowDimensions()
+  const { upcomingStore, todayStore, doneStore } = useStores()
 
-  const [backgroundColor, setBackgroundColor] = useState(null)
-  const [opacity, setOpacity] = useState(null)
+  /* Swipe config */
 
+  const [swipe, setSwipe] = useState({
+    left: {
+      enabled: false,
+      color: null,
+      handler: () => null,
+    },
+    right: {
+      enabled: false,
+      color: null,
+      handler: () => null,
+    },
+  })
+
+  const [swipeMap] = useState({
+    upcoming: {
+      left: {
+        enabled: false,
+        color: null,
+        handler: () => null,
+      },
+      right: {
+        enabled: true,
+        color: theme.colors.yellow,
+        handler: () => {
+          upcomingStore.removeTask(task.id)
+          todayStore.addTask(task)
+        },
+      },
+    },
+    today: {
+      left: {
+        enabled: true,
+        color: theme.colors.red,
+        handler: () => {
+          todayStore.removeTask(task.id)
+          upcomingStore.addTask(task)
+        },
+      },
+      right: {
+        enabled: true,
+        color: theme.colors.green,
+        handler: () => {
+          todayStore.removeTask(task.id)
+          doneStore.addTask(task)
+        },
+      },
+    },
+    done: {
+      left: {
+        enabled: true,
+        color: theme.colors.yellow,
+        handler: () => {
+          doneStore.removeTask(task.id)
+          todayStore.addTask(task)
+        },
+      },
+      right: {
+        enabled: false,
+        color: null,
+        handler: () => null,
+      },
+    },
+  })
+
+  useEffect(() => {
+    setSwipe(swipeMap[taskType])
+  }, [taskType])
+
+  /* Swipe logic */
+
+  // How much distance to drag before popping and handling swipe
+  const [popThreshold] = useState(64)
+
+  // Horizontal translation of view
+  const [pan] = useState(new Animated.Value(0))
+
+  // Track current and previous x position
   const [currentDx, setCurrentDx] = useState(0)
   const prevDx = usePrevious(currentDx)
 
-  const [popThreshold] = useState(80)
-  const swipingRightRef = useRef(false)
-  const shouldPopRef = useRef(false)
+  // Swipe state
+  const [swipingRight, setSwipingRight] = useState(false)
+  const [shouldPop, setShouldPop] = useState(false)
+
+  // Styles to apply based on swipe state
+  const [backgroundColor, setBackgroundColor] = useState(null)
+  const [opacity, setOpacity] = useState(null)
+
   useEffect(() => {
-    const deltaX = currentDx - prevDx
-    const swipingRight = currentDx > 0
-    const exceedThreshold = Math.abs(currentDx) >= popThreshold
-    let shouldPop = false
-    if (swipingRight) {
-      setBackgroundColor(theme.colors.green)
-      if (exceedThreshold && deltaX > 0) {
-        shouldPop = true
-      }
+    // Determine swipe direction
+    const newSwipingRight = currentDx > 0
+    if (newSwipingRight) {
+      if (!swipe.right.enabled) return
+      setBackgroundColor(swipe.right.color)
     } else {
-      setBackgroundColor(theme.colors.red)
-      if (exceedThreshold && deltaX < 0) {
-        shouldPop = true
-      }
+      if (!swipe.left.enabled) return
+      setBackgroundColor(swipe.left.color)
     }
-    if (shouldPop) {
+    // Determine whether should pop or not
+    const deltaX = currentDx - prevDx
+    const exceedThreshold = Math.abs(currentDx) >= popThreshold
+    const newShouldPop = exceedThreshold && (
+      // Must be swiping in the correct direction
+      newSwipingRight ? deltaX > 0 : deltaX < 0
+    )
+    if (newShouldPop) {
       setOpacity(1)
     } else {
       setOpacity(0.25)
     }
-    swipingRightRef.current = swipingRight
-    shouldPopRef.current = shouldPop
+    // Apple horizontal translation
+    pan.setValue(currentDx)
+    setSwipingRight(newSwipingRight)
+    setShouldPop(newShouldPop)
   }, [currentDx])
 
-  const [pan] = useState(new Animated.Value(0))
+  /* Pan responder */
+
+  // All changing values must be ref
+  const swipeRef = useTrackingRef(swipe)
+  const swipingRightRef = useTrackingRef(swipingRight)
+  const shouldPopRef = useTrackingRef(shouldPop)
+
   const [panResponder] = useState(PanResponder.create({
     onMoveShouldSetPanResponder: (event, gestureState) => {
+      // Only interested in horizontal movement
       const { dx, dy } = gestureState
-      return (Math.abs(dx) > Math.abs(dy))
+      return Math.abs(dx) > Math.abs(dy)
     },
     onPanResponderMove: (event, gestureState) => {
       const { dx } = gestureState
-      pan.setValue(dx)
       setCurrentDx(dx)
     },
     onPanResponderRelease: () => {
       const restSpeedThreshold = 20
       const restDisplacementThreshold = 20
+      // Animate pop
       if (shouldPopRef.current) {
         Animated.spring(pan, {
           toValue: swipingRightRef.current ? window.width : -window.width,
@@ -76,10 +173,16 @@ const TaskItem = ({ task }) => {
           restDisplacementThreshold,
           useNativeDriver: true,
         }).start(() => {
-          taskStore.removeTask(task.id)
+          // Handle swipe after pop
+          if (swipingRightRef.current) {
+            swipeRef.current.right.handler()
+          } else {
+            swipeRef.current.left.handler()
+          }
         })
         return
       }
+      // Animate back to original state
       Animated.spring(pan, {
         toValue: 0,
         restSpeedThreshold,
@@ -89,9 +192,10 @@ const TaskItem = ({ task }) => {
     },
   }))
 
+  // Press handler
+
   const onPress = () => {
-    taskStore.selectTask(task.id)
-    Actions.taskDetail()
+    Actions.taskDetailScreen({ taskType, task })
   }
 
   return (
@@ -117,26 +221,40 @@ const TaskItem = ({ task }) => {
       />
     </View>
   )
-}
+})
 
 TaskItem.propTypes = {
   task: PropTypes.object.isRequired,
 }
 
-const TaskList = () => {
-  const { taskStore } = useStores()
+const TaskList = ({ taskType }) => {
+  const { upcomingStore, todayStore, doneStore } = useStores()
   const classes = useStyles(styles)
+
+  const tasksMap = {
+    upcoming: upcomingStore.tasks,
+    today: todayStore.tasks,
+    done: doneStore.tasks,
+  }
+  const tasks = tasksMap[taskType]
 
   return (
     <FlatList
       style={classes.mainContainer}
-      data={taskStore.tasks.slice()}
+      data={tasks.slice()}
       renderItem={({ item }) => (
-        <TaskItem task={item} />
+        <TaskItem
+          taskType={taskType}
+          task={item}
+        />
       )}
       keyExtractor={(item) => item.id}
     />
   )
+}
+
+TaskList.propTypes = {
+  taskType: PropTypes.string.isRequired,
 }
 
 export default observer(TaskList)

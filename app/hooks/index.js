@@ -29,9 +29,18 @@ const usePrevious = (value) => {
   return ref.current
 }
 
+const useTrackingRef = (value) => {
+  const valueRef = useRef(value)
+  useEffect(() => {
+    valueRef.current = value
+  }, [value])
+  return valueRef
+}
+
 export {
   useStores,
   useTheme,
   useStyles,
   usePrevious,
+  useTrackingRef,
 }
