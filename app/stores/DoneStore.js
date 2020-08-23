@@ -32,12 +32,6 @@ class TaskStore {
       return task.id !== id
     })
   }
-
-  @action selectTask = (id) => {
-    this.index = this.tasks.findIndex((task) => {
-      return task.id === id
-    })
-  }
 }
 
 export default TaskStore
