@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import {
   View,
@@ -27,8 +27,7 @@ const TaskItem = observer(({ taskType, task }) => {
   const window = useWindowDimensions()
   const { upcomingStore, todayStore, doneStore } = useStores()
 
-  const [backgroundColor, setBackgroundColor] = useState(null)
-  const [opacity, setOpacity] = useState(null)
+  /* Swipe config */
 
   const [swipe, setSwipe] = useState({
     left: {
@@ -40,6 +39,7 @@ const TaskItem = observer(({ taskType, task }) => {
       handler: () => null,
     },
   })
+
   const [swipeMap] = useState({
     upcoming: {
       left: {
@@ -84,48 +84,60 @@ const TaskItem = observer(({ taskType, task }) => {
       },
     },
   })
+
   useEffect(() => {
     setSwipe(swipeMap[taskType])
   }, [taskType])
 
+  /* Swipe logic */
+
+  const [popThreshold] = useState(80)
+
   const [currentDx, setCurrentDx] = useState(0)
   const prevDx = usePrevious(currentDx)
 
-  const [popThreshold] = useState(80)
-  const swipingRightRef = useRef(false)
-  const shouldPopRef = useRef(false)
+  const [swipingRight, setSwipingRight] = useState(false)
+  const [shouldPop, setShouldPop] = useState(false)
+
+  const [backgroundColor, setBackgroundColor] = useState(null)
+  const [opacity, setOpacity] = useState(null)
+
   useEffect(() => {
-    const deltaX = currentDx - prevDx
-    const swipingRight = currentDx > 0
-    const exceedThreshold = Math.abs(currentDx) >= popThreshold
-    let shouldPop = false
-    if (swipingRight) {
+    // Determine swipe direction
+    const newSwipingRight = currentDx > 0
+    if (newSwipingRight) {
       setBackgroundColor(swipe.right.color)
-      if (exceedThreshold && deltaX > 0) {
-        shouldPop = true
-      }
     } else {
       setBackgroundColor(swipe.left.color)
-      if (exceedThreshold && deltaX < 0) {
-        shouldPop = true
-      }
     }
-    if (shouldPop) {
+    // Determine whether should pop or not
+    const deltaX = currentDx - prevDx
+    const exceedThreshold = Math.abs(currentDx) >= popThreshold
+    const newShouldPop = exceedThreshold && (
+      // Must be swiping in the correct direction
+      newSwipingRight ? deltaX > 0 : deltaX < 0
+    )
+    if (newShouldPop) {
       setOpacity(1)
     } else {
       setOpacity(0.25)
     }
-    swipingRightRef.current = swipingRight
-    shouldPopRef.current = shouldPop
+    setSwipingRight(newSwipingRight)
+    setShouldPop(newShouldPop)
   }, [currentDx])
 
+  /* Pan responder */
+
   const swipeRef = useTrackingRef(swipe)
+  const swipingRightRef = useTrackingRef(swipingRight)
+  const shouldPopRef = useTrackingRef(shouldPop)
 
   const [pan] = useState(new Animated.Value(0))
   const [panResponder] = useState(PanResponder.create({
     onMoveShouldSetPanResponder: (event, gestureState) => {
+      // Only interested in horizontal movement
       const { dx, dy } = gestureState
-      return (Math.abs(dx) > Math.abs(dy))
+      return Math.abs(dx) > Math.abs(dy)
     },
     onPanResponderMove: (event, gestureState) => {
       const { dx } = gestureState
@@ -135,6 +147,7 @@ const TaskItem = observer(({ taskType, task }) => {
     onPanResponderRelease: () => {
       const restSpeedThreshold = 20
       const restDisplacementThreshold = 20
+      // Animate pop
       if (shouldPopRef.current) {
         Animated.spring(pan, {
           toValue: swipingRightRef.current ? window.width : -window.width,
@@ -142,6 +155,7 @@ const TaskItem = observer(({ taskType, task }) => {
           restDisplacementThreshold,
           useNativeDriver: true,
         }).start(() => {
+          // Handle swipe after pop
           if (swipingRightRef.current) {
             swipeRef.current.right.handler()
           } else {
@@ -150,6 +164,7 @@ const TaskItem = observer(({ taskType, task }) => {
         })
         return
       }
+      // Animate back to original state
       Animated.spring(pan, {
         toValue: 0,
         restSpeedThreshold,
@@ -158,6 +173,8 @@ const TaskItem = observer(({ taskType, task }) => {
       }).start()
     },
   }))
+
+  // Press handler
 
   const onPress = () => {
     Actions.taskDetailScreen({ taskType, task })
