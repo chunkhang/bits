@@ -31,10 +31,12 @@ const TaskItem = observer(({ taskType, task }) => {
 
   const [swipe, setSwipe] = useState({
     left: {
+      enabled: false,
       color: null,
       handler: () => null,
     },
     right: {
+      enabled: false,
       color: null,
       handler: () => null,
     },
@@ -43,10 +45,12 @@ const TaskItem = observer(({ taskType, task }) => {
   const [swipeMap] = useState({
     upcoming: {
       left: {
+        enabled: false,
         color: null,
         handler: () => null,
       },
       right: {
+        enabled: true,
         color: theme.colors.yellow,
         handler: () => {
           upcomingStore.removeTask(task.id)
@@ -56,6 +60,7 @@ const TaskItem = observer(({ taskType, task }) => {
     },
     today: {
       left: {
+        enabled: true,
         color: theme.colors.red,
         handler: () => {
           todayStore.removeTask(task.id)
@@ -63,6 +68,7 @@ const TaskItem = observer(({ taskType, task }) => {
         },
       },
       right: {
+        enabled: true,
         color: theme.colors.green,
         handler: () => {
           todayStore.removeTask(task.id)
@@ -72,6 +78,7 @@ const TaskItem = observer(({ taskType, task }) => {
     },
     done: {
       left: {
+        enabled: true,
         color: theme.colors.yellow,
         handler: () => {
           doneStore.removeTask(task.id)
@@ -79,6 +86,7 @@ const TaskItem = observer(({ taskType, task }) => {
         },
       },
       right: {
+        enabled: false,
         color: null,
         handler: () => null,
       },
@@ -91,14 +99,21 @@ const TaskItem = observer(({ taskType, task }) => {
 
   /* Swipe logic */
 
+  // How much distance to drag before popping and handling swipe
   const [popThreshold] = useState(80)
 
+  // Horizontal translation of view
+  const [pan] = useState(new Animated.Value(0))
+
+  // Track current and previous x position
   const [currentDx, setCurrentDx] = useState(0)
   const prevDx = usePrevious(currentDx)
 
+  // Swipe state
   const [swipingRight, setSwipingRight] = useState(false)
   const [shouldPop, setShouldPop] = useState(false)
 
+  // Styles to apply based on swipe state
   const [backgroundColor, setBackgroundColor] = useState(null)
   const [opacity, setOpacity] = useState(null)
 
@@ -106,8 +121,10 @@ const TaskItem = observer(({ taskType, task }) => {
     // Determine swipe direction
     const newSwipingRight = currentDx > 0
     if (newSwipingRight) {
+      if (!swipe.right.enabled) return
       setBackgroundColor(swipe.right.color)
     } else {
+      if (!swipe.left.enabled) return
       setBackgroundColor(swipe.left.color)
     }
     // Determine whether should pop or not
@@ -122,17 +139,19 @@ const TaskItem = observer(({ taskType, task }) => {
     } else {
       setOpacity(0.25)
     }
+    // Apple horizontal translation
+    pan.setValue(currentDx)
     setSwipingRight(newSwipingRight)
     setShouldPop(newShouldPop)
   }, [currentDx])
 
   /* Pan responder */
 
+  // All changing values must be ref
   const swipeRef = useTrackingRef(swipe)
   const swipingRightRef = useTrackingRef(swipingRight)
   const shouldPopRef = useTrackingRef(shouldPop)
 
-  const [pan] = useState(new Animated.Value(0))
   const [panResponder] = useState(PanResponder.create({
     onMoveShouldSetPanResponder: (event, gestureState) => {
       // Only interested in horizontal movement
@@ -141,7 +160,6 @@ const TaskItem = observer(({ taskType, task }) => {
     },
     onPanResponderMove: (event, gestureState) => {
       const { dx } = gestureState
-      pan.setValue(dx)
       setCurrentDx(dx)
     },
     onPanResponderRelease: () => {
