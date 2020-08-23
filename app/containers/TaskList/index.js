@@ -10,7 +10,13 @@ import {
 import { observer } from 'mobx-react'
 import { Actions } from 'react-native-router-flux'
 
-import { useStores, useTheme, useStyles, usePrevious } from '~/hooks'
+import {
+  useStores,
+  useTheme,
+  useStyles,
+  usePrevious,
+  useTrackingRef,
+} from '~/hooks'
 import { ListItem } from '~/components'
 
 import styles from './styles'
@@ -24,46 +30,63 @@ const TaskItem = observer(({ taskType, task }) => {
   const [backgroundColor, setBackgroundColor] = useState(null)
   const [opacity, setOpacity] = useState(null)
 
-  const swipeHandlerMap = {
+  const [swipe, setSwipe] = useState({
+    left: {
+      color: null,
+      handler: () => null,
+    },
+    right: {
+      color: null,
+      handler: () => null,
+    },
+  })
+  const [swipeMap] = useState({
     upcoming: {
-      left: () => null,
-      right: () => {
-        upcomingStore.removeTask(task.id)
-        todayStore.addTask(task)
+      left: {
+        color: null,
+        handler: () => null,
+      },
+      right: {
+        color: theme.colors.yellow,
+        handler: () => {
+          upcomingStore.removeTask(task.id)
+          todayStore.addTask(task)
+        },
       },
     },
     today: {
-      left: () => {
-        todayStore.removeTask(task.id)
-        upcomingStore.addTask(task)
+      left: {
+        color: theme.colors.red,
+        handler: () => {
+          todayStore.removeTask(task.id)
+          upcomingStore.addTask(task)
+        },
       },
-      right: () => {
-        todayStore.removeTask(task.id)
-        doneStore.addTask(task)
+      right: {
+        color: theme.colors.green,
+        handler: () => {
+          todayStore.removeTask(task.id)
+          doneStore.addTask(task)
+        },
       },
     },
     done: {
-      left: () => {
-        doneStore.removeTask(task.id)
-        todayStore.addTask(task)
+      left: {
+        color: theme.colors.yellow,
+        handler: () => {
+          doneStore.removeTask(task.id)
+          todayStore.addTask(task)
+        },
       },
-      right: () => null,
+      right: {
+        color: null,
+        handler: () => null,
+      },
     },
-  }
-
-  const onSwipeLeft = () => {
-    const handler = swipeHandlerMap[taskType].left
-    handler()
-  }
-
-  const onSwipeRight = () => {
-    const handler = swipeHandlerMap[taskType].right
-    handler()
-  }
-
-  const onPress = () => {
-    Actions.taskDetailScreen({ taskType, task })
-  }
+  })
+  useEffect(() => {
+    setSwipe(swipeMap[taskType])
+  }, [taskType])
 
   const [currentDx, setCurrentDx] = useState(0)
   const prevDx = usePrevious(currentDx)
@@ -77,12 +100,12 @@ const TaskItem = observer(({ taskType, task }) => {
     const exceedThreshold = Math.abs(currentDx) >= popThreshold
     let shouldPop = false
     if (swipingRight) {
-      setBackgroundColor(theme.colors.green)
+      setBackgroundColor(swipe.right.color)
       if (exceedThreshold && deltaX > 0) {
         shouldPop = true
       }
     } else {
-      setBackgroundColor(theme.colors.red)
+      setBackgroundColor(swipe.left.color)
       if (exceedThreshold && deltaX < 0) {
         shouldPop = true
       }
@@ -95,6 +118,8 @@ const TaskItem = observer(({ taskType, task }) => {
     swipingRightRef.current = swipingRight
     shouldPopRef.current = shouldPop
   }, [currentDx])
+
+  const swipeRef = useTrackingRef(swipe)
 
   const [pan] = useState(new Animated.Value(0))
   const [panResponder] = useState(PanResponder.create({
@@ -118,9 +143,9 @@ const TaskItem = observer(({ taskType, task }) => {
           useNativeDriver: true,
         }).start(() => {
           if (swipingRightRef.current) {
-            onSwipeRight()
+            swipeRef.current.right.handler()
           } else {
-            onSwipeLeft()
+            swipeRef.current.left.handler()
           }
         })
         return
@@ -133,6 +158,10 @@ const TaskItem = observer(({ taskType, task }) => {
       }).start()
     },
   }))
+
+  const onPress = () => {
+    Actions.taskDetailScreen({ taskType, task })
+  }
 
   return (
     <View style={{ position: 'relative' }}>
