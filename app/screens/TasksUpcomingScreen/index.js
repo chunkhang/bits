@@ -1,11 +1,17 @@
 import React from 'react'
 import { View } from 'react-native'
-import { Text } from 'react-native-elements'
+
+import { useStyles } from '~/hooks'
+import { TaskList } from '~/containers'
+
+import styles from './styles'
 
 const TasksUpcomingScreen = () => {
+  const classes = useStyles(styles)
+
   return (
-    <View>
-      <Text>Upcoming</Text>
+    <View style={classes.mainContainer}>
+      <TaskList type="upcoming" />
     </View>
   )
 }

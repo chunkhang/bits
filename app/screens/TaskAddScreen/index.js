@@ -24,7 +24,10 @@ const TaskAddScreen = () => {
     const name = layoutStore.addTaskInput.trim()
     if (!name) return
 
-    taskStore.addTask({ name })
+    taskStore.addTask({
+      type: 'today',
+      name,
+    })
 
     layoutStore.setAddTaskInput('')
   }

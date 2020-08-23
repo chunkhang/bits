@@ -25,7 +25,7 @@ class TaskStore {
   addTask = (task) => {
     this.tasks.push({
       id: uuidv4(),
-      name: task.name,
+      ...task,
     })
   }
 

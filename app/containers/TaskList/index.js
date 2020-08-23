@@ -15,7 +15,7 @@ import { ListItem } from '~/components'
 
 import styles from './styles'
 
-const TaskItem = ({ task }) => {
+const TaskItem = observer(({ task }) => {
   const { taskStore } = useStores()
   const theme = useTheme()
   const classes = useStyles(styles)
@@ -23,6 +23,44 @@ const TaskItem = ({ task }) => {
 
   const [backgroundColor, setBackgroundColor] = useState(null)
   const [opacity, setOpacity] = useState(null)
+
+  const swipeHandlerMap = {
+    upcoming: {
+      left: () => null,
+      right: () => {
+        taskStore.updateTask(task.id, { type: 'today' })
+      },
+    },
+    today: {
+      left: () => {
+        taskStore.updateTask(task.id, { type: 'upcoming' })
+      },
+      right: () => {
+        taskStore.updateTask(task.id, { type: 'done' })
+      },
+    },
+    done: {
+      left: () => {
+        taskStore.updateTask(task.id, { type: 'today' })
+      },
+      right: () => null,
+    },
+  }
+
+  const onSwipeLeft = () => {
+    const handler = swipeHandlerMap[task.type].left
+    handler()
+  }
+
+  const onSwipeRight = () => {
+    const handler = swipeHandlerMap[task.type].right
+    handler()
+  }
+
+  const onPress = () => {
+    taskStore.selectTask(task.id)
+    Actions.taskDetail()
+  }
 
   const [currentDx, setCurrentDx] = useState(0)
   const prevDx = usePrevious(currentDx)
@@ -76,7 +114,11 @@ const TaskItem = ({ task }) => {
           restDisplacementThreshold,
           useNativeDriver: true,
         }).start(() => {
-          taskStore.removeTask(task.id)
+          if (swipingRightRef.current) {
+            onSwipeRight()
+          } else {
+            onSwipeLeft()
+          }
         })
         return
       }
@@ -88,11 +130,6 @@ const TaskItem = ({ task }) => {
       }).start()
     },
   }))
-
-  const onPress = () => {
-    taskStore.selectTask(task.id)
-    Actions.taskDetail()
-  }
 
   return (
     <View style={{ position: 'relative' }}>
@@ -117,26 +154,34 @@ const TaskItem = ({ task }) => {
       />
     </View>
   )
-}
+})
 
 TaskItem.propTypes = {
   task: PropTypes.object.isRequired,
 }
 
-const TaskList = () => {
+const TaskList = ({ type }) => {
   const { taskStore } = useStores()
   const classes = useStyles(styles)
+
+  const tasks = taskStore.tasks.filter((task) => {
+    return task.type === type
+  })
 
   return (
     <FlatList
       style={classes.mainContainer}
-      data={taskStore.tasks.slice()}
+      data={tasks}
       renderItem={({ item }) => (
         <TaskItem task={item} />
       )}
       keyExtractor={(item) => item.id}
     />
   )
+}
+
+TaskList.propTypes = {
+  type: PropTypes.string.isRequired,
 }
 
 export default observer(TaskList)
