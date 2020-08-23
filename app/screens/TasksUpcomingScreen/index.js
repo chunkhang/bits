@@ -11,7 +11,7 @@ const TasksUpcomingScreen = () => {
 
   return (
     <View style={classes.mainContainer}>
-      <TaskList type="upcoming" />
+      <TaskList taskType="upcoming" />
     </View>
   )
 }

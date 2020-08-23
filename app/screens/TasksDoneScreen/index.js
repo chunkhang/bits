@@ -11,7 +11,7 @@ const TasksDoneScreen = () => {
 
   return (
     <View style={classes.mainContainer}>
-      <TaskList type="done" />
+      <TaskList taskType="done" />
     </View>
   )
 }

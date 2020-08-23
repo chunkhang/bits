@@ -15,11 +15,11 @@ import { ListItem } from '~/components'
 
 import styles from './styles'
 
-const TaskItem = observer(({ task }) => {
-  const { taskStore } = useStores()
+const TaskItem = observer(({ taskType, task }) => {
   const theme = useTheme()
   const classes = useStyles(styles)
   const window = useWindowDimensions()
+  const { upcomingStore, todayStore, doneStore } = useStores()
 
   const [backgroundColor, setBackgroundColor] = useState(null)
   const [opacity, setOpacity] = useState(null)
@@ -28,38 +28,41 @@ const TaskItem = observer(({ task }) => {
     upcoming: {
       left: () => null,
       right: () => {
-        taskStore.updateTask(task.id, { type: 'today' })
+        upcomingStore.removeTask(task.id)
+        todayStore.addTask(task)
       },
     },
     today: {
       left: () => {
-        taskStore.updateTask(task.id, { type: 'upcoming' })
+        todayStore.removeTask(task.id)
+        upcomingStore.addTask(task)
       },
       right: () => {
-        taskStore.updateTask(task.id, { type: 'done' })
+        todayStore.removeTask(task.id)
+        doneStore.addTask(task)
       },
     },
     done: {
       left: () => {
-        taskStore.updateTask(task.id, { type: 'today' })
+        doneStore.removeTask(task.id)
+        todayStore.addTask(task)
       },
       right: () => null,
     },
   }
 
   const onSwipeLeft = () => {
-    const handler = swipeHandlerMap[task.type].left
+    const handler = swipeHandlerMap[taskType].left
     handler()
   }
 
   const onSwipeRight = () => {
-    const handler = swipeHandlerMap[task.type].right
+    const handler = swipeHandlerMap[taskType].right
     handler()
   }
 
   const onPress = () => {
-    taskStore.selectTask(task.id)
-    Actions.taskDetail()
+    Actions.taskDetail({ taskType, task })
   }
 
   const [currentDx, setCurrentDx] = useState(0)
@@ -160,20 +163,26 @@ TaskItem.propTypes = {
   task: PropTypes.object.isRequired,
 }
 
-const TaskList = ({ type }) => {
-  const { taskStore } = useStores()
+const TaskList = ({ taskType }) => {
+  const { upcomingStore, todayStore, doneStore } = useStores()
   const classes = useStyles(styles)
 
-  const tasks = taskStore.tasks.filter((task) => {
-    return task.type === type
-  })
+  const tasksMap = {
+    upcoming: upcomingStore.tasks,
+    today: todayStore.tasks,
+    done: doneStore.tasks,
+  }
+  const tasks = tasksMap[taskType]
 
   return (
     <FlatList
       style={classes.mainContainer}
-      data={tasks}
+      data={tasks.slice()}
       renderItem={({ item }) => (
-        <TaskItem task={item} />
+        <TaskItem
+          taskType={taskType}
+          task={item}
+        />
       )}
       keyExtractor={(item) => item.id}
     />
@@ -181,7 +190,7 @@ const TaskList = ({ type }) => {
 }
 
 TaskList.propTypes = {
-  type: PropTypes.string.isRequired,
+  taskType: PropTypes.string.isRequired,
 }
 
 export default observer(TaskList)

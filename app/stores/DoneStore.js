@@ -1,4 +1,4 @@
-import { observable, action, computed } from 'mobx'
+import { observable, action } from 'mobx'
 import { persist } from 'mobx-persist'
 import { v4 as uuidv4 } from 'uuid'
 
@@ -10,27 +10,14 @@ class TaskStore {
   @persist('list')
   @observable tasks = []
 
-  @observable index = null
-
-  @computed get task() {
-    if (this.index >= this.count) return null
-    return this.tasks[this.index]
-  }
-
-  @computed get count() {
-    return this.tasks.length
-  }
-
-  @action
-  addTask = (task) => {
+  @action addTask = (task) => {
     this.tasks.push({
       id: uuidv4(),
       ...task,
     })
   }
 
-  @action
-  updateTask = (id, updates) => {
+  @action updateTask = (id, updates) => {
     this.tasks = this.tasks.map((task) => {
       if (task.id !== id) return task
       return {
@@ -40,15 +27,13 @@ class TaskStore {
     })
   }
 
-  @action
-  removeTask = (id) => {
+  @action removeTask = (id) => {
     this.tasks = this.tasks.filter((task) => {
       return task.id !== id
     })
   }
 
-  @action
-  selectTask = (id) => {
+  @action selectTask = (id) => {
     this.index = this.tasks.findIndex((task) => {
       return task.id === id
     })
