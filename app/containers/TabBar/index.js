@@ -76,10 +76,7 @@ const TabBar = ({ navigation }) => {
   }))
 
   const onPressAdd = () => {
-    Actions.todayTasksScreen()
-    setTimeout(() => {
-      Actions.addTaskScreen()
-    })
+    Actions.addTaskScreen()
   }
 
   const onPressTab = (i) => {
