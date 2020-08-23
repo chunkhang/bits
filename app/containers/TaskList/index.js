@@ -62,7 +62,7 @@ const TaskItem = observer(({ taskType, task }) => {
   }
 
   const onPress = () => {
-    Actions.taskDetail({ taskType, task })
+    Actions.taskDetailScreen({ taskType, task })
   }
 
   const [currentDx, setCurrentDx] = useState(0)

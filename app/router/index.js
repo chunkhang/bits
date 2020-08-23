@@ -27,11 +27,11 @@ const AppRouter = () => {
       <Modal hideNavBar>
         <Scene
           initial
-          key="loading"
+          key="loadingScreen"
           component={AppLoadingScreen}
         />
         <Lightbox
-          key="home"
+          key="homeScreen"
           type={ActionConst.REPLACE}
         >
           <Stack headerMode="screen">
@@ -42,7 +42,7 @@ const AppRouter = () => {
                 swipeEnabled={false}
               >
                 <Stack
-                  key="upcomingTasks"
+                  key="upcomingTasksScreen"
                   navBar={NavBar}
                   title="Upcoming"
                   hideBackButton
@@ -56,7 +56,7 @@ const AppRouter = () => {
                 </Stack>
                 <Stack
                   initial
-                  key="todayTasks"
+                  key="todayTasksScreen"
                   navBar={NavBar}
                   title="Today"
                   hideBackButton
@@ -69,7 +69,7 @@ const AppRouter = () => {
                   />
                 </Stack>
                 <Stack
-                  key="doneTasks"
+                  key="doneTasksScreen"
                   navBar={NavBar}
                   title="Done"
                   hideBackButton
@@ -84,14 +84,14 @@ const AppRouter = () => {
               </Tabs>
             </Overlay>
             <Scene
-              key="taskDetail"
+              key="taskDetailScreen"
               component={TaskDetailScreen}
               navBar={NavBar}
               title="Task"
             />
           </Stack>
           <Scene
-            key="addTask"
+            key="addTaskScreen"
             component={TaskAddScreen}
           />
         </Lightbox>

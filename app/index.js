@@ -13,7 +13,7 @@ import theme from './theme'
 const App = () => {
   useEffect(() => {
     rootStore.rehydrate().then(() => {
-      Actions.home()
+      Actions.homeScreen()
     })
   }, [])
 
