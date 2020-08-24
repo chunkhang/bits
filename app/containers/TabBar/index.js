@@ -12,6 +12,7 @@ import { observer } from 'mobx-react'
 import { Actions } from 'react-native-router-flux'
 
 import { useTheme, useStyles } from '~/hooks'
+import { BeepSound } from '~/assets/sounds'
 import { PlusIcon } from '~/components'
 
 import styles from './styles'
@@ -20,6 +21,12 @@ const TabBar = ({ navigation }) => {
   const theme = useTheme()
   const classes = useStyles(styles)
   const window = useWindowDimensions()
+
+  const [tabColors] = useState([
+    theme.colors.red,
+    theme.colors.yellow,
+    theme.colors.green,
+  ])
 
   const navigateToTab = (i) => {
     if (i < 0 || i > navigation.state.routes.length - 1) return
@@ -71,8 +78,10 @@ const TabBar = ({ navigation }) => {
       if (currentMoveX > breakpoint) return acc + 1
       return acc
     }, -1)
-    if (scrubbing) {
+    if (scrubbing && newIndex !== navigation.state.index) {
       setScrubIndex(newIndex)
+      BeepSound.stop()
+      BeepSound.play()
     }
   }, [currentMoveX])
 
@@ -105,7 +114,7 @@ const TabBar = ({ navigation }) => {
       {scrubbing ? (
         <View style={classes.scrubsContainer}>
           {navigation.state.routes.map((route, i) => {
-            const backgroundColor = theme.globals.tabs[i].color
+            const backgroundColor = tabColors[i]
             const opacity = scrubIndex === i ? 1 : theme.globals.blurOpacity
 
             return (
@@ -122,7 +131,7 @@ const TabBar = ({ navigation }) => {
       ) : (
         <View style={classes.tabsContainer}>
           {navigation.state.routes.map((route, i) => {
-            const backgroundColor = theme.globals.tabs[i].color
+            const backgroundColor = tabColors[i]
             const opacity = navigation.state.index === i ? 1 : theme.globals.blurOpacity
 
             return (

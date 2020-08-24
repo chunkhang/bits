@@ -1,25 +1,26 @@
 import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
-import { View, TouchableOpacity, Alert } from 'react-native'
-import { observer } from 'mobx-react'
+import {
+  View,
+  TouchableOpacity,
+  TouchableWithoutFeedback,
+  Alert,
+  Keyboard,
+} from 'react-native'
 import { Icon } from 'react-native-elements'
-import { Actions } from 'react-native-router-flux'
 
-import { useStores, useStyles } from '~/hooks'
+import { useStyles } from '~/hooks'
 import { ListItem } from '~/components'
 
 import styles from './styles'
 
-const TaskDetailScreen = ({ taskType, task }) => {
-  const { upcomingStore, todayStore, doneStore } = useStores()
+const TaskDetailScreen = ({
+  color,
+  task,
+  onUpdate,
+  onRemove,
+}) => {
   const classes = useStyles(styles)
-
-  const storeMap = {
-    upcoming: upcomingStore,
-    today: todayStore,
-    done: doneStore,
-  }
-  const store = storeMap[taskType]
 
   const [originalValue, setOriginalValue] = useState('')
   const [value, setValue] = useState('')
@@ -33,7 +34,7 @@ const TaskDetailScreen = ({ taskType, task }) => {
 
   useEffect(() => {
     if (!value.trim()) return
-    store.updateTask(task.id, { name: value })
+    onUpdate(task, { name: value })
   }, [value])
 
   useEffect(() => {
@@ -52,7 +53,11 @@ const TaskDetailScreen = ({ taskType, task }) => {
     }
   }
 
-  const onPress = () => {
+  const onPressBackground = () => {
+    Keyboard.dismiss()
+  }
+
+  const onPressTrash = () => {
     Alert.alert(
       'Delete task',
       'Are you sure you want to delete this task?',
@@ -64,8 +69,7 @@ const TaskDetailScreen = ({ taskType, task }) => {
         {
           text: 'Yes',
           onPress: () => {
-            Actions.pop()
-            store.removeTask(task.id)
+            onRemove(task)
           },
         },
       ],
@@ -73,28 +77,38 @@ const TaskDetailScreen = ({ taskType, task }) => {
   }
 
   return (
-    <View style={classes.mainContainer}>
-      <ListItem
-        editable
-        value={value}
-        onChangeText={onChangeText}
-        onSubmitEditing={onSubmitEditing}
-      />
-      <View style={classes.actionContainer}>
-        <TouchableOpacity onPress={onPress}>
-          <Icon
-            name="trash-2"
-            type="feather"
-          />
-        </TouchableOpacity>
+    <TouchableWithoutFeedback onPress={onPressBackground}>
+      <View style={classes.mainContainer}>
+        <ListItem
+          editable
+          value={value}
+          onChangeText={onChangeText}
+          onSubmitEditing={onSubmitEditing}
+          color={color}
+        />
+        <View style={classes.actionContainer}>
+          <TouchableOpacity onPress={onPressTrash}>
+            <Icon
+              name="trash-2"
+              type="feather"
+            />
+          </TouchableOpacity>
+        </View>
       </View>
-    </View>
+    </TouchableWithoutFeedback>
   )
 }
 
 TaskDetailScreen.propTypes = {
-  taskType: PropTypes.string.isRequired,
+  color: PropTypes.string.isRequired,
   task: PropTypes.object.isRequired,
+  onUpdate: PropTypes.func,
+  onRemove: PropTypes.func,
 }
 
-export default observer(TaskDetailScreen)
+TaskDetailScreen.defaultProps = {
+  onUpdate: () => null,
+  onRemove: () => null,
+}
+
+export default TaskDetailScreen

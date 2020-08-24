@@ -1,10 +1,10 @@
-import React, { useState, useEffect, forwardRef } from 'react'
+import React, { forwardRef } from 'react'
 import PropTypes from 'prop-types'
 import { TouchableWithoutFeedback, View } from 'react-native'
 import { Input, Text } from 'react-native-elements'
 import { observer } from 'mobx-react'
 
-import { useStyles, useStores } from '~/hooks'
+import { useStyles } from '~/hooks'
 
 import styles from './styles'
 
@@ -22,16 +22,6 @@ const ListItem = forwardRef((props, ref) => {
   } = props
 
   const classes = useStyles(styles)
-  const { layoutStore } = useStores()
-
-  const [backgroundColor, setBackgroundColor] = useState(color)
-  useEffect(() => {
-    if (color) {
-      setBackgroundColor(color)
-    } else {
-      setBackgroundColor(layoutStore.tabColor)
-    }
-  }, [color, layoutStore.tabColor])
 
   return (
     <TouchableWithoutFeedback
@@ -39,7 +29,7 @@ const ListItem = forwardRef((props, ref) => {
       disabled={!onPress}
     >
       <View style={[classes.mainContainer, containerStyle]}>
-        <View style={[classes.dot, { backgroundColor }]} />
+        <View style={[classes.dot, { backgroundColor: color }]} />
         {editable ? (
           <Input
             value={value}
