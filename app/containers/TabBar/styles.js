@@ -30,16 +30,10 @@ const styles = (theme) => {
       height: '100%',
     },
 
-    addButton: {
+    button: {
       borderRadius: 4,
       width: theme.globals.tabBarHeight,
       height: theme.globals.tabBarHeight,
-    },
-
-    icon: {
-      borderRadius: 2,
-      width: theme.globals.tabBarHeight / 2,
-      height: theme.globals.tabBarHeight / 2,
     },
   }
 }

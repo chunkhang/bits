@@ -127,7 +127,7 @@ const TabBar = ({ navigation }) => {
                         />
                       )}
                       buttonStyle={[
-                        classes.addButton,
+                        classes.button,
                         { backgroundColor, opacity },
                       ]}
                       onPress={onPressAdd}
@@ -137,7 +137,7 @@ const TabBar = ({ navigation }) => {
                   ) : (
                     <View
                       style={[
-                        classes.icon,
+                        classes.button,
                         { backgroundColor, opacity },
                       ]}
                     />
