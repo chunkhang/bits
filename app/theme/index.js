@@ -13,6 +13,7 @@ const globals = {
   topGutter: 24,
   bottomGutter: 24,
   tabBarHeight: 48,
+  blurOpacity: 0.2,
   tabs: [
     { color: colors.red },
     { color: colors.yellow },

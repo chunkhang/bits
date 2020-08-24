@@ -92,7 +92,7 @@ const TabBar = ({ navigation }) => {
         <View style={classes.scrubsContainer}>
           {navigation.state.routes.map((route, i) => {
             const backgroundColor = theme.globals.tabs[i].color
-            const opacity = scrubIndex === i ? 1 : 0.25
+            const opacity = scrubIndex === i ? 1 : theme.globals.blurOpacity
 
             return (
               <View
@@ -109,7 +109,7 @@ const TabBar = ({ navigation }) => {
         <View style={classes.tabsContainer}>
           {navigation.state.routes.map((route, i) => {
             const backgroundColor = theme.globals.tabs[i].color
-            const opacity = navigation.state.index === i ? 1 : 0.25
+            const opacity = navigation.state.index === i ? 1 : theme.globals.blurOpacity
 
             return (
               <TouchableWithoutFeedback

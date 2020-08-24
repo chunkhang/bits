@@ -127,7 +127,7 @@ const TaskItem = observer(({ taskType, task }) => {
     if (newShouldPop) {
       setOpacity(1)
     } else {
-      setOpacity(0.25)
+      setOpacity(theme.globals.blurOpacity)
     }
     // Apply horizontal translation
     // If swipe is disabled, we allow limited movement
