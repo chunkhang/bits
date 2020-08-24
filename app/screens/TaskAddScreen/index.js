@@ -3,6 +3,7 @@ import { KeyboardAvoidingView, Keyboard } from 'react-native'
 import { observer } from 'mobx-react'
 
 import { useStores, useStyles } from '~/hooks'
+import { DingSound } from '~/assets/sounds'
 import { Lightbox, Header, ListItem } from '~/components'
 
 import styles from './styles'
@@ -27,6 +28,9 @@ const TaskAddScreen = () => {
     todayStore.addTask({ name })
 
     layoutStore.setAddTaskInput('')
+
+    DingSound.stop()
+    DingSound.play()
   }
 
   const handleDismiss = () => {
