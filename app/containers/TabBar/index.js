@@ -51,24 +51,38 @@ const TabBar = ({ navigation }) => {
     }
   }, [window])
 
-  const [currentX, setCurrentX] = useState(0)
+  // Only allow scrubbing if swipe starts from current tab
+  const [currentX0, setCurrentX0] = useState(null)
   useEffect(() => {
-    const newIndex = breakpoints.reduce((acc, breakpoint) => {
-      if (currentX > breakpoint) {
-        return acc + 1
-      }
+    if (!currentX0) return
+    const currentIndex = breakpoints.reduce((acc, breakpoint) => {
+      if (currentX0 > breakpoint) return acc + 1
       return acc
     }, -1)
-    setScrubIndex(newIndex)
-  }, [currentX])
+    if (currentIndex === navigation.state.index) {
+      setScrubbing(true)
+    }
+  }, [currentX0])
+
+  const [currentMoveX, setCurrentMoveX] = useState(null)
+  useEffect(() => {
+    if (!currentMoveX) return
+    const newIndex = breakpoints.reduce((acc, breakpoint) => {
+      if (currentMoveX > breakpoint) return acc + 1
+      return acc
+    }, -1)
+    if (scrubbing) {
+      setScrubIndex(newIndex)
+    }
+  }, [currentMoveX])
 
   const [panResponder] = useState(PanResponder.create({
     onMoveShouldSetPanResponder: () => {
       return true
     },
     onPanResponderMove: (event, gestureState) => {
-      setScrubbing(true)
-      setCurrentX(gestureState.moveX)
+      setCurrentX0(gestureState.x0)
+      setCurrentMoveX(gestureState.moveX)
     },
     onPanResponderRelease: () => {
       setScrubbing(false)

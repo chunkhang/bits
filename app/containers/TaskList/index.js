@@ -94,7 +94,7 @@ const TaskItem = observer(({ taskType, task }) => {
   const [pan] = useState(new Animated.Value(0))
 
   // Track current and previous x position
-  const [currentDx, setCurrentDx] = useState(0)
+  const [currentDx, setCurrentDx] = useState(null)
   const prevDx = usePrevious(currentDx)
 
   // Swipe state
@@ -106,6 +106,7 @@ const TaskItem = observer(({ taskType, task }) => {
   const [opacity, setOpacity] = useState(null)
 
   useEffect(() => {
+    if (!currentDx || !prevDx) return
     let swipeEnabled = true
     // Determine swipe direction
     const newSwipingRight = currentDx > 0
@@ -148,18 +149,16 @@ const TaskItem = observer(({ taskType, task }) => {
   const [panResponder] = useState(PanResponder.create({
     onMoveShouldSetPanResponder: (event, gestureState) => {
       // Only interested in horizontal movement
-      const { dx, dy } = gestureState
-      return Math.abs(dx) > Math.abs(dy)
+      return Math.abs(gestureState.dx) > Math.abs(gestureState.dy)
     },
     onPanResponderMove: (event, gestureState) => {
-      const { dx } = gestureState
-      setCurrentDx(dx)
+      setCurrentDx(gestureState.dx)
     },
     onPanResponderRelease: () => {
       const restSpeedThreshold = 20
       const restDisplacementThreshold = 20
-      // Animate pop
       if (shouldPopRef.current) {
+        // Animate pop
         Animated.spring(pan, {
           toValue: swipingRightRef.current ? window.width : -window.width,
           restSpeedThreshold,
@@ -173,15 +172,15 @@ const TaskItem = observer(({ taskType, task }) => {
             swipeRef.current.left.handler()
           }
         })
-        return
+      } else {
+        // Animate back to original state
+        Animated.spring(pan, {
+          toValue: 0,
+          restSpeedThreshold,
+          restDisplacementThreshold,
+          useNativeDriver: true,
+        }).start()
       }
-      // Animate back to original state
-      Animated.spring(pan, {
-        toValue: 0,
-        restSpeedThreshold,
-        restDisplacementThreshold,
-        useNativeDriver: true,
-      }).start()
     },
   }))
 
