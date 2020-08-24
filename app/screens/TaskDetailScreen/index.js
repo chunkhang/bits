@@ -1,6 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
-import { View, TouchableOpacity, Alert } from 'react-native'
+import {
+  View,
+  TouchableOpacity,
+  TouchableWithoutFeedback,
+  Alert,
+  Keyboard,
+} from 'react-native'
 import { observer } from 'mobx-react'
 import { Icon } from 'react-native-elements'
 import { Actions } from 'react-native-router-flux'
@@ -52,7 +58,11 @@ const TaskDetailScreen = ({ taskType, task }) => {
     }
   }
 
-  const onPress = () => {
+  const onPressBackground = () => {
+    Keyboard.dismiss()
+  }
+
+  const onPressTrash = () => {
     Alert.alert(
       'Delete task',
       'Are you sure you want to delete this task?',
@@ -73,22 +83,24 @@ const TaskDetailScreen = ({ taskType, task }) => {
   }
 
   return (
-    <View style={classes.mainContainer}>
-      <ListItem
-        editable
-        value={value}
-        onChangeText={onChangeText}
-        onSubmitEditing={onSubmitEditing}
-      />
-      <View style={classes.actionContainer}>
-        <TouchableOpacity onPress={onPress}>
-          <Icon
-            name="trash-2"
-            type="feather"
-          />
-        </TouchableOpacity>
+    <TouchableWithoutFeedback onPress={onPressBackground}>
+      <View style={classes.mainContainer}>
+        <ListItem
+          editable
+          value={value}
+          onChangeText={onChangeText}
+          onSubmitEditing={onSubmitEditing}
+        />
+        <View style={classes.actionContainer}>
+          <TouchableOpacity onPress={onPressTrash}>
+            <Icon
+              name="trash-2"
+              type="feather"
+            />
+          </TouchableOpacity>
+        </View>
       </View>
-    </View>
+    </TouchableWithoutFeedback>
   )
 }
 
