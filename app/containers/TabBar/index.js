@@ -12,6 +12,7 @@ import { observer } from 'mobx-react'
 import { Actions } from 'react-native-router-flux'
 
 import { useTheme, useStyles } from '~/hooks'
+import { BeepSound } from '~/assets/sounds'
 import { PlusIcon } from '~/components'
 
 import styles from './styles'
@@ -71,8 +72,10 @@ const TabBar = ({ navigation }) => {
       if (currentMoveX > breakpoint) return acc + 1
       return acc
     }, -1)
-    if (scrubbing) {
+    if (scrubbing && newIndex !== navigation.state.index) {
       setScrubIndex(newIndex)
+      BeepSound.stop()
+      BeepSound.play()
     }
   }, [currentMoveX])
 
