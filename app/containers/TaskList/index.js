@@ -175,11 +175,13 @@ const TaskItem = observer(({ taskType, task }) => {
           useNativeDriver: true,
         }).start(() => {
           // Handle swipe after pop
-          if (swipingRightRef.current) {
-            swipeRef.current.right.handler()
-          } else {
-            swipeRef.current.left.handler()
-          }
+          setTimeout(() => {
+            if (swipingRightRef.current) {
+              swipeRef.current.right.handler()
+            } else {
+              swipeRef.current.left.handler()
+            }
+          }, 0)
         })
       } else {
         // Animate back to original state
