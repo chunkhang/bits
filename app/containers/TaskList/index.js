@@ -17,7 +17,7 @@ import {
   usePrevious,
   useTrackingRef,
 } from '~/hooks'
-import { ChimeSound } from '~/assets/sounds'
+import { BloopSound, ChimeSound } from '~/assets/sounds'
 import { ListItem } from '~/components'
 
 import styles from './styles'
@@ -43,6 +43,8 @@ const TaskItem = observer(({ taskType, task }) => {
         handler: () => {
           upcomingStore.removeTask(task.id)
           todayStore.addTask(task)
+          BloopSound.stop()
+          BloopSound.play()
         },
       },
     },
@@ -53,6 +55,8 @@ const TaskItem = observer(({ taskType, task }) => {
         handler: () => {
           todayStore.removeTask(task.id)
           upcomingStore.addTask(task)
+          BloopSound.stop()
+          BloopSound.play()
         },
       },
       right: {
@@ -61,6 +65,8 @@ const TaskItem = observer(({ taskType, task }) => {
         handler: () => {
           todayStore.removeTask(task.id)
           doneStore.addTask(task)
+          ChimeSound.stop()
+          ChimeSound.play()
         },
       },
     },
@@ -71,6 +77,8 @@ const TaskItem = observer(({ taskType, task }) => {
         handler: () => {
           doneStore.removeTask(task.id)
           todayStore.addTask(task)
+          BloopSound.stop()
+          BloopSound.play()
         },
       },
       right: {
@@ -172,8 +180,6 @@ const TaskItem = observer(({ taskType, task }) => {
           } else {
             swipeRef.current.left.handler()
           }
-          // Play sound after swipe
-          ChimeSound.play()
         })
       } else {
         // Animate back to original state
