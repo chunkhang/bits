@@ -3,7 +3,7 @@ const styles = (theme) => {
     mainContainer: {
       flexDirection: 'row',
       alignItems: 'center',
-      height: 48,
+      height: 56,
       paddingHorizontal: theme.globals.horizontalGutter,
       backgroundColor: theme.colors.white,
     },
