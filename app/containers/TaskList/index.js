@@ -17,6 +17,7 @@ import {
   usePrevious,
   useTrackingRef,
 } from '~/hooks'
+import { ChimeSound } from '~/assets/sounds'
 import { ListItem } from '~/components'
 
 import styles from './styles'
@@ -171,6 +172,8 @@ const TaskItem = observer(({ taskType, task }) => {
           } else {
             swipeRef.current.left.handler()
           }
+          // Play sound after swipe
+          ChimeSound.play()
         })
       } else {
         // Animate back to original state
