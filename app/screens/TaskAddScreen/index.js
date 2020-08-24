@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from 'react'
 import { KeyboardAvoidingView, Keyboard } from 'react-native'
 import { observer } from 'mobx-react'
 
-import { useStores, useStyles } from '~/hooks'
+import { useStores, useStyles, useTheme } from '~/hooks'
 import { DingSound } from '~/assets/sounds'
 import { Lightbox, Header, ListItem } from '~/components'
 
@@ -11,6 +11,7 @@ import styles from './styles'
 const TaskAddScreen = () => {
   const { layoutStore, todayStore } = useStores()
   const classes = useStyles(styles)
+  const theme = useTheme()
 
   const inputRef = useRef(null)
   useEffect(() => {
@@ -56,6 +57,7 @@ const TaskAddScreen = () => {
           returnKeyType="next"
           blurOnSubmit={false}
           ref={inputRef}
+          color={theme.colors.yellow}
         />
       </KeyboardAvoidingView>
     </Lightbox>

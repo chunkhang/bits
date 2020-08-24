@@ -14,11 +14,6 @@ const globals = {
   bottomGutter: 24,
   tabBarHeight: 48,
   blurOpacity: 0.2,
-  tabs: [
-    { color: colors.red },
-    { color: colors.yellow },
-    { color: colors.green },
-  ],
 }
 
 const weights = {

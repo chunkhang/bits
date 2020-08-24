@@ -19,7 +19,6 @@ import {
   TaskDetailScreen,
 } from '~/screens'
 import { TabBar, NavBar } from '~/containers'
-import rootStore from '~/stores'
 
 const AppRouter = () => {
   return (
@@ -47,12 +46,7 @@ const AppRouter = () => {
                   title="Upcoming"
                   hideBackButton
                 >
-                  <Scene
-                    component={TasksUpcomingScreen}
-                    onEnter={() => {
-                      rootStore.layoutStore.setTab(0)
-                    }}
-                  />
+                  <Scene component={TasksUpcomingScreen} />
                 </Stack>
                 <Stack
                   initial
@@ -61,12 +55,7 @@ const AppRouter = () => {
                   title="Today"
                   hideBackButton
                 >
-                  <Scene
-                    component={TasksTodayScreen}
-                    onEnter={() => {
-                      rootStore.layoutStore.setTab(1)
-                    }}
-                  />
+                  <Scene component={TasksTodayScreen} />
                 </Stack>
                 <Stack
                   key="doneTasksScreen"
@@ -74,12 +63,7 @@ const AppRouter = () => {
                   title="Done"
                   hideBackButton
                 >
-                  <Scene
-                    component={TasksDoneScreen}
-                    onEnter={() => {
-                      rootStore.layoutStore.setTab(2)
-                    }}
-                  />
+                  <Scene component={TasksDoneScreen} />
                 </Stack>
               </Tabs>
             </Overlay>

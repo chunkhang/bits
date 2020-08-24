@@ -16,7 +16,7 @@ import { ListItem } from '~/components'
 
 import styles from './styles'
 
-const TaskDetailScreen = ({ taskType, task }) => {
+const TaskDetailScreen = ({ taskType, task, color }) => {
   const { upcomingStore, todayStore, doneStore } = useStores()
   const classes = useStyles(styles)
 
@@ -90,6 +90,7 @@ const TaskDetailScreen = ({ taskType, task }) => {
           value={value}
           onChangeText={onChangeText}
           onSubmitEditing={onSubmitEditing}
+          color={color}
         />
         <View style={classes.actionContainer}>
           <TouchableOpacity onPress={onPressTrash}>
@@ -107,6 +108,7 @@ const TaskDetailScreen = ({ taskType, task }) => {
 TaskDetailScreen.propTypes = {
   taskType: PropTypes.string.isRequired,
   task: PropTypes.object.isRequired,
+  color: PropTypes.string.isRequired,
 }
 
 export default observer(TaskDetailScreen)

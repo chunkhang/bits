@@ -22,6 +22,12 @@ const TabBar = ({ navigation }) => {
   const classes = useStyles(styles)
   const window = useWindowDimensions()
 
+  const [tabColors] = useState([
+    theme.colors.red,
+    theme.colors.yellow,
+    theme.colors.green,
+  ])
+
   const navigateToTab = (i) => {
     if (i < 0 || i > navigation.state.routes.length - 1) return
     const route = navigation.state.routes[i]
@@ -108,7 +114,7 @@ const TabBar = ({ navigation }) => {
       {scrubbing ? (
         <View style={classes.scrubsContainer}>
           {navigation.state.routes.map((route, i) => {
-            const backgroundColor = theme.globals.tabs[i].color
+            const backgroundColor = tabColors[i]
             const opacity = scrubIndex === i ? 1 : theme.globals.blurOpacity
 
             return (
@@ -125,7 +131,7 @@ const TabBar = ({ navigation }) => {
       ) : (
         <View style={classes.tabsContainer}>
           {navigation.state.routes.map((route, i) => {
-            const backgroundColor = theme.globals.tabs[i].color
+            const backgroundColor = tabColors[i]
             const opacity = navigation.state.index === i ? 1 : theme.globals.blurOpacity
 
             return (

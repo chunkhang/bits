@@ -22,7 +22,7 @@ import { ListItem } from '~/components'
 
 import styles from './styles'
 
-const TaskItem = observer(({ taskType, task }) => {
+const TaskItem = observer(({ taskType, task, color }) => {
   const theme = useTheme()
   const classes = useStyles(styles)
   const window = useWindowDimensions()
@@ -190,7 +190,7 @@ const TaskItem = observer(({ taskType, task }) => {
   // Press handler
 
   const onPress = () => {
-    Actions.taskDetailScreen({ taskType, task })
+    Actions.taskDetailScreen({ taskType, task, color })
   }
 
   return (
@@ -206,6 +206,7 @@ const TaskItem = observer(({ taskType, task }) => {
         <ListItem
           value={task.name}
           onPress={onPress}
+          color={color}
         />
       </Animated.View>
       <View
@@ -220,9 +221,10 @@ const TaskItem = observer(({ taskType, task }) => {
 
 TaskItem.propTypes = {
   task: PropTypes.object.isRequired,
+  color: PropTypes.string.isRequired,
 }
 
-const TaskList = ({ taskType }) => {
+const TaskList = ({ taskType, color }) => {
   const { upcomingStore, todayStore, doneStore } = useStores()
   const classes = useStyles(styles)
 
@@ -241,6 +243,7 @@ const TaskList = ({ taskType }) => {
         <TaskItem
           taskType={taskType}
           task={item}
+          color={color}
         />
       )}
       keyExtractor={(item) => item.id}
@@ -250,6 +253,7 @@ const TaskList = ({ taskType }) => {
 
 TaskList.propTypes = {
   taskType: PropTypes.string.isRequired,
+  color: PropTypes.string.isRequired,
 }
 
 export default observer(TaskList)
