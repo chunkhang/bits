@@ -1,3 +1,5 @@
+import { StyleSheet } from 'react-native'
+
 const styles = (theme) => {
   return {
     mainContainer: {
@@ -25,8 +27,9 @@ const styles = (theme) => {
     },
 
     divider: {
-      height: 1,
+      height: StyleSheet.hairlineWidth,
       marginTop: 12,
+      backgroundColor: theme.colors.black,
     },
   }
 }
