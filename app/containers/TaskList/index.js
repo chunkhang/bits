@@ -7,91 +7,31 @@ import {
   Animated,
   useWindowDimensions,
 } from 'react-native'
-import { observer } from 'mobx-react'
-import { Actions } from 'react-native-router-flux'
 
 import {
-  useStores,
   useTheme,
   useStyles,
   usePrevious,
   useTrackingRef,
 } from '~/hooks'
-import { BloopSound, ChimeSound } from '~/assets/sounds'
 import { ListItem } from '~/components'
 
 import styles from './styles'
 
-const TaskItem = observer(({ taskType, task, color }) => {
-  const theme = useTheme()
+const TaskItem = ({
+  color,
+  task,
+  onPress,
+  swipeLeftEnabled,
+  swipeLeftColor,
+  onSwipeLeft,
+  swipeRightEnabled,
+  swipeRightColor,
+  onSwipeRight,
+}) => {
   const classes = useStyles(styles)
+  const theme = useTheme()
   const window = useWindowDimensions()
-  const { upcomingStore, todayStore, doneStore } = useStores()
-
-  /* Swipe config */
-
-  const swipeMap = {
-    upcoming: {
-      left: {
-        enabled: false,
-        color: null,
-        handler: () => null,
-      },
-      right: {
-        enabled: true,
-        color: theme.colors.yellow,
-        handler: () => {
-          upcomingStore.removeTask(task.id)
-          todayStore.addTask(task)
-          BloopSound.stop()
-          BloopSound.play()
-        },
-      },
-    },
-    today: {
-      left: {
-        enabled: true,
-        color: theme.colors.red,
-        handler: () => {
-          todayStore.removeTask(task.id)
-          upcomingStore.addTask(task)
-          BloopSound.stop()
-          BloopSound.play()
-        },
-      },
-      right: {
-        enabled: true,
-        color: theme.colors.green,
-        handler: () => {
-          todayStore.removeTask(task.id)
-          doneStore.addTask(task)
-          ChimeSound.stop()
-          ChimeSound.play()
-        },
-      },
-    },
-    done: {
-      left: {
-        enabled: true,
-        color: theme.colors.yellow,
-        handler: () => {
-          doneStore.removeTask(task.id)
-          todayStore.addTask(task)
-          BloopSound.stop()
-          BloopSound.play()
-        },
-      },
-      right: {
-        enabled: false,
-        color: null,
-        handler: () => null,
-      },
-    },
-  }
-
-  const swipe = swipeMap[taskType]
-
-  /* Swipe logic */
 
   // How much distance to drag before popping and handling swipe
   const [popThreshold] = useState(64)
@@ -116,11 +56,11 @@ const TaskItem = observer(({ taskType, task, color }) => {
     // Determine swipe direction
     const newSwipingRight = currentDx > 0
     if (newSwipingRight) {
-      if (!swipe.right.enabled) return
-      setBackgroundColor(swipe.right.color)
+      if (!swipeRightEnabled) return
+      setBackgroundColor(swipeRightColor)
     } else {
-      if (!swipe.left.enabled) return
-      setBackgroundColor(swipe.left.color)
+      if (!swipeLeftEnabled) return
+      setBackgroundColor(swipeLeftColor)
     }
     // Determine whether should pop or not
     const deltaDx = currentDx - prevDx
@@ -140,10 +80,10 @@ const TaskItem = observer(({ taskType, task, color }) => {
     setShouldPop(newShouldPop)
   }, [currentDx])
 
-  /* Pan responder */
-
   // All changing values must be ref
-  const swipeRef = useTrackingRef(swipe)
+  const taskRef = useTrackingRef(task)
+  const onSwipeLeftRef = useTrackingRef(onSwipeLeft)
+  const onSwipeRightRef = useTrackingRef(onSwipeRight)
   const swipingRightRef = useTrackingRef(swipingRight)
   const shouldPopRef = useTrackingRef(shouldPop)
 
@@ -169,9 +109,9 @@ const TaskItem = observer(({ taskType, task, color }) => {
           // Handle swipe after pop
           setTimeout(() => {
             if (swipingRightRef.current) {
-              swipeRef.current.right.handler()
+              onSwipeRightRef.current(taskRef.current)
             } else {
-              swipeRef.current.left.handler()
+              onSwipeLeftRef.current(taskRef.current)
             }
           }, 0)
         })
@@ -187,14 +127,8 @@ const TaskItem = observer(({ taskType, task, color }) => {
     },
   }))
 
-  // Press handler
-
-  const onPress = () => {
-    Actions.taskDetailScreen({ taskType, task, color })
-  }
-
   return (
-    <View style={{ position: 'relative' }}>
+    <View style={classes.itemContainer}>
       <Animated.View
         style={{
           transform: [
@@ -205,8 +139,10 @@ const TaskItem = observer(({ taskType, task, color }) => {
       >
         <ListItem
           value={task.name}
-          onPress={onPress}
           color={color}
+          onPress={() => {
+            onPress(task)
+          }}
         />
       </Animated.View>
       <View
@@ -217,33 +153,58 @@ const TaskItem = observer(({ taskType, task, color }) => {
       />
     </View>
   )
-})
-
-TaskItem.propTypes = {
-  task: PropTypes.object.isRequired,
-  color: PropTypes.string.isRequired,
 }
 
-const TaskList = ({ taskType, color }) => {
-  const { upcomingStore, todayStore, doneStore } = useStores()
-  const classes = useStyles(styles)
+TaskItem.propTypes = {
+  color: PropTypes.string.isRequired,
+  task: PropTypes.object.isRequired,
+  onPress: PropTypes.func,
+  swipeLeftEnabled: PropTypes.bool,
+  swipeLeftColor: PropTypes.string,
+  onSwipeLeft: PropTypes.func,
+  swipeRightEnabled: PropTypes.bool,
+  swipeRightColor: PropTypes.string,
+  onSwipeRight: PropTypes.func,
+}
 
-  const tasksMap = {
-    upcoming: upcomingStore.tasks,
-    today: todayStore.tasks,
-    done: doneStore.tasks,
-  }
-  const tasks = tasksMap[taskType]
+TaskItem.defaultProps = {
+  onPress: () => null,
+  swipeLeftEnabled: false,
+  swipeLeftColor: null,
+  onSwipeLeft: () => null,
+  swipeRightEnabled: false,
+  swipeRightColor: null,
+  onSwipeRight: () => null,
+}
+
+const TaskList = ({
+  color,
+  tasks,
+  onPressItem,
+  swipeLeftEnabled,
+  swipeLeftColor,
+  onSwipeLeft,
+  swipeRightEnabled,
+  swipeRightColor,
+  onSwipeRight,
+}) => {
+  const classes = useStyles(styles)
 
   return (
     <FlatList
       style={classes.mainContainer}
-      data={tasks.slice()}
+      data={tasks}
       renderItem={({ item }) => (
         <TaskItem
-          taskType={taskType}
-          task={item}
           color={color}
+          task={item}
+          onPress={onPressItem}
+          swipeLeftEnabled={swipeLeftEnabled}
+          swipeLeftColor={swipeLeftColor}
+          onSwipeLeft={onSwipeLeft}
+          swipeRightEnabled={swipeRightEnabled}
+          swipeRightColor={swipeRightColor}
+          onSwipeRight={onSwipeRight}
         />
       )}
       keyExtractor={(item) => item.id}
@@ -252,8 +213,26 @@ const TaskList = ({ taskType, color }) => {
 }
 
 TaskList.propTypes = {
-  taskType: PropTypes.string.isRequired,
   color: PropTypes.string.isRequired,
+  tasks: PropTypes.array,
+  onPressItem: PropTypes.func,
+  swipeLeftEnabled: PropTypes.bool,
+  swipeLeftColor: PropTypes.string,
+  onSwipeLeft: PropTypes.func,
+  swipeRightEnabled: PropTypes.bool,
+  swipeRightColor: PropTypes.string,
+  onSwipeRight: PropTypes.func,
 }
 
-export default observer(TaskList)
+TaskList.defaultProps = {
+  tasks: [],
+  onPressItem: () => null,
+  swipeLeftEnabled: false,
+  swipeLeftColor: null,
+  onSwipeLeft: () => null,
+  swipeRightEnabled: false,
+  swipeRightColor: null,
+  onSwipeRight: () => null,
+}
+
+export default TaskList

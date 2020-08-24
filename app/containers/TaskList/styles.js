@@ -4,6 +4,10 @@ const styles = () => {
       flex: 1,
     },
 
+    itemContainer: {
+      position: 'relative',
+    },
+
     swipeBackground: {
       position: 'absolute',
       left: 0,
