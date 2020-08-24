@@ -87,6 +87,9 @@ const TaskItem = observer(({ taskType, task }) => {
   // How much distance to drag before popping and handling swipe
   const [popThreshold] = useState(64)
 
+  // How much distance can be dragged for disabled swipe
+  const [disabledThreshold] = useState(20)
+
   // Horizontal translation of view
   const [pan] = useState(new Animated.Value(0))
 
@@ -103,29 +106,34 @@ const TaskItem = observer(({ taskType, task }) => {
   const [opacity, setOpacity] = useState(null)
 
   useEffect(() => {
+    let swipeEnabled = true
     // Determine swipe direction
     const newSwipingRight = currentDx > 0
-    if (newSwipingRight) {
-      if (!swipe.right.enabled) return
+    if (newSwipingRight && swipe.right.enabled) {
       setBackgroundColor(swipe.right.color)
-    } else {
-      if (!swipe.left.enabled) return
+    } else if (!newSwipingRight && swipe.left.enabled) {
       setBackgroundColor(swipe.left.color)
+    } else {
+      setBackgroundColor(null)
+      swipeEnabled = false
     }
     // Determine whether should pop or not
-    const deltaX = currentDx - prevDx
+    const deltaDx = currentDx - prevDx
     const exceedThreshold = Math.abs(currentDx) >= popThreshold
-    const newShouldPop = exceedThreshold && (
+    const newShouldPop = swipeEnabled && exceedThreshold && (
       // Must be swiping in the correct direction
-      newSwipingRight ? deltaX > 0 : deltaX < 0
+      newSwipingRight ? deltaDx > 0 : deltaDx < 0
     )
     if (newShouldPop) {
       setOpacity(1)
     } else {
       setOpacity(0.25)
     }
-    // Apple horizontal translation
-    pan.setValue(currentDx)
+    // Apply horizontal translation
+    // If swipe is disabled, we allow limited movement
+    if (swipeEnabled || Math.abs(currentDx) <= disabledThreshold) {
+      pan.setValue(currentDx)
+    }
     setSwipingRight(newSwipingRight)
     setShouldPop(newShouldPop)
   }, [currentDx])
