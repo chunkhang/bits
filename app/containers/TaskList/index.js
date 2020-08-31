@@ -89,6 +89,7 @@ const TaskItem = ({
 
   // All changing values must be ref
   const taskRef = useTrackingRef(task)
+  const sortingRef = useTrackingRef(sorting)
   const onSwipeLeftRef = useTrackingRef(onSwipeLeft)
   const onSwipeRightRef = useTrackingRef(onSwipeRight)
   const swipingRightRef = useTrackingRef(swipingRight)
@@ -96,8 +97,12 @@ const TaskItem = ({
 
   const [panResponder] = useState(PanResponder.create({
     onMoveShouldSetPanResponder: (event, gestureState) => {
-      // Only interested in horizontal movement
-      return Math.abs(gestureState.dx) > Math.abs(gestureState.dy)
+      return (
+        // Only when not sorting
+        !sortingRef.current &&
+        // Only interested in horizontal movement
+        Math.abs(gestureState.dx) > Math.abs(gestureState.dy)
+      )
     },
     onPanResponderMove: (event, gestureState) => {
       setCurrentDx(gestureState.dx)
