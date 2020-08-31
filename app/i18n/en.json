@@ -1,0 +1,29 @@
+{
+  "general": {
+    "yes": "Yes",
+    "no": "No"
+  },
+  "alert": {
+    "deleteTask": {
+      "title": "Delete task",
+      "message": "Are you sure you want to delete this task?"
+    }
+  },
+  "screen": {
+    "upcomingTasks": {
+      "title": "Upcoming"
+    },
+    "todayTasks": {
+      "title": "Today"
+    },
+    "doneTasks": {
+      "title": "Done"
+    },
+    "taskDetail": {
+      "title": "Task"
+    },
+    "addTask": {
+      "title": "Add Task"
+    }
+  }
+}

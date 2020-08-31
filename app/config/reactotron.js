@@ -4,6 +4,8 @@ import { NativeModules } from 'react-native'
 import Reactotron from 'reactotron-react-native'
 import AsyncStorage from '@react-native-community/async-storage'
 
+import app from '../../app.json'
+
 if (__DEV__) {
   // https://github.com/infinitered/reactotron/issues/272#issuecomment-272013885
   const { scriptURL } = NativeModules.SourceCode
@@ -11,7 +13,7 @@ if (__DEV__) {
 
   Reactotron
     .setAsyncStorageHandler(AsyncStorage)
-    .configure({ host, name: 'Bits' })
+    .configure({ host, name: app.name })
     .useReactNative({
       asyncStorage: false,
       networking: {

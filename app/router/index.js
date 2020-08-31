@@ -9,6 +9,7 @@ import {
   Scene,
   ActionConst,
 } from 'react-native-router-flux'
+import I18n from 'i18n-js'
 
 import {
   AppLoadingScreen,
@@ -43,7 +44,7 @@ const AppRouter = () => {
                 <Stack
                   key="upcomingTasksScreen"
                   navBar={NavBar}
-                  title="Upcoming"
+                  title={I18n.t('screen.upcomingTasks.title')}
                   hideBackButton
                 >
                   <Scene component={TasksUpcomingScreen} />
@@ -52,7 +53,7 @@ const AppRouter = () => {
                   initial
                   key="todayTasksScreen"
                   navBar={NavBar}
-                  title="Today"
+                  title={I18n.t('screen.todayTasks.title')}
                   hideBackButton
                 >
                   <Scene component={TasksTodayScreen} />
@@ -60,7 +61,7 @@ const AppRouter = () => {
                 <Stack
                   key="doneTasksScreen"
                   navBar={NavBar}
-                  title="Done"
+                  title={I18n.t('screen.doneTasks.title')}
                   hideBackButton
                 >
                   <Scene component={TasksDoneScreen} />
@@ -71,12 +72,13 @@ const AppRouter = () => {
               key="taskDetailScreen"
               component={TaskDetailScreen}
               navBar={NavBar}
-              title="Task"
+              title={I18n.t('screen.taskDetail.title')}
             />
           </Stack>
           <Scene
             key="addTaskScreen"
             component={TaskAddScreen}
+            title={I18n.t('screen.addTask.title')}
           />
         </Lightbox>
       </Modal>

@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from 'react'
+import PropTypes from 'prop-types'
 import { KeyboardAvoidingView, Keyboard } from 'react-native'
 import { observer } from 'mobx-react'
 
@@ -8,7 +9,7 @@ import { Lightbox, Header, ListItem } from '~/components'
 
 import styles from './styles'
 
-const TaskAddScreen = () => {
+const TaskAddScreen = ({ title }) => {
   const { layoutStore, todayStore } = useStores()
   const classes = useStyles(styles)
   const theme = useTheme()
@@ -48,7 +49,7 @@ const TaskAddScreen = () => {
         keyboardVerticalOffset={44}
         behavior="padding"
       >
-        <Header title="Add Task" />
+        <Header title={title} />
         <ListItem
           editable
           value={layoutStore.addTaskInput}
@@ -62,6 +63,10 @@ const TaskAddScreen = () => {
       </KeyboardAvoidingView>
     </Lightbox>
   )
+}
+
+TaskAddScreen.propTypes = {
+  title: PropTypes.string.isRequired,
 }
 
 export default observer(TaskAddScreen)
