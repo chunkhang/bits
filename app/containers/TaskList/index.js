@@ -136,19 +136,27 @@ const TaskItem = ({
 
   /* Sorting */
 
+  // Start sorting the list
+  // Set this item as the active row being dragged around
   const onLongPress = () => {
-    // Start sorting the list
     setSorting(true)
-    // Set this item as the active row being dragged around
     if (toggleRowActive) {
       toggleRowActive()
     }
   }
 
+  // Reset swipe state when sorting starts
+  useEffect(() => {
+    if (sorting) {
+      setSwipeColor(null)
+      setSwipeOpacity(null)
+    }
+  }, [sorting])
+
+  // Blur the item if the list is being sorted, but this
+  // is not the item being dragged around
   const [itemOpacity, setItemOpacity] = useState(null)
   useEffect(() => {
-    // Blur the item the list is being sorted, but this
-    // is not the item being dragged around
     if (sorting && !rowActive) {
       setItemOpacity(theme.globals.blurOpacity)
     } else {
