@@ -1,14 +1,26 @@
 const styles = (theme) => {
+  const {
+    horizontalGutter,
+    bottomGutter,
+    tabBarHeight,
+    taskItemHeight,
+  } = theme.globals
+
   return {
     mainContainer: {
       flex: 1,
     },
 
+    primaryContainer: {
+      flex: 1,
+      marginBottom: bottomGutter + tabBarHeight,
+    },
+
     itemContainer: {
       flexDirection: 'row',
       alignItems: 'center',
-      height: theme.globals.taskItemHeight,
-      paddingHorizontal: theme.globals.horizontalGutter,
+      height: taskItemHeight,
+      paddingHorizontal: horizontalGutter,
       backgroundColor: theme.colors.white,
     },
 
@@ -39,7 +51,10 @@ const styles = (theme) => {
     },
 
     actionContainer: {
-      marginTop: 24,
+      position: 'absolute',
+      bottom: bottomGutter,
+      height: tabBarHeight,
+      width: '100%',
       justifyContent: 'center',
       alignItems: 'center',
     },

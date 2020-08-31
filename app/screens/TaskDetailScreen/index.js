@@ -79,17 +79,19 @@ const TaskDetailScreen = ({
   return (
     <TouchableWithoutFeedback onPress={onPressBackground}>
       <View style={classes.mainContainer}>
-        <View style={classes.itemContainer}>
-          <View style={[classes.dot, { backgroundColor: color }]} />
-          <Input
-            value={value}
-            onChangeText={onChangeText}
-            onSubmitEditing={onSubmitEditing}
-            returnKeyType="done"
-            containerStyle={classes.containerStyle}
-            inputContainerStyle={classes.inputContainerStyle}
-            inputStyle={classes.inputStyle}
-          />
+        <View style={classes.primaryContainer}>
+          <View style={classes.itemContainer}>
+            <View style={[classes.dot, { backgroundColor: color }]} />
+            <Input
+              value={value}
+              onChangeText={onChangeText}
+              onSubmitEditing={onSubmitEditing}
+              returnKeyType="done"
+              containerStyle={classes.containerStyle}
+              inputContainerStyle={classes.inputContainerStyle}
+              inputStyle={classes.inputStyle}
+            />
+          </View>
         </View>
         <View style={classes.actionContainer}>
           <TouchableOpacity onPress={onPressTrash}>
