@@ -193,6 +193,7 @@ const TaskItem = ({
         <TouchableWithoutFeedback
           onPress={onPress}
           onLongPress={onLongPress}
+          delayLongPress={250}
         >
           <View
             style={[
