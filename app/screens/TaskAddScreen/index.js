@@ -1,11 +1,12 @@
 import React, { useEffect, useRef } from 'react'
 import PropTypes from 'prop-types'
-import { KeyboardAvoidingView, Keyboard } from 'react-native'
+import { KeyboardAvoidingView, Keyboard, View } from 'react-native'
+import { Input } from 'react-native-elements'
 import { observer } from 'mobx-react'
 
 import { useStores, useStyles, useTheme } from '~/hooks'
 import { DingSound } from '~/assets/sounds'
-import { Lightbox, Header, ListItem } from '~/components'
+import { Lightbox, Header } from '~/components'
 
 import styles from './styles'
 
@@ -50,16 +51,25 @@ const TaskAddScreen = ({ title }) => {
         behavior="padding"
       >
         <Header title={title} />
-        <ListItem
-          editable
-          value={layoutStore.addTaskInput}
-          onChangeText={onChangeText}
-          onSubmitEditing={onSubmitEditing}
-          returnKeyType="next"
-          blurOnSubmit={false}
-          ref={inputRef}
-          color={theme.colors.yellow}
-        />
+        <View style={classes.itemContainer}>
+          <View
+            style={[
+              classes.dot,
+              { backgroundColor: theme.colors.yellow },
+            ]}
+          />
+          <Input
+            value={layoutStore.addTaskInput}
+            onChangeText={onChangeText}
+            onSubmitEditing={onSubmitEditing}
+            returnKeyType="next"
+            blurOnSubmit={false}
+            containerStyle={classes.containerStyle}
+            inputContainerStyle={classes.inputContainerStyle}
+            inputStyle={classes.inputStyle}
+            ref={inputRef}
+          />
+        </View>
       </KeyboardAvoidingView>
     </Lightbox>
   )

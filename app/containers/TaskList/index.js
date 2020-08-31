@@ -2,11 +2,13 @@ import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import {
   View,
-  FlatList,
   PanResponder,
   Animated,
+  Text,
+  TouchableWithoutFeedback,
   useWindowDimensions,
 } from 'react-native'
+import SortableList from 'react-native-sortable-list'
 
 import {
   useTheme,
@@ -14,7 +16,6 @@ import {
   usePrevious,
   useTrackingRef,
 } from '~/hooks'
-import { ListItem } from '~/components'
 
 import styles from './styles'
 
@@ -22,6 +23,10 @@ const TaskItem = ({
   color,
   task,
   onPress,
+  sorting,
+  setSorting,
+  rowActive,
+  toggleRowActive,
   swipeLeftEnabled,
   swipeLeftColor,
   onSwipeLeft,
@@ -32,6 +37,8 @@ const TaskItem = ({
   const classes = useStyles(styles)
   const theme = useTheme()
   const window = useWindowDimensions()
+
+  /* Swiping */
 
   // How much distance to drag before popping and handling swipe
   const [popThreshold] = useState(64)
@@ -48,8 +55,8 @@ const TaskItem = ({
   const [shouldPop, setShouldPop] = useState(false)
 
   // Styles to apply based on swipe state
-  const [backgroundColor, setBackgroundColor] = useState(null)
-  const [opacity, setOpacity] = useState(null)
+  const [swipeColor, setSwipeColor] = useState(null)
+  const [swipeOpacity, setSwipeOpacity] = useState(null)
 
   useEffect(() => {
     if (!currentDx || !prevDx) return
@@ -57,10 +64,10 @@ const TaskItem = ({
     const newSwipingRight = currentDx > 0
     if (newSwipingRight) {
       if (!swipeRightEnabled) return
-      setBackgroundColor(swipeRightColor)
+      setSwipeColor(swipeRightColor)
     } else {
       if (!swipeLeftEnabled) return
-      setBackgroundColor(swipeLeftColor)
+      setSwipeColor(swipeLeftColor)
     }
     // Determine whether should pop or not
     const deltaDx = currentDx - prevDx
@@ -70,9 +77,9 @@ const TaskItem = ({
       newSwipingRight ? deltaDx > 0 : deltaDx < 0
     )
     if (newShouldPop) {
-      setOpacity(1)
+      setSwipeOpacity(1)
     } else {
-      setOpacity(theme.globals.blurOpacity)
+      setSwipeOpacity(theme.globals.blurOpacity)
     }
     // Apply horizontal translation
     pan.setValue(currentDx)
@@ -127,6 +134,28 @@ const TaskItem = ({
     },
   }))
 
+  /* Sorting */
+
+  const onLongPress = () => {
+    // Start sorting the list
+    setSorting(true)
+    // Set this item as the active row being dragged around
+    if (toggleRowActive) {
+      toggleRowActive()
+    }
+  }
+
+  const [itemOpacity, setItemOpacity] = useState(null)
+  useEffect(() => {
+    // Blur the item the list is being sorted, but this
+    // is not the item being dragged around
+    if (sorting && !rowActive) {
+      setItemOpacity(theme.globals.blurOpacity)
+    } else {
+      setItemOpacity(null)
+    }
+  }, [sorting, rowActive])
+
   return (
     <View style={classes.itemContainer}>
       <Animated.View
@@ -137,18 +166,34 @@ const TaskItem = ({
         }}
         {...panResponder.panHandlers}
       >
-        <ListItem
-          value={task.name}
-          color={color}
-          onPress={() => {
-            onPress(task)
-          }}
-        />
+        <TouchableWithoutFeedback
+          onPress={() => onPress(task)}
+          onLongPress={onLongPress}
+        >
+          <View
+            style={[
+              classes.item,
+              { opacity: itemOpacity },
+            ]}
+          >
+            <View
+              style={[
+                classes.dot,
+                { backgroundColor: color },
+              ]}
+            />
+            <View style={classes.textContainer}>
+              <Text style={classes.text}>
+                {task.name}
+              </Text>
+            </View>
+          </View>
+        </TouchableWithoutFeedback>
       </Animated.View>
       <View
         style={[
           classes.swipeBackground,
-          { backgroundColor, opacity },
+          { backgroundColor: swipeColor, opacity: swipeOpacity },
         ]}
       />
     </View>
@@ -159,6 +204,10 @@ TaskItem.propTypes = {
   color: PropTypes.string.isRequired,
   task: PropTypes.object.isRequired,
   onPress: PropTypes.func,
+  sorting: PropTypes.bool,
+  setSorting: PropTypes.func,
+  rowActive: PropTypes.bool,
+  toggleRowActive: PropTypes.func,
   swipeLeftEnabled: PropTypes.bool,
   swipeLeftColor: PropTypes.string,
   onSwipeLeft: PropTypes.func,
@@ -169,6 +218,10 @@ TaskItem.propTypes = {
 
 TaskItem.defaultProps = {
   onPress: () => null,
+  sorting: false,
+  setSorting: () => null,
+  rowActive: false,
+  toggleRowActive: () => null,
   swipeLeftEnabled: false,
   swipeLeftColor: null,
   onSwipeLeft: () => null,
@@ -189,26 +242,53 @@ const TaskList = ({
   onSwipeRight,
 }) => {
   const classes = useStyles(styles)
+  const theme = useTheme()
+
+  const [sorting, setSorting] = useState(false)
+
+  const onActivateRow = () => {
+    console.log('activate...')
+  }
+
+  const onReleaseRow = () => {
+    console.log('release...')
+    setSorting(false)
+  }
+
+  const onChangeOrder = () => {
+    console.log('change order...')
+  }
 
   return (
-    <FlatList
-      style={classes.mainContainer}
-      data={tasks}
-      renderItem={({ item }) => (
-        <TaskItem
-          color={color}
-          task={item}
-          onPress={onPressItem}
-          swipeLeftEnabled={swipeLeftEnabled}
-          swipeLeftColor={swipeLeftColor}
-          onSwipeLeft={onSwipeLeft}
-          swipeRightEnabled={swipeRightEnabled}
-          swipeRightColor={swipeRightColor}
-          onSwipeRight={onSwipeRight}
-        />
-      )}
-      keyExtractor={(item) => item.id}
-    />
+    <View style={classes.mainContainer}>
+      <SortableList
+        style={classes.list}
+        data={tasks}
+        autoscrollAreaSize={theme.globals.taskItemHeight}
+        manuallyActivateRows
+        onActivateRow={onActivateRow}
+        onReleaseRow={onReleaseRow}
+        onChangeOrder={onChangeOrder}
+        renderRow={({ data, active }) => {
+          return (
+            <TaskItem
+              color={color}
+              task={data}
+              onPress={onPressItem}
+              setSorting={setSorting}
+              sorting={sorting}
+              rowActive={active}
+              swipeLeftEnabled={swipeLeftEnabled}
+              swipeLeftColor={swipeLeftColor}
+              onSwipeLeft={onSwipeLeft}
+              swipeRightEnabled={swipeRightEnabled}
+              swipeRightColor={swipeRightColor}
+              onSwipeRight={onSwipeRight}
+            />
+          )
+        }}
+      />
+    </View>
   )
 }
 

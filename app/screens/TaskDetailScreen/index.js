@@ -7,11 +7,10 @@ import {
   Alert,
   Keyboard,
 } from 'react-native'
-import { Icon } from 'react-native-elements'
+import { Icon, Input } from 'react-native-elements'
 import I18n from 'i18n-js'
 
 import { useStyles } from '~/hooks'
-import { ListItem } from '~/components'
 
 import styles from './styles'
 
@@ -80,13 +79,18 @@ const TaskDetailScreen = ({
   return (
     <TouchableWithoutFeedback onPress={onPressBackground}>
       <View style={classes.mainContainer}>
-        <ListItem
-          editable
-          value={value}
-          onChangeText={onChangeText}
-          onSubmitEditing={onSubmitEditing}
-          color={color}
-        />
+        <View style={classes.itemContainer}>
+          <View style={[classes.dot, { backgroundColor: color }]} />
+          <Input
+            value={value}
+            onChangeText={onChangeText}
+            onSubmitEditing={onSubmitEditing}
+            returnKeyType="done"
+            containerStyle={classes.containerStyle}
+            inputContainerStyle={classes.inputContainerStyle}
+            inputStyle={classes.inputStyle}
+          />
+        </View>
         <View style={classes.actionContainer}>
           <TouchableOpacity onPress={onPressTrash}>
             <Icon

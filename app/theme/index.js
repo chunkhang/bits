@@ -14,6 +14,7 @@ const globals = {
   bottomGutter: 24,
   tabBarHeight: 48,
   blurOpacity: 0.2,
+  taskItemHeight: 56,
 }
 
 const weights = {
