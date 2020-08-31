@@ -275,6 +275,11 @@ const TaskList = ({
   const classes = useStyles(styles)
   const theme = useTheme()
 
+  const [sortable, setSortable] = useState(false)
+  useEffect(() => {
+    setSortable(sortEnabled && tasks.length > 1)
+  }, [sortEnabled, tasks.length])
+
   const [sorting, setSorting] = useState(false)
 
   const onReleaseRow = (key, order) => {
@@ -292,7 +297,7 @@ const TaskList = ({
       <SortableList
         style={classes.list}
         data={tasks}
-        sortingEnabled={sortEnabled}
+        sortingEnabled={sortable}
         autoscrollAreaSize={theme.globals.taskItemHeight}
         manuallyActivateRows
         onReleaseRow={onReleaseRow}
@@ -303,7 +308,7 @@ const TaskList = ({
               color={color}
               task={data}
               onPress={onPressItem}
-              sortEnabled={sortEnabled}
+              sortEnabled={sortable}
               sorting={sorting}
               setSorting={setSorting}
               rowActive={active}
