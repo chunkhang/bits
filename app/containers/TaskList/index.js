@@ -16,6 +16,7 @@ import {
   usePrevious,
   useTrackingRef,
 } from '~/hooks'
+import { BeepSound } from '~/assets/sounds'
 
 import styles from './styles'
 
@@ -274,12 +275,12 @@ const TaskList = ({
   }
 
   const onReleaseRow = () => {
-    console.log('release...')
     setSorting(false)
   }
 
   const onChangeOrder = () => {
-    console.log('change order...')
+    BeepSound.stop()
+    BeepSound.play()
   }
 
   return (
