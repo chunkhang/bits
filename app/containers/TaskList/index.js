@@ -24,6 +24,7 @@ const TaskItem = ({
   color,
   task,
   onPress: propsOnPress,
+  sortEnabled,
   sorting,
   setSorting,
   rowActive,
@@ -145,6 +146,7 @@ const TaskItem = ({
   // Start sorting the list
   // Set this item as the active row being dragged around
   const onLongPress = () => {
+    if (!sortEnabled) return
     setSorting(true)
     if (toggleRowActive) {
       toggleRowActive()
@@ -229,6 +231,7 @@ TaskItem.propTypes = {
   color: PropTypes.string.isRequired,
   task: PropTypes.object.isRequired,
   onPress: PropTypes.func,
+  sortEnabled: PropTypes.bool,
   sorting: PropTypes.bool,
   setSorting: PropTypes.func,
   rowActive: PropTypes.bool,
@@ -243,6 +246,7 @@ TaskItem.propTypes = {
 
 TaskItem.defaultProps = {
   onPress: () => null,
+  sortEnabled: false,
   sorting: false,
   setSorting: () => null,
   rowActive: false,
@@ -259,6 +263,8 @@ const TaskList = ({
   color,
   tasks,
   onPressItem,
+  sortEnabled,
+  onSort,
   swipeLeftEnabled,
   swipeLeftColor,
   onSwipeLeft,
@@ -271,12 +277,9 @@ const TaskList = ({
 
   const [sorting, setSorting] = useState(false)
 
-  const onActivateRow = () => {
-    console.log('activate...')
-  }
-
-  const onReleaseRow = () => {
+  const onReleaseRow = (key, order) => {
     setSorting(false)
+    onSort(order)
   }
 
   const onChangeOrder = () => {
@@ -289,9 +292,9 @@ const TaskList = ({
       <SortableList
         style={classes.list}
         data={tasks}
+        sortingEnabled={sortEnabled}
         autoscrollAreaSize={theme.globals.taskItemHeight}
         manuallyActivateRows
-        onActivateRow={onActivateRow}
         onReleaseRow={onReleaseRow}
         onChangeOrder={onChangeOrder}
         renderRow={({ data, active }) => {
@@ -300,8 +303,9 @@ const TaskList = ({
               color={color}
               task={data}
               onPress={onPressItem}
-              setSorting={setSorting}
+              sortEnabled={sortEnabled}
               sorting={sorting}
+              setSorting={setSorting}
               rowActive={active}
               swipeLeftEnabled={swipeLeftEnabled}
               swipeLeftColor={swipeLeftColor}
@@ -321,6 +325,8 @@ TaskList.propTypes = {
   color: PropTypes.string.isRequired,
   tasks: PropTypes.array,
   onPressItem: PropTypes.func,
+  sortEnabled: PropTypes.bool,
+  onSort: PropTypes.func,
   swipeLeftEnabled: PropTypes.bool,
   swipeLeftColor: PropTypes.string,
   onSwipeLeft: PropTypes.func,
@@ -332,6 +338,8 @@ TaskList.propTypes = {
 TaskList.defaultProps = {
   tasks: [],
   onPressItem: () => null,
+  sortEnabled: false,
+  onSort: () => null,
   swipeLeftEnabled: false,
   swipeLeftColor: null,
   onSwipeLeft: () => null,

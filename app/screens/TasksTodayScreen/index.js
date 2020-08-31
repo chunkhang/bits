@@ -32,6 +32,10 @@ const TasksTodayScreen = () => {
     })
   }
 
+  const onSort = (order) => {
+    todayStore.reorderTasks(order)
+  }
+
   const onSwipeLeft = (task) => {
     todayStore.removeTask(task.id)
     upcomingStore.addTask(task)
@@ -52,6 +56,8 @@ const TasksTodayScreen = () => {
         color={theme.colors.yellow}
         tasks={todayStore.tasks.slice()}
         onPressItem={onPressItem}
+        sortEnabled
+        onSort={onSort}
         swipeLeftEnabled
         swipeLeftColor={theme.colors.red}
         onSwipeLeft={onSwipeLeft}

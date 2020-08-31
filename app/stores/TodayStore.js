@@ -32,6 +32,14 @@ class TaskStore {
       return task.id !== id
     })
   }
+
+  @action reorderTasks = (order) => {
+    if (order.length !== this.tasks.length) return
+    const newTasks = order.map((key) => {
+      return this.tasks[key]
+    })
+    this.tasks = newTasks
+  }
 }
 
 export default TaskStore
