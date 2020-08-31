@@ -7,6 +7,7 @@ import { Actions } from 'react-native-router-flux'
 import { StoreContext } from '~/contexts'
 import AppRouter from '~/router'
 import rootStore from '~/stores'
+import '~/i18n'
 
 import theme from './theme'
 
