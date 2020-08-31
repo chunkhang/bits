@@ -8,6 +8,7 @@ import {
   Keyboard,
 } from 'react-native'
 import { Icon } from 'react-native-elements'
+import I18n from 'i18n-js'
 
 import { useStyles } from '~/hooks'
 import { ListItem } from '~/components'
@@ -59,15 +60,15 @@ const TaskDetailScreen = ({
 
   const onPressTrash = () => {
     Alert.alert(
-      'Delete task',
-      'Are you sure you want to delete this task?',
+      I18n.t('alert.deleteTask.title'),
+      I18n.t('alert.deleteTask.message'),
       [
         {
-          text: 'No',
+          text: I18n.t('general.no'),
           style: 'cancel',
         },
         {
-          text: 'Yes',
+          text: I18n.t('general.yes'),
           onPress: () => {
             onRemove(task)
           },
