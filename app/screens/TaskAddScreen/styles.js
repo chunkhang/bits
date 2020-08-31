@@ -23,10 +23,13 @@ const styles = (theme) => {
     },
 
     containerStyle: {
+      flex: 1,
       paddingHorizontal: 0,
       // Not sure why it's 1 pixel off
       // when compared to Text
       marginTop: 1,
+      // Fix alignment for clear button
+      marginRight: -6,
     },
 
     inputContainerStyle: {

@@ -62,7 +62,9 @@ const TaskAddScreen = ({ title }) => {
             value={layoutStore.addTaskInput}
             onChangeText={onChangeText}
             onSubmitEditing={onSubmitEditing}
+            clearButtonMode="while-editing"
             returnKeyType="next"
+            enablesReturnKeyAutomatically
             blurOnSubmit={false}
             containerStyle={classes.containerStyle}
             inputContainerStyle={classes.inputContainerStyle}
