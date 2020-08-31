@@ -1,3 +1,4 @@
+import { configure } from 'mobx'
 import { create } from 'mobx-persist'
 import AsyncStorage from '@react-native-community/async-storage'
 
@@ -8,6 +9,7 @@ import DoneStore from './DoneStore'
 
 class RootStore {
   constructor() {
+    configure({ enforceActions: 'always' })
     this.layoutStore = new LayoutStore(this)
     this.upcomingStore = new UpcomingStore(this)
     this.todayStore = new TodayStore(this)

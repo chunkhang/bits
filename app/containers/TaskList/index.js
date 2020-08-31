@@ -2,11 +2,13 @@ import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import {
   View,
-  FlatList,
   PanResponder,
   Animated,
+  Text,
+  TouchableWithoutFeedback,
   useWindowDimensions,
 } from 'react-native'
+import SortableList from 'react-native-sortable-list'
 
 import {
   useTheme,
@@ -14,14 +16,19 @@ import {
   usePrevious,
   useTrackingRef,
 } from '~/hooks'
-import { ListItem } from '~/components'
+import { BeepSound } from '~/assets/sounds'
 
 import styles from './styles'
 
 const TaskItem = ({
   color,
   task,
-  onPress,
+  onPress: propsOnPress,
+  sortEnabled,
+  sorting,
+  setSorting,
+  rowActive,
+  toggleRowActive,
   swipeLeftEnabled,
   swipeLeftColor,
   onSwipeLeft,
@@ -32,6 +39,8 @@ const TaskItem = ({
   const classes = useStyles(styles)
   const theme = useTheme()
   const window = useWindowDimensions()
+
+  /* Swiping */
 
   // How much distance to drag before popping and handling swipe
   const [popThreshold] = useState(64)
@@ -48,8 +57,8 @@ const TaskItem = ({
   const [shouldPop, setShouldPop] = useState(false)
 
   // Styles to apply based on swipe state
-  const [backgroundColor, setBackgroundColor] = useState(null)
-  const [opacity, setOpacity] = useState(null)
+  const [swipeColor, setSwipeColor] = useState(null)
+  const [swipeOpacity, setSwipeOpacity] = useState(null)
 
   useEffect(() => {
     if (!currentDx || !prevDx) return
@@ -57,10 +66,10 @@ const TaskItem = ({
     const newSwipingRight = currentDx > 0
     if (newSwipingRight) {
       if (!swipeRightEnabled) return
-      setBackgroundColor(swipeRightColor)
+      setSwipeColor(swipeRightColor)
     } else {
       if (!swipeLeftEnabled) return
-      setBackgroundColor(swipeLeftColor)
+      setSwipeColor(swipeLeftColor)
     }
     // Determine whether should pop or not
     const deltaDx = currentDx - prevDx
@@ -70,9 +79,9 @@ const TaskItem = ({
       newSwipingRight ? deltaDx > 0 : deltaDx < 0
     )
     if (newShouldPop) {
-      setOpacity(1)
+      setSwipeOpacity(1)
     } else {
-      setOpacity(theme.globals.blurOpacity)
+      setSwipeOpacity(theme.globals.blurOpacity)
     }
     // Apply horizontal translation
     pan.setValue(currentDx)
@@ -82,6 +91,7 @@ const TaskItem = ({
 
   // All changing values must be ref
   const taskRef = useTrackingRef(task)
+  const sortingRef = useTrackingRef(sorting)
   const onSwipeLeftRef = useTrackingRef(onSwipeLeft)
   const onSwipeRightRef = useTrackingRef(onSwipeRight)
   const swipingRightRef = useTrackingRef(swipingRight)
@@ -89,8 +99,12 @@ const TaskItem = ({
 
   const [panResponder] = useState(PanResponder.create({
     onMoveShouldSetPanResponder: (event, gestureState) => {
-      // Only interested in horizontal movement
-      return Math.abs(gestureState.dx) > Math.abs(gestureState.dy)
+      return (
+        // Only when not sorting
+        !sortingRef.current &&
+        // Only interested in horizontal movement
+        Math.abs(gestureState.dx) > Math.abs(gestureState.dy)
+      )
     },
     onPanResponderMove: (event, gestureState) => {
       setCurrentDx(gestureState.dx)
@@ -127,6 +141,47 @@ const TaskItem = ({
     },
   }))
 
+  /* Sorting */
+
+  // Start sorting the list
+  // Set this item as the active row being dragged around
+  const onLongPress = () => {
+    if (!sortEnabled) return
+    setSorting(true)
+    if (toggleRowActive) {
+      toggleRowActive()
+    }
+  }
+
+  // If somehow sorting failed to stop, use press to stop it
+  // Otherwise, press the item as usual
+  const onPress = () => {
+    if (sorting) {
+      setSorting(false)
+    } else {
+      propsOnPress(task)
+    }
+  }
+
+  // Reset swipe state when sorting starts
+  useEffect(() => {
+    if (sorting) {
+      setSwipeColor(null)
+      setSwipeOpacity(null)
+    }
+  }, [sorting])
+
+  // Blur the item if the list is being sorted, but this
+  // is not the item being dragged around
+  const [itemOpacity, setItemOpacity] = useState(null)
+  useEffect(() => {
+    if (sorting && !rowActive) {
+      setItemOpacity(theme.globals.blurOpacity)
+    } else {
+      setItemOpacity(null)
+    }
+  }, [sorting, rowActive])
+
   return (
     <View style={classes.itemContainer}>
       <Animated.View
@@ -137,18 +192,35 @@ const TaskItem = ({
         }}
         {...panResponder.panHandlers}
       >
-        <ListItem
-          value={task.name}
-          color={color}
-          onPress={() => {
-            onPress(task)
-          }}
-        />
+        <TouchableWithoutFeedback
+          onPress={onPress}
+          onLongPress={onLongPress}
+          delayLongPress={250}
+        >
+          <View
+            style={[
+              classes.item,
+              { opacity: itemOpacity },
+            ]}
+          >
+            <View
+              style={[
+                classes.dot,
+                { backgroundColor: color },
+              ]}
+            />
+            <View style={classes.textContainer}>
+              <Text style={classes.text}>
+                {task.name}
+              </Text>
+            </View>
+          </View>
+        </TouchableWithoutFeedback>
       </Animated.View>
       <View
         style={[
           classes.swipeBackground,
-          { backgroundColor, opacity },
+          { backgroundColor: swipeColor, opacity: swipeOpacity },
         ]}
       />
     </View>
@@ -159,6 +231,11 @@ TaskItem.propTypes = {
   color: PropTypes.string.isRequired,
   task: PropTypes.object.isRequired,
   onPress: PropTypes.func,
+  sortEnabled: PropTypes.bool,
+  sorting: PropTypes.bool,
+  setSorting: PropTypes.func,
+  rowActive: PropTypes.bool,
+  toggleRowActive: PropTypes.func,
   swipeLeftEnabled: PropTypes.bool,
   swipeLeftColor: PropTypes.string,
   onSwipeLeft: PropTypes.func,
@@ -169,6 +246,11 @@ TaskItem.propTypes = {
 
 TaskItem.defaultProps = {
   onPress: () => null,
+  sortEnabled: false,
+  sorting: false,
+  setSorting: () => null,
+  rowActive: false,
+  toggleRowActive: () => null,
   swipeLeftEnabled: false,
   swipeLeftColor: null,
   onSwipeLeft: () => null,
@@ -181,6 +263,8 @@ const TaskList = ({
   color,
   tasks,
   onPressItem,
+  sortEnabled,
+  onSort,
   swipeLeftEnabled,
   swipeLeftColor,
   onSwipeLeft,
@@ -189,26 +273,56 @@ const TaskList = ({
   onSwipeRight,
 }) => {
   const classes = useStyles(styles)
+  const theme = useTheme()
+
+  const [sortable, setSortable] = useState(false)
+  useEffect(() => {
+    setSortable(sortEnabled && tasks.length > 1)
+  }, [sortEnabled, tasks.length])
+
+  const [sorting, setSorting] = useState(false)
+
+  const onReleaseRow = (key, order) => {
+    setSorting(false)
+    onSort(order)
+  }
+
+  const onChangeOrder = () => {
+    BeepSound.stop()
+    BeepSound.play()
+  }
 
   return (
-    <FlatList
-      style={classes.mainContainer}
-      data={tasks}
-      renderItem={({ item }) => (
-        <TaskItem
-          color={color}
-          task={item}
-          onPress={onPressItem}
-          swipeLeftEnabled={swipeLeftEnabled}
-          swipeLeftColor={swipeLeftColor}
-          onSwipeLeft={onSwipeLeft}
-          swipeRightEnabled={swipeRightEnabled}
-          swipeRightColor={swipeRightColor}
-          onSwipeRight={onSwipeRight}
-        />
-      )}
-      keyExtractor={(item) => item.id}
-    />
+    <View style={classes.mainContainer}>
+      <SortableList
+        style={classes.list}
+        data={tasks}
+        sortingEnabled={sortable}
+        autoscrollAreaSize={theme.globals.taskItemHeight}
+        manuallyActivateRows
+        onReleaseRow={onReleaseRow}
+        onChangeOrder={onChangeOrder}
+        renderRow={({ data, active }) => {
+          return (
+            <TaskItem
+              color={color}
+              task={data}
+              onPress={onPressItem}
+              sortEnabled={sortable}
+              sorting={sorting}
+              setSorting={setSorting}
+              rowActive={active}
+              swipeLeftEnabled={swipeLeftEnabled}
+              swipeLeftColor={swipeLeftColor}
+              onSwipeLeft={onSwipeLeft}
+              swipeRightEnabled={swipeRightEnabled}
+              swipeRightColor={swipeRightColor}
+              onSwipeRight={onSwipeRight}
+            />
+          )
+        }}
+      />
+    </View>
   )
 }
 
@@ -216,6 +330,8 @@ TaskList.propTypes = {
   color: PropTypes.string.isRequired,
   tasks: PropTypes.array,
   onPressItem: PropTypes.func,
+  sortEnabled: PropTypes.bool,
+  onSort: PropTypes.func,
   swipeLeftEnabled: PropTypes.bool,
   swipeLeftColor: PropTypes.string,
   onSwipeLeft: PropTypes.func,
@@ -227,6 +343,8 @@ TaskList.propTypes = {
 TaskList.defaultProps = {
   tasks: [],
   onPressItem: () => null,
+  sortEnabled: false,
+  onSort: () => null,
   swipeLeftEnabled: false,
   swipeLeftColor: null,
   onSwipeLeft: () => null,
