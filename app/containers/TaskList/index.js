@@ -22,7 +22,7 @@ import styles from './styles'
 const TaskItem = ({
   color,
   task,
-  onPress,
+  onPress: propsOnPress,
   sorting,
   setSorting,
   rowActive,
@@ -150,6 +150,16 @@ const TaskItem = ({
     }
   }
 
+  // If somehow sorting failed to stop, use press to stop it
+  // Otherwise, press the item as usual
+  const onPress = () => {
+    if (sorting) {
+      setSorting(false)
+    } else {
+      propsOnPress(task)
+    }
+  }
+
   // Reset swipe state when sorting starts
   useEffect(() => {
     if (sorting) {
@@ -180,7 +190,7 @@ const TaskItem = ({
         {...panResponder.panHandlers}
       >
         <TouchableWithoutFeedback
-          onPress={() => onPress(task)}
+          onPress={onPress}
           onLongPress={onLongPress}
         >
           <View
