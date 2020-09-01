@@ -1,17 +1,17 @@
 import React from 'react'
 import { TouchableOpacity } from 'react-native'
 import { Icon } from 'react-native-elements'
-import { Actions } from 'react-native-router-flux'
 
-import { useStyles } from '~/hooks'
+import { useStyles, useStores } from '~/hooks'
 
 import styles from './styles'
 
-const BackButton = () => {
+const DeleteButton = () => {
   const classes = useStyles(styles)
+  const { layoutStore } = useStores()
 
   const onPress = () => {
-    Actions.pop()
+    layoutStore.deleteCallback()
   }
 
   return (
@@ -21,11 +21,11 @@ const BackButton = () => {
     >
       <Icon
         type="feather"
-        name="arrow-left"
+        name="trash-2"
         size={22}
       />
     </TouchableOpacity>
   )
 }
 
-export default BackButton
+export default DeleteButton

@@ -23,6 +23,7 @@ import {
   TabBar,
   NavBar,
   BackButton,
+  DeleteButton,
 } from '~/containers'
 
 const AppRouter = () => {
@@ -76,6 +77,7 @@ const AppRouter = () => {
               navBar={NavBar}
               navBarNodes={{
                 leftNode: <BackButton />,
+                rightNode: <DeleteButton />,
               }}
             />
           </Stack>
