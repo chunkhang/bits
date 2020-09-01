@@ -12,6 +12,7 @@ import I18n from 'i18n-js'
 
 import { useStyles, useTheme, useStores } from '~/hooks'
 import { BeepSound } from '~/assets/sounds'
+import config from '~/config'
 
 import styles from './styles'
 
@@ -84,14 +85,21 @@ const SettingsScreen = () => {
   ]
 
   return (
-    <ScrollView style={classes.mainContainer}>
-      {settings.map((setting) => (
-        <SettingsRow
-          key={setting.text}
-          setting={setting}
-        />
-      ))}
-    </ScrollView>
+    <View style={classes.mainContainer}>
+      <ScrollView style={classes.scrollContainer}>
+        {settings.map((setting) => (
+          <SettingsRow
+            key={setting.text}
+            setting={setting}
+          />
+        ))}
+      </ScrollView>
+      <View style={classes.bottomContainer}>
+        <Text style={classes.version}>
+          {config.version}
+        </Text>
+      </View>
+    </View>
   )
 }
 

@@ -5,6 +5,9 @@ const styles = (theme) => {
       paddingHorizontal: theme.globals.horizontalGutter,
     },
 
+    scrollContainer: {
+    },
+
     row: {
       height: theme.globals.taskItemHeight,
       flexDirection: 'row',
@@ -22,6 +25,19 @@ const styles = (theme) => {
       width: 12,
       borderRadius: 2,
       borderColor: theme.colors.black,
+    },
+
+    bottomContainer: {
+      marginBottom: theme.globals.bottomGutter,
+      height: theme.globals.tabBarHeight,
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
+
+    version: {
+      opacity: theme.globals.blurOpacity,
+      fontWeight: theme.weights.regular,
+      fontSize: 14,
     },
   }
 }

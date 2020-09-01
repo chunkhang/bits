@@ -1,2 +1,7 @@
-import './reactotron'
-import './warning'
+import packageJson from '../../package.json'
+
+const { version } = packageJson
+
+export default {
+  version,
+}
