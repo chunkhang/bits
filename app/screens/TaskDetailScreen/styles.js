@@ -1,19 +1,9 @@
 const styles = (theme) => {
-  const {
-    horizontalGutter,
-    bottomGutter,
-    tabBarHeight,
-    taskItemHeight,
-  } = theme.globals
+  const { horizontalGutter, taskItemHeight } = theme.globals
 
   return {
     mainContainer: {
       flex: 1,
-    },
-
-    primaryContainer: {
-      flex: 1,
-      marginBottom: bottomGutter + tabBarHeight,
     },
 
     itemContainer: {
@@ -48,15 +38,6 @@ const styles = (theme) => {
       marginTop: 0,
       fontSize: 16,
       fontWeight: theme.weights.regular,
-    },
-
-    actionContainer: {
-      position: 'absolute',
-      bottom: bottomGutter,
-      height: tabBarHeight,
-      width: '100%',
-      justifyContent: 'center',
-      alignItems: 'center',
     },
   }
 }

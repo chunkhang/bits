@@ -1,15 +1,15 @@
 import AppLoadingScreen from './AppLoadingScreen'
-import TasksUpcomingScreen from './TasksUpcomingScreen'
-import TasksTodayScreen from './TasksTodayScreen'
-import TasksDoneScreen from './TasksDoneScreen'
-import TaskAddScreen from './TaskAddScreen'
+import UpcomingTasksScreen from './UpcomingTasksScreen'
+import TodayTasksScreen from './TodayTasksScreen'
+import DoneTasksScreen from './DoneTasksScreen'
+import AddTaskScreen from './AddTaskScreen'
 import TaskDetailScreen from './TaskDetailScreen'
 
 export {
   AppLoadingScreen,
-  TasksUpcomingScreen,
-  TasksTodayScreen,
-  TasksDoneScreen,
-  TaskAddScreen,
+  UpcomingTasksScreen,
+  TodayTasksScreen,
+  DoneTasksScreen,
+  AddTaskScreen,
   TaskDetailScreen,
 }

@@ -12,6 +12,21 @@ const styles = (theme) => {
       height: 24,
       alignItems: 'flex-end',
       justifyContent: 'space-between',
+      // backgroundColor: 'grey',
+    },
+
+    leftContainer: {
+      position: 'absolute',
+      bottom: 0,
+      left: 0,
+      zIndex: 1,
+    },
+
+    rightContainer: {
+      position: 'absolute',
+      bottom: 0,
+      right: 0,
+      zIndex: 1,
     },
 
     titleContainer: {

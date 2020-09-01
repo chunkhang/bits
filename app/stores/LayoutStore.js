@@ -5,6 +5,22 @@ class LayoutStore {
     this.rootStore = rootStore
   }
 
+  /* Navigation bar */
+
+  @observable deleteCallback = () => null
+
+  @action onDelete = (callback) => {
+    this.deleteCallback = callback
+  }
+
+  @observable clearCallback = () => null
+
+  @action onClear = (callback) => {
+    this.clearCallback = callback
+  }
+
+  /* Inputs */
+
   @observable addTaskInput = ''
 
   @action setAddTaskInput = (input) => {

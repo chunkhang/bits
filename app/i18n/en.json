@@ -1,12 +1,18 @@
 {
   "general": {
-    "yes": "Yes",
-    "no": "No"
+    "ok": "OK",
+    "cancel": "Cancel"
   },
   "alert": {
     "deleteTask": {
-      "title": "Delete task",
-      "message": "Are you sure you want to delete this task?"
+      "title": "Delete Task",
+      "message": "Are you sure you want to delete this task?",
+      "confirm": "Delete"
+    },
+    "clearTasks": {
+      "title": "Clear Tasks",
+      "message": "Are you sure you want to clear all done tasks?",
+      "confirm": "Clear"
     }
   },
   "screen": {

@@ -10,7 +10,7 @@ import { Lightbox, Header } from '~/components'
 
 import styles from './styles'
 
-const TaskAddScreen = ({ title }) => {
+const AddTaskScreen = ({ title }) => {
   const { layoutStore, todayStore } = useStores()
   const classes = useStyles(styles)
   const theme = useTheme()
@@ -77,8 +77,8 @@ const TaskAddScreen = ({ title }) => {
   )
 }
 
-TaskAddScreen.propTypes = {
+AddTaskScreen.propTypes = {
   title: PropTypes.string.isRequired,
 }
 
-export default observer(TaskAddScreen)
+export default observer(AddTaskScreen)

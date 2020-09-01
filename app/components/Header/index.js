@@ -14,13 +14,17 @@ const Header = ({ title, leftNode, rightNode }) => {
   return (
     <View style={classes.mainContainer}>
       <View style={classes.header}>
-        {leftNode}
+        <View style={classes.leftContainer}>
+          {leftNode}
+        </View>
         <View style={classes.titleContainer}>
           <Text style={classes.title}>
             {title}
           </Text>
         </View>
-        {rightNode}
+        <View style={classes.rightContainer}>
+          {rightNode}
+        </View>
       </View>
       <Divider style={classes.divider} />
     </View>

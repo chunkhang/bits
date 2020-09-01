@@ -9,31 +9,31 @@ import { TaskList } from '~/containers'
 
 import styles from './styles'
 
-const TasksDoneScreen = () => {
-  const { todayStore, doneStore } = useStores()
+const UpcomingTasksScreen = () => {
+  const { upcomingStore, todayStore } = useStores()
   const classes = useStyles(styles)
   const theme = useTheme()
 
   const onUpdate = (task, updates) => {
-    doneStore.updateTask(task.id, updates)
+    upcomingStore.updateTask(task.id, updates)
   }
 
   const onRemove = (task) => {
     Actions.pop()
-    doneStore.removeTask(task.id)
+    upcomingStore.removeTask(task.id)
   }
 
   const onPressItem = (task) => {
     Actions.taskDetailScreen({
-      color: theme.colors.green,
+      color: theme.colors.red,
       task,
       onUpdate,
       onRemove,
     })
   }
 
-  const onSwipeLeft = (task) => {
-    doneStore.removeTask(task.id)
+  const onSwipeRight = (task) => {
+    upcomingStore.removeTask(task.id)
     todayStore.addTask(task)
     BloopSound.stop()
     BloopSound.play()
@@ -42,15 +42,15 @@ const TasksDoneScreen = () => {
   return (
     <View style={classes.mainContainer}>
       <TaskList
-        color={theme.colors.green}
-        tasks={doneStore.tasks.slice()}
+        color={theme.colors.red}
+        tasks={upcomingStore.tasks.slice()}
         onPressItem={onPressItem}
-        swipeLeftEnabled
-        swipeLeftColor={theme.colors.yellow}
-        onSwipeLeft={onSwipeLeft}
+        swipeRightEnabled
+        swipeRightColor={theme.colors.yellow}
+        onSwipeRight={onSwipeRight}
       />
     </View>
   )
 }
 
-export default observer(TasksDoneScreen)
+export default observer(UpcomingTasksScreen)

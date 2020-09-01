@@ -9,7 +9,7 @@ import { TaskList } from '~/containers'
 
 import styles from './styles'
 
-const TasksTodayScreen = () => {
+const TodayTasksScreen = () => {
   const { upcomingStore, todayStore, doneStore } = useStores()
   const classes = useStyles(styles)
   const theme = useTheme()
@@ -69,4 +69,4 @@ const TasksTodayScreen = () => {
   )
 }
 
-export default observer(TasksTodayScreen)
+export default observer(TodayTasksScreen)
