@@ -18,22 +18,16 @@ const DoneTasksScreen = () => {
 
   useEffect(() => {
     layoutStore.onClear(() => {
-      if (doneStore.tasks.length > 0) {
-        utils.confirmAlert({
-          title: I18n.t('alert.clearTasks.title'),
-          message: I18n.t('alert.clearTasks.message'),
-          confirm: I18n.t('alert.clearTasks.confirm'),
-          onConfirm: () => {
-            doneStore.clearTasks()
-          },
-          destructive: true,
-        })
-      } else {
-        utils.notifyAlert({
-          title: I18n.t('alert.clearTasks.errorTitle'),
-          message: I18n.t('alert.clearTasks.errorMessage'),
-        })
-      }
+      if (doneStore.tasks.length === 0) return
+      utils.confirmAlert({
+        title: I18n.t('alert.clearTasks.title'),
+        message: I18n.t('alert.clearTasks.message'),
+        confirm: I18n.t('alert.clearTasks.confirm'),
+        onConfirm: () => {
+          doneStore.clearTasks()
+        },
+        destructive: true,
+      })
     })
   }, [])
 

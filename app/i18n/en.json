@@ -12,9 +12,7 @@
     "clearTasks": {
       "title": "Clear Tasks",
       "message": "Are you sure you want to clear all done tasks?",
-      "confirm": "Clear",
-      "errorTitle": "Cannot Clear",
-      "errorMessage": "There is no task to clear."
+      "confirm": "Clear"
     }
   },
   "screen": {
