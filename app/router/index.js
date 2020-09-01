@@ -23,6 +23,7 @@ import {
   TabBar,
   NavBar,
   BackButton,
+  SettingsButton,
   DeleteButton,
   ClearButton,
 } from '~/containers'
@@ -51,6 +52,9 @@ const AppRouter = () => {
                   key="upcomingTasksScreen"
                   title={I18n.t('screen.upcomingTasks.title')}
                   navBar={NavBar}
+                  navBarNodes={{
+                    leftNode: <SettingsButton />,
+                  }}
                 >
                   <Scene component={UpcomingTasksScreen} />
                 </Stack>
@@ -59,6 +63,9 @@ const AppRouter = () => {
                   key="todayTasksScreen"
                   title={I18n.t('screen.todayTasks.title')}
                   navBar={NavBar}
+                  navBarNodes={{
+                    leftNode: <SettingsButton />,
+                  }}
                 >
                   <Scene component={TodayTasksScreen} />
                 </Stack>
@@ -67,6 +74,7 @@ const AppRouter = () => {
                   title={I18n.t('screen.doneTasks.title')}
                   navBar={NavBar}
                   navBarNodes={{
+                    leftNode: <SettingsButton />,
                     rightNode: <ClearButton />,
                   }}
                 >

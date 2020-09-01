@@ -7,6 +7,12 @@ class LayoutStore {
 
   /* Navigation bar */
 
+  @observable settingsCallback = () => null
+
+  @action onSettings = (callback) => {
+    this.settingsCallback = callback
+  }
+
   @observable deleteCallback = () => null
 
   @action onDelete = (callback) => {
