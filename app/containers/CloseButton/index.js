@@ -7,11 +7,11 @@ import { useStyles } from '~/hooks'
 
 import styles from './styles'
 
-const SettingsButton = () => {
+const CloseButton = () => {
   const classes = useStyles(styles)
 
   const onPress = () => {
-    Actions.settingsScreen()
+    Actions.pop()
   }
 
   return (
@@ -21,11 +21,11 @@ const SettingsButton = () => {
     >
       <Icon
         type="feather"
-        name="settings"
-        size={20}
+        name="x"
+        size={22}
       />
     </TouchableOpacity>
   )
 }
 
-export default SettingsButton
+export default CloseButton

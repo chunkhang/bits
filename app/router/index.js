@@ -13,6 +13,7 @@ import I18n from 'i18n-js'
 
 import {
   AppLoadingScreen,
+  SettingsScreen,
   UpcomingTasksScreen,
   TodayTasksScreen,
   DoneTasksScreen,
@@ -23,6 +24,7 @@ import {
   TabBar,
   NavBar,
   BackButton,
+  CloseButton,
   SettingsButton,
   DeleteButton,
   ClearButton,
@@ -31,15 +33,17 @@ import {
 const AppRouter = () => {
   return (
     <Router>
-      <Modal hideNavBar>
+      <Modal>
         <Scene
           initial
           key="loadingScreen"
           component={AppLoadingScreen}
+          hideNavBar
         />
         <Lightbox
           key="homeScreen"
           type={ActionConst.REPLACE}
+          hideNavBar
         >
           <Stack headerMode="screen">
             <Overlay hideNavBar>
@@ -99,6 +103,15 @@ const AppRouter = () => {
             title={I18n.t('screen.addTask.title')}
           />
         </Lightbox>
+        <Scene
+          key="settingsScreen"
+          component={SettingsScreen}
+          title={I18n.t('screen.settings.title')}
+          navBar={NavBar}
+          navBarNodes={{
+            leftNode: <CloseButton />,
+          }}
+        />
       </Modal>
     </Router>
   )

@@ -16,6 +16,9 @@
     }
   },
   "screen": {
+    "settings": {
+      title: "Settings"
+    },
     "upcomingTasks": {
       "title": "Upcoming"
     },
