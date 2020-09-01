@@ -1,47 +1,28 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { TouchableOpacity } from 'react-native'
-import { Icon } from 'react-native-elements'
-import { Actions } from 'react-native-router-flux'
 
-import { useStyles } from '~/hooks'
 import { Header } from '~/components'
 
-import styles from './styles'
-
-const NavBar = ({ title, hideBackButton }) => {
-  const classes = useStyles(styles)
-
-  const onPress = () => {
-    Actions.pop()
-  }
+const NavBar = ({ title, navBarNodes }) => {
+  const { leftNode, rightNode } = navBarNodes
 
   return (
     <Header
       title={title}
-      leftNode={hideBackButton ? null : (
-        <TouchableOpacity
-          style={classes.iconContainer}
-          onPress={onPress}
-        >
-          <Icon
-            name="arrow-left"
-            type="feather"
-          />
-        </TouchableOpacity>
-      )}
+      leftNode={leftNode}
+      rightNode={rightNode}
     />
   )
 }
 
 NavBar.propTypes = {
   title: PropTypes.string,
-  hideBackButton: PropTypes.bool,
+  navBarNodes: PropTypes.object,
 }
 
 NavBar.defaultProps = {
   title: null,
-  hideBackButton: false,
+  navBarNodes: {},
 }
 
 export default NavBar

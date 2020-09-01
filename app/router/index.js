@@ -19,7 +19,11 @@ import {
   AddTaskScreen,
   TaskDetailScreen,
 } from '~/screens'
-import { TabBar, NavBar } from '~/containers'
+import {
+  TabBar,
+  NavBar,
+  BackButton,
+} from '~/containers'
 
 const AppRouter = () => {
   return (
@@ -43,26 +47,23 @@ const AppRouter = () => {
               >
                 <Stack
                   key="upcomingTasksScreen"
-                  navBar={NavBar}
                   title={I18n.t('screen.upcomingTasks.title')}
-                  hideBackButton
+                  navBar={NavBar}
                 >
                   <Scene component={UpcomingTasksScreen} />
                 </Stack>
                 <Stack
                   initial
                   key="todayTasksScreen"
-                  navBar={NavBar}
                   title={I18n.t('screen.todayTasks.title')}
-                  hideBackButton
+                  navBar={NavBar}
                 >
                   <Scene component={TodayTasksScreen} />
                 </Stack>
                 <Stack
                   key="doneTasksScreen"
-                  navBar={NavBar}
                   title={I18n.t('screen.doneTasks.title')}
-                  hideBackButton
+                  navBar={NavBar}
                 >
                   <Scene component={DoneTasksScreen} />
                 </Stack>
@@ -71,8 +72,11 @@ const AppRouter = () => {
             <Scene
               key="taskDetailScreen"
               component={TaskDetailScreen}
-              navBar={NavBar}
               title={I18n.t('screen.taskDetail.title')}
+              navBar={NavBar}
+              navBarNodes={{
+                leftNode: <BackButton />,
+              }}
             />
           </Stack>
           <Scene
