@@ -1,7 +1,7 @@
 const styles = () => {
   return {
     iconContainer: {
-      margin: -1,
+      marginVertical: -2,
     },
   }
 }

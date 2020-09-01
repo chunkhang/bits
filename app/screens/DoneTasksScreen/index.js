@@ -1,18 +1,41 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { View } from 'react-native'
 import { Actions } from 'react-native-router-flux'
 import { observer } from 'mobx-react'
+import I18n from 'i18n-js'
 
 import { useStores, useStyles, useTheme } from '~/hooks'
 import { BloopSound } from '~/assets/sounds'
 import { TaskList } from '~/containers'
+import utils from '~/utils'
 
 import styles from './styles'
 
 const DoneTasksScreen = () => {
-  const { todayStore, doneStore } = useStores()
+  const { todayStore, doneStore, layoutStore } = useStores()
   const classes = useStyles(styles)
   const theme = useTheme()
+
+  useEffect(() => {
+    layoutStore.onClear(() => {
+      if (doneStore.tasks.length > 0) {
+        utils.confirmAlert({
+          title: I18n.t('alert.clearTasks.title'),
+          message: I18n.t('alert.clearTasks.message'),
+          confirm: I18n.t('alert.clearTasks.confirm'),
+          onConfirm: () => {
+            doneStore.clearTasks()
+          },
+          destructive: true,
+        })
+      } else {
+        utils.notifyAlert({
+          title: I18n.t('alert.clearTasks.errorTitle'),
+          message: I18n.t('alert.clearTasks.errorMessage'),
+        })
+      }
+    })
+  }, [])
 
   const onUpdate = (task, updates) => {
     doneStore.updateTask(task.id, updates)

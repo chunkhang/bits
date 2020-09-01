@@ -3,13 +3,13 @@ import PropTypes from 'prop-types'
 import {
   View,
   TouchableWithoutFeedback,
-  Alert,
   Keyboard,
 } from 'react-native'
 import { Input } from 'react-native-elements'
 import I18n from 'i18n-js'
 
 import { useStyles, useStores } from '~/hooks'
+import utils from '~/utils'
 
 import styles from './styles'
 
@@ -24,22 +24,15 @@ const TaskDetailScreen = ({
 
   useEffect(() => {
     layoutStore.onDelete(() => {
-      Alert.alert(
-        I18n.t('alert.deleteTask.title'),
-        I18n.t('alert.deleteTask.message'),
-        [
-          {
-            text: I18n.t('general.no'),
-            style: 'cancel',
-          },
-          {
-            text: I18n.t('general.yes'),
-            onPress: () => {
-              onRemove(task)
-            },
-          },
-        ],
-      )
+      utils.confirmAlert({
+        title: I18n.t('alert.deleteTask.title'),
+        message: I18n.t('alert.deleteTask.message'),
+        confirm: I18n.t('alert.deleteTask.confirm'),
+        onConfirm: () => {
+          onRemove(task)
+        },
+        destructive: true,
+      })
     })
   }, [])
 

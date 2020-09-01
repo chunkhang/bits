@@ -6,12 +6,12 @@ import { useStyles, useStores } from '~/hooks'
 
 import styles from './styles'
 
-const DeleteButton = () => {
+const ClearButton = () => {
   const classes = useStyles(styles)
   const { layoutStore } = useStores()
 
   const onPress = () => {
-    layoutStore.deleteCallback()
+    layoutStore.clearCallback()
   }
 
   return (
@@ -21,11 +21,11 @@ const DeleteButton = () => {
     >
       <Icon
         type="feather"
-        name="trash-2"
+        name="archive"
         size={20}
       />
     </TouchableOpacity>
   )
 }
 
-export default DeleteButton
+export default ClearButton

@@ -32,6 +32,10 @@ class TaskStore {
       return task.id !== id
     })
   }
+
+  @action clearTasks = () => {
+    this.tasks = []
+  }
 }
 
 export default TaskStore

@@ -12,6 +12,7 @@ const styles = (theme) => {
       height: 24,
       alignItems: 'flex-end',
       justifyContent: 'space-between',
+      // backgroundColor: 'grey',
     },
 
     leftContainer: {

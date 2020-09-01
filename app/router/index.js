@@ -24,6 +24,7 @@ import {
   NavBar,
   BackButton,
   DeleteButton,
+  ClearButton,
 } from '~/containers'
 
 const AppRouter = () => {
@@ -65,6 +66,9 @@ const AppRouter = () => {
                   key="doneTasksScreen"
                   title={I18n.t('screen.doneTasks.title')}
                   navBar={NavBar}
+                  navBarNodes={{
+                    rightNode: <ClearButton />,
+                  }}
                 >
                   <Scene component={DoneTasksScreen} />
                 </Stack>

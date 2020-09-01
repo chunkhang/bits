@@ -13,6 +13,12 @@ class LayoutStore {
     this.deleteCallback = callback
   }
 
+  @observable clearCallback = () => null
+
+  @action onClear = (callback) => {
+    this.clearCallback = callback
+  }
+
   /* Inputs */
 
   @observable addTaskInput = ''
