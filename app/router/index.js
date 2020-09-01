@@ -13,10 +13,10 @@ import I18n from 'i18n-js'
 
 import {
   AppLoadingScreen,
-  TasksUpcomingScreen,
-  TasksTodayScreen,
-  TasksDoneScreen,
-  TaskAddScreen,
+  UpcomingTasksScreen,
+  TodayTasksScreen,
+  DoneTasksScreen,
+  AddTaskScreen,
   TaskDetailScreen,
 } from '~/screens'
 import { TabBar, NavBar } from '~/containers'
@@ -47,7 +47,7 @@ const AppRouter = () => {
                   title={I18n.t('screen.upcomingTasks.title')}
                   hideBackButton
                 >
-                  <Scene component={TasksUpcomingScreen} />
+                  <Scene component={UpcomingTasksScreen} />
                 </Stack>
                 <Stack
                   initial
@@ -56,7 +56,7 @@ const AppRouter = () => {
                   title={I18n.t('screen.todayTasks.title')}
                   hideBackButton
                 >
-                  <Scene component={TasksTodayScreen} />
+                  <Scene component={TodayTasksScreen} />
                 </Stack>
                 <Stack
                   key="doneTasksScreen"
@@ -64,7 +64,7 @@ const AppRouter = () => {
                   title={I18n.t('screen.doneTasks.title')}
                   hideBackButton
                 >
-                  <Scene component={TasksDoneScreen} />
+                  <Scene component={DoneTasksScreen} />
                 </Stack>
               </Tabs>
             </Overlay>
@@ -77,7 +77,7 @@ const AppRouter = () => {
           </Stack>
           <Scene
             key="addTaskScreen"
-            component={TaskAddScreen}
+            component={AddTaskScreen}
             title={I18n.t('screen.addTask.title')}
           />
         </Lightbox>
