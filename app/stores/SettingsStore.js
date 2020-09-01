@@ -12,6 +12,20 @@ class SettingStore {
   @action toggleDarkMode = () => {
     this.darkMode = !this.darkMode
   }
+
+  @persist
+  @observable sounds = true
+
+  @action toggleSounds = () => {
+    this.sounds = !this.sounds
+  }
+
+  @persist
+  @observable badges = true
+
+  @action toggleBadges = () => {
+    this.badges = !this.badges
+  }
 }
 
 export default SettingStore

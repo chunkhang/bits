@@ -12,9 +12,16 @@ const styles = (theme) => {
       justifyContent: 'space-between',
     },
 
-    text: {
+    rowText: {
       fontWeight: theme.weights.regular,
-      fontSize: 16,
+      fontSize: 14,
+    },
+
+    rowDot: {
+      height: 12,
+      width: 12,
+      borderRadius: 2,
+      borderColor: theme.colors.black,
     },
   }
 }
