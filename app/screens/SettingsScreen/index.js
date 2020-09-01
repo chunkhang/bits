@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import {
   StyleSheet,
+  ScrollView,
   View,
   TouchableWithoutFeedback,
 } from 'react-native'
@@ -83,14 +84,14 @@ const SettingsScreen = () => {
   ]
 
   return (
-    <View style={classes.mainContainer}>
+    <ScrollView style={classes.mainContainer}>
       {settings.map((setting) => (
         <SettingsRow
           key={setting.text}
           setting={setting}
         />
       ))}
-    </View>
+    </ScrollView>
   )
 }
 

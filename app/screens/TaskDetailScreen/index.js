@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import {
+  ScrollView,
   View,
   TouchableWithoutFeedback,
   Keyboard,
@@ -73,7 +74,7 @@ const TaskDetailScreen = ({
 
   return (
     <TouchableWithoutFeedback onPress={onPressBackground}>
-      <View style={classes.mainContainer}>
+      <ScrollView style={classes.mainContainer}>
         <View style={classes.itemContainer}>
           <View style={[classes.dot, { backgroundColor: color }]} />
           <Input
@@ -86,7 +87,7 @@ const TaskDetailScreen = ({
             inputStyle={classes.inputStyle}
           />
         </View>
-      </View>
+      </ScrollView>
     </TouchableWithoutFeedback>
   )
 }
