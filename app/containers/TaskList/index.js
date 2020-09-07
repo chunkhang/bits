@@ -288,7 +288,6 @@ const TaskList = ({
   }
 
   const onChangeOrder = () => {
-    BeepSound.stop()
     BeepSound.play()
   }
 

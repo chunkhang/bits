@@ -39,14 +39,12 @@ const TodayTasksScreen = () => {
   const onSwipeLeft = (task) => {
     todayStore.removeTask(task.id)
     upcomingStore.addTask(task)
-    BloopSound.stop()
     BloopSound.play()
   }
 
   const onSwipeRight = (task) => {
     todayStore.removeTask(task.id)
     doneStore.addTask(task)
-    ChimeSound.stop()
     ChimeSound.play()
   }
 

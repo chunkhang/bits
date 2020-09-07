@@ -34,7 +34,6 @@ const SettingsRow = ({ setting }) => {
 
   const onPress = () => {
     setting.toggleActive()
-    BeepSound.stop()
     BeepSound.play()
   }
 
