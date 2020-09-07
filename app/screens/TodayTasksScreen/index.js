@@ -1,7 +1,8 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { View } from 'react-native'
 import { Actions } from 'react-native-router-flux'
 import { observer } from 'mobx-react'
+import PushNotification from 'react-native-push-notification'
 
 import { useStores, useStyles, useTheme } from '~/hooks'
 import { BloopSound, ChimeSound } from '~/assets/sounds'
@@ -13,6 +14,10 @@ const TodayTasksScreen = () => {
   const { upcomingStore, todayStore, doneStore } = useStores()
   const classes = useStyles(styles)
   const theme = useTheme()
+
+  useEffect(() => {
+    PushNotification.setApplicationIconBadgeNumber(todayStore.tasks.length)
+  }, [todayStore.tasks.length])
 
   const onUpdate = (task, updates) => {
     todayStore.updateTask(task.id, updates)
