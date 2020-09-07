@@ -11,13 +11,18 @@ import { TaskList } from '~/containers'
 import styles from './styles'
 
 const TodayTasksScreen = () => {
-  const { upcomingStore, todayStore, doneStore } = useStores()
+  const { upcomingStore, todayStore, doneStore, settingsStore } = useStores()
   const classes = useStyles(styles)
   const theme = useTheme()
 
   useEffect(() => {
-    PushNotification.setApplicationIconBadgeNumber(todayStore.tasks.length)
-  }, [todayStore.tasks.length])
+    if (settingsStore.badges) {
+      PushNotification.setApplicationIconBadgeNumber(todayStore.tasks.length)
+    } else {
+      // Clear badge if badges settings is disabled
+      PushNotification.setApplicationIconBadgeNumber(0)
+    }
+  }, [todayStore.tasks.length, settingsStore.badges])
 
   const onUpdate = (task, updates) => {
     todayStore.updateTask(task.id, updates)
