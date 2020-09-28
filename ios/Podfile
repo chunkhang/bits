@@ -6,10 +6,9 @@ platform :ios, '10.0'
 target 'Bits' do
   config = use_native_modules!
 
-  # pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
-  # pod 'RNCPushNotificationIOS', :path => '../node_modules/@react-native-community/push-notification-ios'
-
   use_react_native!(:path => config["reactNativePath"])
+
+  pod 'RNCPushNotificationIOS', :path => '../node_modules/@react-native-community/push-notification-ios'
 
   target 'BitsTests' do
     inherit! :complete
