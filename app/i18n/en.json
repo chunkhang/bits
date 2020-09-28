@@ -16,6 +16,12 @@
     }
   },
   "screen": {
+    "settings": {
+      "title": "Settings",
+      "darkMode": "Dark mode",
+      "sounds": "Play app sounds",
+      "badges": "Show task count on app icon badge"
+    },
     "upcomingTasks": {
       "title": "Upcoming"
     },
@@ -31,5 +37,5 @@
     "addTask": {
       "title": "Add Task"
     }
-  }
+  },
 }

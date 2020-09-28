@@ -32,7 +32,6 @@ const AddTaskScreen = ({ title }) => {
 
     layoutStore.setAddTaskInput('')
 
-    DingSound.stop()
     DingSound.play()
   }
 

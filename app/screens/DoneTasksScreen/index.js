@@ -52,7 +52,6 @@ const DoneTasksScreen = () => {
   const onSwipeLeft = (task) => {
     doneStore.removeTask(task.id)
     todayStore.addTask(task)
-    BloopSound.stop()
     BloopSound.play()
   }
 

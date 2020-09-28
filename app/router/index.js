@@ -13,6 +13,7 @@ import I18n from 'i18n-js'
 
 import {
   AppLoadingScreen,
+  SettingsScreen,
   UpcomingTasksScreen,
   TodayTasksScreen,
   DoneTasksScreen,
@@ -23,6 +24,8 @@ import {
   TabBar,
   NavBar,
   BackButton,
+  CloseButton,
+  SettingsButton,
   DeleteButton,
   ClearButton,
 } from '~/containers'
@@ -30,15 +33,17 @@ import {
 const AppRouter = () => {
   return (
     <Router>
-      <Modal hideNavBar>
+      <Modal>
         <Scene
           initial
           key="loadingScreen"
           component={AppLoadingScreen}
+          hideNavBar
         />
         <Lightbox
           key="homeScreen"
           type={ActionConst.REPLACE}
+          hideNavBar
         >
           <Stack headerMode="screen">
             <Overlay hideNavBar>
@@ -51,6 +56,9 @@ const AppRouter = () => {
                   key="upcomingTasksScreen"
                   title={I18n.t('screen.upcomingTasks.title')}
                   navBar={NavBar}
+                  navBarNodes={{
+                    leftNode: <SettingsButton />,
+                  }}
                 >
                   <Scene component={UpcomingTasksScreen} />
                 </Stack>
@@ -59,6 +67,9 @@ const AppRouter = () => {
                   key="todayTasksScreen"
                   title={I18n.t('screen.todayTasks.title')}
                   navBar={NavBar}
+                  navBarNodes={{
+                    leftNode: <SettingsButton />,
+                  }}
                 >
                   <Scene component={TodayTasksScreen} />
                 </Stack>
@@ -67,6 +78,7 @@ const AppRouter = () => {
                   title={I18n.t('screen.doneTasks.title')}
                   navBar={NavBar}
                   navBarNodes={{
+                    leftNode: <SettingsButton />,
                     rightNode: <ClearButton />,
                   }}
                 >
@@ -91,6 +103,15 @@ const AppRouter = () => {
             title={I18n.t('screen.addTask.title')}
           />
         </Lightbox>
+        <Scene
+          key="settingsScreen"
+          component={SettingsScreen}
+          title={I18n.t('screen.settings.title')}
+          navBar={NavBar}
+          navBarNodes={{
+            leftNode: <CloseButton />,
+          }}
+        />
       </Modal>
     </Router>
   )

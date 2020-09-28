@@ -80,7 +80,6 @@ const TabBar = ({ navigation }) => {
     }, -1)
     if (scrubbing && newIndex !== navigation.state.index) {
       setScrubIndex(newIndex)
-      BeepSound.stop()
       BeepSound.play()
     }
   }, [currentMoveX])

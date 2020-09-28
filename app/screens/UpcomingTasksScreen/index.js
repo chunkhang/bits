@@ -35,7 +35,6 @@ const UpcomingTasksScreen = () => {
   const onSwipeRight = (task) => {
     upcomingStore.removeTask(task.id)
     todayStore.addTask(task)
-    BloopSound.stop()
     BloopSound.play()
   }
 

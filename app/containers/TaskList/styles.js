@@ -34,8 +34,8 @@ const styles = (theme) => {
     },
 
     text: {
-      fontSize: 16,
       fontWeight: theme.weights.regular,
+      fontSize: 16,
     },
 
     swipeBackground: {
