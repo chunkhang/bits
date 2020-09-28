@@ -1,7 +1,7 @@
-import { YellowBox } from 'react-native'
+import { LogBox } from 'react-native'
 
 if (__DEV__) {
-  YellowBox.ignoreWarnings([
+  LogBox.ignoreLogs([
     'componentWillReceiveProps',
     'componentWillMount',
     'SortableList',
