@@ -13,6 +13,7 @@ import { observer } from 'mobx-react'
 import I18n from 'i18n-js'
 import { LongPressGestureHandler, State } from 'react-native-gesture-handler'
 import AsyncStorage from '@react-native-community/async-storage'
+import { SafeAreaView } from 'react-native-safe-area-context'
 
 import { useStyles, useTheme, useStores } from '~/hooks'
 import { BeepSound } from '~/assets/sounds'
@@ -107,7 +108,7 @@ const SettingsScreen = () => {
   }
 
   return (
-    <View style={classes.mainContainer}>
+    <SafeAreaView style={classes.mainContainer} edges={['bottom']}>
       <ScrollView style={classes.scrollContainer}>
         {settings.map((setting) => (
           <SettingsRow
@@ -128,7 +129,7 @@ const SettingsScreen = () => {
           </View>
         </LongPressGestureHandler>
       </View>
-    </View>
+    </SafeAreaView>
   )
 }
 

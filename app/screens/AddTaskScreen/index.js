@@ -46,7 +46,6 @@ const AddTaskScreen = ({ title }) => {
     >
       <KeyboardAvoidingView
         style={classes.mainContainer}
-        keyboardVerticalOffset={44}
         behavior="padding"
       >
         <Header title={title} />

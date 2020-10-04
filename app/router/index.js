@@ -12,7 +12,6 @@ import {
 import I18n from 'i18n-js'
 
 import {
-  AppLoadingScreen,
   SettingsScreen,
   UpcomingTasksScreen,
   TodayTasksScreen,
@@ -34,12 +33,6 @@ const AppRouter = () => {
   return (
     <Router>
       <Modal>
-        <Scene
-          initial
-          key="loadingScreen"
-          component={AppLoadingScreen}
-          hideNavBar
-        />
         <Lightbox
           key="homeScreen"
           type={ActionConst.REPLACE}

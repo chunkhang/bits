@@ -1,5 +1,9 @@
 const styles = (theme) => {
   return {
+    parentContainer: {
+      position: 'relative',
+    },
+
     mainContainer: {
       position: 'absolute',
       bottom: theme.globals.bottomGutter,
