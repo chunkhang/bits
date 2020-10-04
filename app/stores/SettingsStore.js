@@ -1,6 +1,5 @@
 import { observable, action } from 'mobx'
 import { persist } from 'mobx-persist'
-import { Appearance } from 'react-native'
 
 class SettingStore {
   constructor(rootStore) {
