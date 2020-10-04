@@ -5,7 +5,7 @@ import { observer } from 'mobx-react'
 
 import { useStores, useStyles, useTheme } from '~/hooks'
 import { BloopSound } from '~/assets/sounds'
-import { TaskList } from '~/containers'
+import TaskList from '~/containers/TaskList'
 
 import styles from './styles'
 

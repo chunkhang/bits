@@ -6,7 +6,8 @@ import { observer } from 'mobx-react'
 
 import { useStores, useStyles, useTheme } from '~/hooks'
 import { DingSound } from '~/assets/sounds'
-import { Lightbox, Header } from '~/components'
+import Lightbox from '~/components/Lightbox'
+import Header from '~/components/Header'
 
 import styles from './styles'
 

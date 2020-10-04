@@ -14,7 +14,7 @@ import { SafeAreaView } from 'react-native-safe-area-context'
 
 import { useTheme, useStyles } from '~/hooks'
 import { BeepSound } from '~/assets/sounds'
-import { PlusIcon } from '~/components'
+import PlusIcon from '~/components/PlusIcon'
 
 import styles from './styles'
 

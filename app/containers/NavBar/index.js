@@ -2,7 +2,7 @@ import React from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import PropTypes from 'prop-types'
 
-import { Header } from '~/components'
+import Header from '~/components/Header'
 
 const NavBar = ({ title, navBarNodes }) => {
   const { leftNode, rightNode } = navBarNodes
