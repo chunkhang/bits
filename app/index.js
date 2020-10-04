@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react'
-import { ActivityIndicator } from 'react-native'
 import { NavigationContainer } from '@react-navigation/native'
 import { ThemeProvider } from 'react-native-elements'
 import PushNotification from 'react-native-push-notification'
 import { ColorSchemeProvider } from 'react-native-dynamic'
-import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context'
+import { SafeAreaProvider } from 'react-native-safe-area-context'
+import SplashScreen from 'react-native-splash-screen'
 
 import { StoreContext } from '~/contexts'
 import AppRouter from '~/router'
@@ -27,8 +27,11 @@ const App = () => {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    rootStore.rehydrate().then(() => {
+    rootStore.rehydrate().finally(() => {
       setLoading(false)
+      setTimeout(() => {
+        SplashScreen.hide()
+      }, 0)
     })
   }, [])
 
@@ -38,13 +41,9 @@ const App = () => {
         <ColorSchemeProvider>
           <ThemeProvider theme={theme}>
             <SafeAreaProvider>
-              {loading ? (
-                <SafeAreaView style={{ flex: 1, justifyContent: 'center' }}>
-                  <ActivityIndicator />
-                </SafeAreaView>
-              ) : (
+              {!loading ? (
                 <AppRouter />
-              )}
+              ) : null}
             </SafeAreaProvider>
           </ThemeProvider>
         </ColorSchemeProvider>
