@@ -107,7 +107,10 @@ const TabBar = ({ navigation }) => {
   }
 
   return (
-    <SafeAreaView edges={['bottom']}>
+    <SafeAreaView
+      edges={['bottom']}
+      style={classes.safeContainer}
+    >
       <View style={classes.parentContainer}>
         <Animated.View
           style={classes.mainContainer}

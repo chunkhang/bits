@@ -11,6 +11,10 @@ const useStores = () => {
 
 const useTheme = () => {
   const { theme } = useContext(ThemeContext)
+  // Fix dynamic value prototype
+  Object.keys(theme.dynamics).forEach((key) => {
+    Object.setPrototypeOf(theme.dynamics[key], DynamicValue.prototype)
+  })
   return theme
 }
 

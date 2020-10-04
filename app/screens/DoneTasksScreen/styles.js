@@ -3,7 +3,8 @@ const styles = (theme) => {
   return {
     mainContainer: {
       flex: 1,
-      marginBottom: bottomGutter + tabBarHeight,
+      paddingBottom: bottomGutter + tabBarHeight,
+      backgroundColor: theme.dynamics.background,
     },
   }
 }

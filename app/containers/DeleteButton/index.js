@@ -1,14 +1,18 @@
 import React from 'react'
 import { TouchableOpacity } from 'react-native'
 import { Icon } from 'react-native-elements'
+import { useDynamicValue } from 'react-native-dynamic'
 
-import { useStyles, useStores } from '~/hooks'
+import { useStyles, useStores, useTheme } from '~/hooks'
 
 import styles from './styles'
 
 const DeleteButton = () => {
   const classes = useStyles(styles)
   const { layoutStore } = useStores()
+  const theme = useTheme()
+
+  const color = useDynamicValue(theme.dynamics.foreground)
 
   const onPress = () => {
     layoutStore.deleteCallback()
@@ -23,6 +27,7 @@ const DeleteButton = () => {
         type="feather"
         name="trash-2"
         size={20}
+        color={color}
       />
     </TouchableOpacity>
   )

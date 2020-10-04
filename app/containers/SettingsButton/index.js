@@ -2,13 +2,17 @@ import React from 'react'
 import { TouchableOpacity } from 'react-native'
 import { Icon } from 'react-native-elements'
 import { Actions } from 'react-native-router-flux'
+import { useDynamicValue } from 'react-native-dynamic'
 
-import { useStyles } from '~/hooks'
+import { useStyles, useTheme } from '~/hooks'
 
 import styles from './styles'
 
 const SettingsButton = () => {
   const classes = useStyles(styles)
+  const theme = useTheme()
+
+  const color = useDynamicValue(theme.dynamics.foreground)
 
   const onPress = () => {
     Actions.settingsScreen()
@@ -23,6 +27,7 @@ const SettingsButton = () => {
         type="feather"
         name="settings"
         size={20}
+        color={color}
       />
     </TouchableOpacity>
   )

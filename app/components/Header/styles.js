@@ -5,6 +5,7 @@ const styles = (theme) => {
     mainContainer: {
       paddingHorizontal: theme.globals.horizontalGutter,
       paddingTop: theme.globals.topGutter,
+      backgroundColor: theme.dynamics.background,
     },
 
     header: {
@@ -38,12 +39,13 @@ const styles = (theme) => {
       fontWeight: theme.weights.medium,
       textTransform: 'uppercase',
       fontSize: 12,
+      color: theme.dynamics.foreground,
     },
 
     divider: {
       height: StyleSheet.hairlineWidth,
       marginTop: 12,
-      backgroundColor: theme.colors.black,
+      backgroundColor: theme.dynamics.foreground,
     },
   }
 }

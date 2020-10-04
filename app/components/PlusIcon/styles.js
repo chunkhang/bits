@@ -7,7 +7,7 @@ const styles = (theme) => {
     stroke: {
       position: 'absolute',
       alignSelf: 'center',
-      backgroundColor: theme.colors.white,
+      backgroundColor: theme.dynamics.background,
       borderRadius: 2,
     },
   }

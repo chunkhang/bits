@@ -108,8 +108,11 @@ const SettingsScreen = () => {
   }
 
   return (
-    <SafeAreaView style={classes.mainContainer} edges={['bottom']}>
-      <ScrollView style={classes.scrollContainer}>
+    <SafeAreaView
+      edges={['bottom']}
+      style={classes.safeContainer}
+    >
+      <ScrollView>
         {settings.map((setting) => (
           <SettingsRow
             key={setting.text}

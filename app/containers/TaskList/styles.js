@@ -17,7 +17,7 @@ const styles = (theme) => {
       alignItems: 'center',
       height: theme.globals.taskItemHeight,
       paddingHorizontal: theme.globals.horizontalGutter,
-      backgroundColor: theme.colors.white,
+      backgroundColor: theme.dynamics.background,
     },
 
     dot: {
@@ -36,6 +36,7 @@ const styles = (theme) => {
     text: {
       fontWeight: theme.weights.regular,
       fontSize: 16,
+      color: theme.dynamics.foreground,
     },
 
     swipeBackground: {

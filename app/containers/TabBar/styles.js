@@ -1,5 +1,9 @@
 const styles = (theme) => {
   return {
+    safeContainer: {
+      backgroundColor: theme.dynamics.background,
+    },
+
     parentContainer: {
       position: 'relative',
     },
@@ -9,6 +13,7 @@ const styles = (theme) => {
       bottom: theme.globals.bottomGutter,
       height: theme.globals.tabBarHeight,
       width: '100%',
+      backgroundColor: theme.dynamics.background,
     },
 
     scrubsContainer: {
