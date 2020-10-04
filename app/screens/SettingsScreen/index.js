@@ -5,10 +5,13 @@ import {
   ScrollView,
   View,
   TouchableWithoutFeedback,
+  NativeModules,
 } from 'react-native'
 import { Text } from 'react-native-elements'
 import { observer } from 'mobx-react'
 import I18n from 'i18n-js'
+import { LongPressGestureHandler } from 'react-native-gesture-handler'
+import AsyncStorage from '@react-native-community/async-storage'
 
 import { useStyles, useTheme, useStores } from '~/hooks'
 import { BeepSound } from '~/assets/sounds'
@@ -83,6 +86,14 @@ const SettingsScreen = () => {
     },
   ]
 
+  const [longPressDuration] = useState(1000)
+
+  const onLongPressVersion = async () => {
+    if (!__DEV__) return
+    await AsyncStorage.clear()
+    NativeModules.DevSettings.reload()
+  }
+
   return (
     <View style={classes.mainContainer}>
       <ScrollView style={classes.scrollContainer}>
@@ -94,9 +105,14 @@ const SettingsScreen = () => {
         ))}
       </ScrollView>
       <View style={classes.bottomContainer}>
-        <Text style={classes.version}>
-          {config.version}
-        </Text>
+        <LongPressGestureHandler
+          onHandlerStateChange={onLongPressVersion}
+          minDurationMs={longPressDuration}
+        >
+          <Text style={classes.version}>
+            {config.version}
+          </Text>
+        </LongPressGestureHandler>
       </View>
     </View>
   )
