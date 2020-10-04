@@ -1,5 +1,5 @@
 import { useContext, useRef, useEffect } from 'react'
-import { StyleSheet } from 'react-native'
+import { DynamicValue, DynamicStyleSheet, useDynamicValue } from 'react-native-dynamic'
 import { ThemeContext } from 'react-native-elements'
 
 import { StoreContext } from '~/contexts'
@@ -16,8 +16,9 @@ const useTheme = () => {
 
 const useStyles = (makeStyles) => {
   const theme = useTheme()
-  const styles = makeStyles(theme)
-  const classes = StyleSheet.create(styles)
+  const styles = makeStyles(theme, (...args) => new DynamicValue(...args))
+  const styleSheet = new DynamicStyleSheet(styles)
+  const classes = useDynamicValue(styleSheet)
   return classes
 }
 

@@ -3,6 +3,7 @@ import { ActivityIndicator } from 'react-native'
 import { NavigationContainer } from '@react-navigation/native'
 import { ThemeProvider } from 'react-native-elements'
 import PushNotification from 'react-native-push-notification'
+import { ColorSchemeProvider } from 'react-native-dynamic'
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context'
 
 import { StoreContext } from '~/contexts'
@@ -34,17 +35,19 @@ const App = () => {
   return (
     <NavigationContainer>
       <StoreContext.Provider value={rootStore}>
-        <ThemeProvider theme={theme}>
-          <SafeAreaProvider>
-            {loading ? (
-              <SafeAreaView style={{ flex: 1, justifyContent: 'center' }}>
-                <ActivityIndicator />
-              </SafeAreaView>
-            ) : (
-              <AppRouter />
-            )}
-          </SafeAreaProvider>
-        </ThemeProvider>
+        <ColorSchemeProvider>
+          <ThemeProvider theme={theme}>
+            <SafeAreaProvider>
+              {loading ? (
+                <SafeAreaView style={{ flex: 1, justifyContent: 'center' }}>
+                  <ActivityIndicator />
+                </SafeAreaView>
+              ) : (
+                <AppRouter />
+              )}
+            </SafeAreaProvider>
+          </ThemeProvider>
+        </ColorSchemeProvider>
       </StoreContext.Provider>
     </NavigationContainer>
   )
