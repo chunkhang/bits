@@ -1,16 +1,10 @@
 import { observable, action } from 'mobx'
 import { persist } from 'mobx-persist'
+import { Appearance } from 'react-native'
 
 class SettingStore {
   constructor(rootStore) {
     this.rootStore = rootStore
-  }
-
-  @persist
-  @observable darkMode = false
-
-  @action toggleDarkMode = () => {
-    this.darkMode = !this.darkMode
   }
 
   @persist

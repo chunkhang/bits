@@ -68,13 +68,7 @@ const SettingsScreen = () => {
   const classes = useStyles(styles)
   const { settingsStore } = useStores()
 
-  // TODO: Implement
   const settings = [
-    {
-      text: I18n.t('screen.settings.darkMode'),
-      active: settingsStore.darkMode,
-      toggleActive: settingsStore.toggleDarkMode,
-    },
     {
       text: I18n.t('screen.settings.sounds'),
       active: settingsStore.sounds,
