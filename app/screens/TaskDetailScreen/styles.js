@@ -4,6 +4,7 @@ const styles = (theme) => {
   return {
     mainContainer: {
       flex: 1,
+      backgroundColor: theme.dynamics.background,
     },
 
     itemContainer: {
@@ -11,7 +12,7 @@ const styles = (theme) => {
       alignItems: 'center',
       height: taskItemHeight,
       paddingHorizontal: horizontalGutter,
-      backgroundColor: theme.colors.white,
+      backgroundColor: theme.dynamics.background,
     },
 
     dot: {
@@ -38,6 +39,7 @@ const styles = (theme) => {
       marginTop: 0,
       fontSize: 16,
       fontWeight: theme.weights.regular,
+      color: theme.dynamics.foreground,
     },
   }
 }

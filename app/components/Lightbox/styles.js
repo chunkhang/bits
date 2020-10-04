@@ -1,4 +1,5 @@
-const styles = (theme) => {
+const styles = (theme, dynamic) => {
+  const { whiteTranslucent, blackTranslucent } = theme.colors
   return {
     mainContainer: {
       position: 'absolute',
@@ -6,7 +7,7 @@ const styles = (theme) => {
       right: 0,
       bottom: 0,
       left: 0,
-      backgroundColor: theme.colors.whiteTranslucent,
+      backgroundColor: dynamic(whiteTranslucent, blackTranslucent),
     },
   }
 }

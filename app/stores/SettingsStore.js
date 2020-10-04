@@ -7,13 +7,6 @@ class SettingStore {
   }
 
   @persist
-  @observable darkMode = false
-
-  @action toggleDarkMode = () => {
-    this.darkMode = !this.darkMode
-  }
-
-  @persist
   @observable sounds = true
 
   @action toggleSounds = () => {

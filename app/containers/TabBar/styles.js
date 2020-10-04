@@ -1,10 +1,19 @@
 const styles = (theme) => {
   return {
+    safeContainer: {
+      backgroundColor: theme.dynamics.background,
+    },
+
+    parentContainer: {
+      position: 'relative',
+    },
+
     mainContainer: {
       position: 'absolute',
       bottom: theme.globals.bottomGutter,
       height: theme.globals.tabBarHeight,
       width: '100%',
+      backgroundColor: theme.dynamics.background,
     },
 
     scrubsContainer: {

@@ -6,7 +6,7 @@ import I18n from 'i18n-js'
 
 import { useStores, useStyles, useTheme } from '~/hooks'
 import { BloopSound } from '~/assets/sounds'
-import { TaskList } from '~/containers'
+import TaskList from '~/containers/TaskList'
 import utils from '~/utils'
 
 import styles from './styles'

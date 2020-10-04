@@ -13,12 +13,18 @@
       "title": "Clear Tasks",
       "message": "Are you sure you want to clear all done tasks?",
       "confirm": "Clear"
+    },
+    "debug": {
+      "title": "Debug",
+      "message": "Choose an action to perform.",
+      "action": {
+        "reset": "Reset App"
+      }
     }
   },
   "screen": {
     "settings": {
       "title": "Settings",
-      "darkMode": "Dark mode",
       "sounds": "Play app sounds",
       "badges": "Show task count on app icon badge"
     },

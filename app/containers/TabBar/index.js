@@ -10,10 +10,11 @@ import {
 import { Button } from 'react-native-elements'
 import { observer } from 'mobx-react'
 import { Actions } from 'react-native-router-flux'
+import { SafeAreaView } from 'react-native-safe-area-context'
 
 import { useTheme, useStyles } from '~/hooks'
 import { BeepSound } from '~/assets/sounds'
-import { PlusIcon } from '~/components'
+import PlusIcon from '~/components/PlusIcon'
 
 import styles from './styles'
 
@@ -106,71 +107,78 @@ const TabBar = ({ navigation }) => {
   }
 
   return (
-    <Animated.View
-      style={classes.mainContainer}
-      {...panResponder.panHandlers}
+    <SafeAreaView
+      edges={['bottom']}
+      style={classes.safeContainer}
     >
-      {scrubbing ? (
-        <View style={classes.scrubsContainer}>
-          {navigation.state.routes.map((route, i) => {
-            const backgroundColor = tabColors[i]
-            const opacity = scrubIndex === i ? 1 : theme.globals.blurOpacity
+      <View style={classes.parentContainer}>
+        <Animated.View
+          style={classes.mainContainer}
+          {...panResponder.panHandlers}
+        >
+          {scrubbing ? (
+            <View style={classes.scrubsContainer}>
+              {navigation.state.routes.map((route, i) => {
+                const backgroundColor = tabColors[i]
+                const opacity = scrubIndex === i ? 1 : theme.globals.blurOpacity
 
-            return (
-              <View
-                key={route.key}
-                style={[
-                  classes.scrub,
-                  { backgroundColor, opacity },
-                ]}
-              />
-            )
-          })}
-        </View>
-      ) : (
-        <View style={classes.tabsContainer}>
-          {navigation.state.routes.map((route, i) => {
-            const backgroundColor = tabColors[i]
-            const opacity = navigation.state.index === i ? 1 : theme.globals.blurOpacity
+                return (
+                  <View
+                    key={route.key}
+                    style={[
+                      classes.scrub,
+                      { backgroundColor, opacity },
+                    ]}
+                  />
+                )
+              })}
+            </View>
+          ) : (
+            <View style={classes.tabsContainer}>
+              {navigation.state.routes.map((route, i) => {
+                const backgroundColor = tabColors[i]
+                const opacity = navigation.state.index === i ? 1 : theme.globals.blurOpacity
 
-            return (
-              <TouchableWithoutFeedback
-                key={route.key}
-                onPress={() => {
-                  onPressTab(i)
-                }}
-              >
-                <View style={classes.tabContainer}>
-                  {i === 1 ? (
-                    <Button
-                      icon={(
-                        <PlusIcon
-                          size={theme.globals.tabBarHeight / 2}
+                return (
+                  <TouchableWithoutFeedback
+                    key={route.key}
+                    onPress={() => {
+                      onPressTab(i)
+                    }}
+                  >
+                    <View style={classes.tabContainer}>
+                      {i === 1 ? (
+                        <Button
+                          icon={(
+                            <PlusIcon
+                              size={theme.globals.tabBarHeight / 2}
+                            />
+                          )}
+                          buttonStyle={[
+                            classes.button,
+                            { backgroundColor, opacity },
+                          ]}
+                          onPress={onPressAdd}
+                          disabled={navigation.state.index !== i}
+                          disabledStyle={{ backgroundColor }}
+                        />
+                      ) : (
+                        <View
+                          style={[
+                            classes.button,
+                            { backgroundColor, opacity },
+                          ]}
                         />
                       )}
-                      buttonStyle={[
-                        classes.button,
-                        { backgroundColor, opacity },
-                      ]}
-                      onPress={onPressAdd}
-                      disabled={navigation.state.index !== i}
-                      disabledStyle={{ backgroundColor }}
-                    />
-                  ) : (
-                    <View
-                      style={[
-                        classes.button,
-                        { backgroundColor, opacity },
-                      ]}
-                    />
-                  )}
-                </View>
-              </TouchableWithoutFeedback>
-            )
-          })}
-        </View>
-      )}
-    </Animated.View>
+                    </View>
+                  </TouchableWithoutFeedback>
+                )
+              })}
+            </View>
+          )}
+        </Animated.View>
+      </View>
+    </SafeAreaView>
   )
 }
 

@@ -11,35 +11,25 @@ import {
 } from 'react-native-router-flux'
 import I18n from 'i18n-js'
 
-import {
-  AppLoadingScreen,
-  SettingsScreen,
-  UpcomingTasksScreen,
-  TodayTasksScreen,
-  DoneTasksScreen,
-  AddTaskScreen,
-  TaskDetailScreen,
-} from '~/screens'
-import {
-  TabBar,
-  NavBar,
-  BackButton,
-  CloseButton,
-  SettingsButton,
-  DeleteButton,
-  ClearButton,
-} from '~/containers'
+import SettingsScreen from '~/screens/SettingsScreen'
+import UpcomingTasksScreen from '~/screens/UpcomingTasksScreen'
+import TodayTasksScreen from '~/screens/TodayTasksScreen'
+import DoneTasksScreen from '~/screens/DoneTasksScreen'
+import AddTaskScreen from '~/screens/AddTaskScreen'
+import TaskDetailScreen from '~/screens/TaskDetailScreen'
+
+import TabBar from '~/containers/TabBar'
+import NavBar from '~/containers/NavBar'
+import BackButton from '~/containers/BackButton'
+import CloseButton from '~/containers/CloseButton'
+import SettingsButton from '~/containers/SettingsButton'
+import DeleteButton from '~/containers/DeleteButton'
+import ClearButton from '~/containers/ClearButton'
 
 const AppRouter = () => {
   return (
     <Router>
       <Modal>
-        <Scene
-          initial
-          key="loadingScreen"
-          component={AppLoadingScreen}
-          hideNavBar
-        />
         <Lightbox
           key="homeScreen"
           type={ActionConst.REPLACE}

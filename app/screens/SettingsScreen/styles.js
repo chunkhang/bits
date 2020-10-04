@@ -1,11 +1,9 @@
 const styles = (theme) => {
   return {
-    mainContainer: {
+    safeContainer: {
       flex: 1,
       paddingHorizontal: theme.globals.horizontalGutter,
-    },
-
-    scrollContainer: {
+      backgroundColor: theme.dynamics.background,
     },
 
     row: {
@@ -18,13 +16,14 @@ const styles = (theme) => {
     rowText: {
       fontWeight: theme.weights.regular,
       fontSize: 14,
+      color: theme.dynamics.foreground,
     },
 
     rowDot: {
       height: 12,
       width: 12,
       borderRadius: 2,
-      borderColor: theme.colors.black,
+      borderColor: theme.dynamics.foreground,
     },
 
     bottomContainer: {
@@ -34,10 +33,17 @@ const styles = (theme) => {
       justifyContent: 'center',
     },
 
+    versionContainer: {
+      flex: 1,
+      justifyContent: 'center',
+      paddingHorizontal: 16,
+    },
+
     version: {
       opacity: theme.globals.blurOpacity,
       fontWeight: theme.weights.regular,
       fontSize: 14,
+      color: theme.dynamics.foreground,
     },
   }
 }

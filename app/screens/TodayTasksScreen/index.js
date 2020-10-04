@@ -6,7 +6,7 @@ import PushNotification from 'react-native-push-notification'
 
 import { useStores, useStyles, useTheme } from '~/hooks'
 import { BloopSound, ChimeSound } from '~/assets/sounds'
-import { TaskList } from '~/containers'
+import TaskList from '~/containers/TaskList'
 
 import styles from './styles'
 

@@ -4,7 +4,7 @@ const styles = (theme) => {
       position: 'absolute',
       bottom: 0,
       width: '100%',
-      backgroundColor: theme.colors.white,
+      backgroundColor: theme.dynamics.background,
     },
 
     itemContainer: {
@@ -12,7 +12,7 @@ const styles = (theme) => {
       alignItems: 'center',
       height: theme.globals.taskItemHeight,
       paddingHorizontal: theme.globals.horizontalGutter,
-      backgroundColor: theme.colors.white,
+      backgroundColor: theme.dynamics.background,
     },
 
     dot: {
@@ -41,6 +41,7 @@ const styles = (theme) => {
       marginTop: 0,
       fontSize: 16,
       fontWeight: theme.weights.regular,
+      color: theme.dynamics.foreground,
     },
 
   }
