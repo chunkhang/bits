@@ -13,6 +13,13 @@
       "title": "Clear Tasks",
       "message": "Are you sure you want to clear all done tasks?",
       "confirm": "Clear"
+    },
+    "debug": {
+      "title": "Debug",
+      "message": "Choose an action to perform.",
+      "action": {
+        "reset": "Reset App"
+      }
     }
   },
   "screen": {

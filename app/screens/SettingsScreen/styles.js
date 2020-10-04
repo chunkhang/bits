@@ -34,6 +34,12 @@ const styles = (theme) => {
       justifyContent: 'center',
     },
 
+    versionContainer: {
+      flex: 1,
+      justifyContent: 'center',
+      paddingHorizontal: 16,
+    },
+
     version: {
       opacity: theme.globals.blurOpacity,
       fontWeight: theme.weights.regular,

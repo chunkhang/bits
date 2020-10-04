@@ -6,11 +6,12 @@ import {
   View,
   TouchableWithoutFeedback,
   NativeModules,
+  Alert,
 } from 'react-native'
 import { Text } from 'react-native-elements'
 import { observer } from 'mobx-react'
 import I18n from 'i18n-js'
-import { LongPressGestureHandler } from 'react-native-gesture-handler'
+import { LongPressGestureHandler, State } from 'react-native-gesture-handler'
 import AsyncStorage from '@react-native-community/async-storage'
 
 import { useStyles, useTheme, useStores } from '~/hooks'
@@ -88,10 +89,27 @@ const SettingsScreen = () => {
 
   const [longPressDuration] = useState(1000)
 
-  const onLongPressVersion = async () => {
-    if (!__DEV__) return
-    await AsyncStorage.clear()
-    NativeModules.DevSettings.reload()
+  const onLongPressVersion = async (event) => {
+    if (!__DEV__ || event.nativeEvent.state !== State.ACTIVE) return
+    Alert.alert(
+      I18n.t('alert.debug.title'),
+      I18n.t('alert.debug.message'),
+      [
+        {
+          text: I18n.t('alert.debug.action.reset'),
+          style: 'destructive',
+          onPress: async () => {
+            await AsyncStorage.clear()
+            NativeModules.DevSettings.reload()
+          },
+        },
+        {
+          text: I18n.t('general.cancel'),
+          style: 'cancel',
+          onPress: () => null,
+        },
+      ],
+    )
   }
 
   return (
@@ -109,9 +127,11 @@ const SettingsScreen = () => {
           onHandlerStateChange={onLongPressVersion}
           minDurationMs={longPressDuration}
         >
-          <Text style={classes.version}>
-            {config.version}
-          </Text>
+          <View style={classes.versionContainer}>
+            <Text style={classes.version}>
+              {config.version}
+            </Text>
+          </View>
         </LongPressGestureHandler>
       </View>
     </View>
