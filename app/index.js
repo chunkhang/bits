@@ -48,7 +48,3 @@ const App = () => {
 }
 
 export default App
-
-export {
-  StoreContext,
-}
