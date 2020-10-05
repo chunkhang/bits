@@ -53,6 +53,6 @@
     "eslint-plugin-react": "^7.18.3",
     "eslint-plugin-react-hooks": "^2.4.0",
     "metro-react-native-babel-preset": "^0.59.0",
-    "reactotron-react-native": "^4.0.3"
+    "reactotron-react-native": "^5.0.0"
   }
 }
