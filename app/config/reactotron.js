@@ -2,6 +2,7 @@
 
 import { NativeModules } from 'react-native'
 import Reactotron from 'reactotron-react-native'
+import ReactotronFlipper from 'reactotron-react-native/dist/flipper'
 import AsyncStorage from '@react-native-community/async-storage'
 
 import app from '../../app.json'
@@ -13,7 +14,11 @@ if (__DEV__) {
 
   Reactotron
     .setAsyncStorageHandler(AsyncStorage)
-    .configure({ host, name: app.name })
+    .configure({
+      host,
+      name: app.name,
+      createSocket: (path) => new ReactotronFlipper(path),
+    })
     .useReactNative({
       asyncStorage: false,
       networking: {
