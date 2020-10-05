@@ -743,6 +743,7 @@
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Bits/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MARKETING_VERSION = 1.0.0;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -769,6 +770,7 @@
 				DEVELOPMENT_TEAM = 78C7P3WM63;
 				INFOPLIST_FILE = Bits/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MARKETING_VERSION = 1.0.0;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
