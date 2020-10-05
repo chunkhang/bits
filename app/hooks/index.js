@@ -2,11 +2,16 @@ import { useContext, useRef, useEffect } from 'react'
 import { DynamicValue, DynamicStyleSheet, useDynamicValue } from 'react-native-dynamic'
 import { ThemeContext } from 'react-native-elements'
 
-import { StoreContext } from '~/contexts'
+import { StoreContext, RealmContext } from '~/contexts'
 
 const useStores = () => {
   const stores = useContext(StoreContext)
   return stores
+}
+
+const useRealm = () => {
+  const realm = useContext(RealmContext)
+  return realm
 }
 
 const useTheme = () => {
@@ -44,6 +49,7 @@ const useTrackingRef = (value) => {
 
 export {
   useStores,
+  useRealm,
   useTheme,
   useStyles,
   usePrevious,
