@@ -18,6 +18,7 @@ import { SafeAreaView } from 'react-native-safe-area-context'
 import { useStyles, useTheme, useStores } from '~/hooks'
 import { BeepSound } from '~/assets/sounds'
 import config from '~/config'
+import database from '~/database'
 
 import styles from './styles'
 
@@ -95,6 +96,7 @@ const SettingsScreen = () => {
           style: 'destructive',
           onPress: async () => {
             await AsyncStorage.clear()
+            database.clear()
             NativeModules.DevSettings.reload()
           },
         },

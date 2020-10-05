@@ -9,6 +9,7 @@ import SplashScreen from 'react-native-splash-screen'
 import { StoreContext } from '~/contexts'
 import AppRouter from '~/router'
 import rootStore from '~/stores'
+import database from '~/database'
 import '~/i18n'
 
 import theme from './theme'
@@ -28,6 +29,7 @@ const App = () => {
 
   useEffect(() => {
     rootStore.rehydrate().finally(() => {
+      database.migrate()
       setLoading(false)
       setTimeout(() => {
         SplashScreen.hide()
