@@ -2,7 +2,7 @@ import { observable, action } from 'mobx'
 import { persist } from 'mobx-persist'
 import { v4 as uuidv4 } from 'uuid'
 
-class TaskStore {
+class TodayStore {
   constructor(rootStore) {
     this.rootStore = rootStore
   }
@@ -42,4 +42,4 @@ class TaskStore {
   }
 }
 
-export default TaskStore
+export default TodayStore
