@@ -11,7 +11,7 @@ import TaskList from '~/containers/TaskList'
 import styles from './styles'
 
 const TodayTasksScreen = () => {
-  const { upcomingStore, todayStore, doneStore, settingsStore } = useStores()
+  const { upcomingStore, todayStore, doneStore, settingsStore, taskStore } = useStores()
   const classes = useStyles(styles)
   const theme = useTheme()
 
@@ -58,11 +58,15 @@ const TodayTasksScreen = () => {
     ChimeSound.play()
   }
 
+  useEffect(() => {
+    taskStore.getTasks()
+  }, [])
+
   return (
     <View style={classes.mainContainer}>
       <TaskList
         color={theme.colors.yellow}
-        tasks={todayStore.tasks.slice()}
+        tasks={taskStore.tasks.slice()}
         onPressItem={onPressItem}
         sortEnabled
         onSort={onSort}

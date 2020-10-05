@@ -5,6 +5,7 @@ class Task {
     properties: {
       id: { type: 'string' },
       name: { type: 'string' },
+      created_at: { type: 'date', default: new Date() },
     },
   }
 

@@ -6,7 +6,7 @@ import { ColorSchemeProvider } from 'react-native-dynamic'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
 import SplashScreen from 'react-native-splash-screen'
 
-import { StoreContext, RealmContext } from '~/contexts'
+import { StoreContext, DatabaseContext } from '~/contexts'
 import AppRouter from '~/router'
 import rootStore from '~/stores'
 import database from '~/database'
@@ -25,21 +25,21 @@ PushNotification.configure({
 })
 
 const App = () => {
-  const [realm, setRealm] = useState(null)
+  const [db, setDatabase] = useState(null)
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     rootStore.rehydrate().finally(() => {
-      const newRealm = database.migrate()
-      setRealm(newRealm)
+      database.migrate()
+      setDatabase(database)
       setLoading(false)
       setTimeout(() => {
         SplashScreen.hide()
       }, 0)
     })
     return () => {
-      if (realm && !realm.isClosed) {
-        realm.close()
+      if (db && db.realm && !db.realm.isClosed) {
+        db.realm.close()
       }
     }
   }, [])
@@ -47,7 +47,7 @@ const App = () => {
   return (
     <NavigationContainer>
       <StoreContext.Provider value={rootStore}>
-        <RealmContext.Provider value={realm}>
+        <DatabaseContext.Provider value={db}>
           <ColorSchemeProvider>
             <ThemeProvider theme={theme}>
               <SafeAreaProvider>
@@ -57,7 +57,7 @@ const App = () => {
               </SafeAreaProvider>
             </ThemeProvider>
           </ColorSchemeProvider>
-        </RealmContext.Provider>
+        </DatabaseContext.Provider>
       </StoreContext.Provider>
     </NavigationContainer>
   )

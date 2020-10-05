@@ -15,10 +15,9 @@ import { LongPressGestureHandler, State } from 'react-native-gesture-handler'
 import AsyncStorage from '@react-native-community/async-storage'
 import { SafeAreaView } from 'react-native-safe-area-context'
 
-import { useStyles, useTheme, useStores } from '~/hooks'
+import { useStyles, useTheme, useStores, useDatabase } from '~/hooks'
 import { BeepSound } from '~/assets/sounds'
 import config from '~/config'
-import database from '~/database'
 
 import styles from './styles'
 
@@ -83,6 +82,7 @@ const SettingsScreen = () => {
     },
   ]
 
+  const database = useDatabase()
   const [longPressDuration] = useState(1000)
 
   const onLongPressVersion = async (event) => {

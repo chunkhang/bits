@@ -1,9 +1,9 @@
 import { createContext } from 'react'
 
 const StoreContext = createContext()
-const RealmContext = createContext()
+const DatabaseContext = createContext()
 
 export {
   StoreContext,
-  RealmContext,
+  DatabaseContext,
 }

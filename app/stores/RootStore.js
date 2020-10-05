@@ -7,6 +7,7 @@ import SettingsStore from './SettingsStore'
 import UpcomingStore from './UpcomingStore'
 import TodayStore from './TodayStore'
 import DoneStore from './DoneStore'
+import TaskStore from './TaskStore'
 
 class RootStore {
   constructor() {
@@ -18,6 +19,7 @@ class RootStore {
     this.upcomingStore = new UpcomingStore(this)
     this.todayStore = new TodayStore(this)
     this.doneStore = new DoneStore(this)
+    this.taskStore = new TaskStore(this)
   }
 
   rehydrate = () => {

@@ -12,7 +12,7 @@ import Header from '~/components/Header'
 import styles from './styles'
 
 const AddTaskScreen = ({ title }) => {
-  const { layoutStore, todayStore } = useStores()
+  const { layoutStore, taskStore } = useStores()
   const classes = useStyles(styles)
   const theme = useTheme()
 
@@ -29,7 +29,9 @@ const AddTaskScreen = ({ title }) => {
     const name = layoutStore.addTaskInput.trim()
     if (!name) return
 
-    todayStore.addTask({ name })
+    taskStore.createTask({
+      name,
+    })
 
     layoutStore.setAddTaskInput('')
 
