@@ -25,7 +25,6 @@
     "react-native": "0.63.2",
     "react-native-dynamic": "^1.0.0",
     "react-native-elements": "^1.2.7",
-    "react-native-flipper": "^0.60.0",
     "react-native-gesture-handler": "^1.6.0",
     "react-native-get-random-values": "^1.2.0",
     "react-native-push-notification": "^5.1.0",
@@ -54,6 +53,7 @@
     "eslint-plugin-react": "^7.18.3",
     "eslint-plugin-react-hooks": "^2.4.0",
     "metro-react-native-babel-preset": "^0.59.0",
+    "react-native-flipper": "^0.60.0",
     "reactotron-react-native": "^5.0.0"
   }
 }
