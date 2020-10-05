@@ -10,7 +10,9 @@ import DoneStore from './DoneStore'
 
 class RootStore {
   constructor() {
-    configure({ enforceActions: 'always' })
+    if (__DEV__) {
+      configure({ enforceActions: 'always' })
+    }
     this.layoutStore = new LayoutStore(this)
     this.settingsStore = new SettingsStore(this)
     this.upcomingStore = new UpcomingStore(this)
