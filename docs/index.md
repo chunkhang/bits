@@ -1,3 +1,0 @@
-# Bits
-
-Hello World
