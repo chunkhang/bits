@@ -1,0 +1,14 @@
+@import url("https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css");
+
+.header {
+  display: flex;
+  align-items: center;
+}
+
+.body {
+  background-color: #8dad6b;
+}
+
+.footer {
+  margin-top: -1.1rem;
+}
