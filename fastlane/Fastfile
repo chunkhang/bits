@@ -1,0 +1,42 @@
+# This file contains the fastlane.tools configuration
+# You can find the documentation at https://docs.fastlane.tools
+#
+# For a list of all available actions, check out
+#
+#     https://docs.fastlane.tools/actions
+#
+# For a list of all available plugins, check out
+#
+#     https://docs.fastlane.tools/plugins/available-plugins
+#
+
+# Uncomment the line if you want fastlane to automatically update itself
+# update_fastlane
+
+default_platform(:ios)
+
+platform :ios do
+  lane :staging do
+    sync_code_signing(type: "development", readonly: true)
+    increment_build_number(build_number: `date +%s`)
+    build_app(scheme: "Bits")
+  end
+
+  lane :release do
+    sync_code_signing(type: "appstore", readonly: true)
+    increment_build_number
+    build_app(scheme: "Bits")
+    changelog_from_git_commits
+    upload_to_testflight
+  end
+
+  lane :review do
+    upload_to_app_store
+  end
+end
+
+# TODO
+# - Move fastlane folder to root
+# - Setup code signing in CI
+# - Setup metadata for app store delivery
+# - Screenshots
