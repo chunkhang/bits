@@ -18,7 +18,7 @@ jobs:
         with:
           node-version: 12.16.1
 
-      - name: Use Ruby
+      - name: Use Ruby 2.7
         uses: actions/setup-ruby@v1
         with:
           ruby-version: 2.7
