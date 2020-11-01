@@ -5,6 +5,7 @@ on:
     branches:
       - master
       - develop
+      - feature/fastlane
   pull_request:
     branches:
       - develop
@@ -24,6 +25,18 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: 12.16.1
+
+      - name: Get npm cache directory
+        id: npm-cache
+        run: |
+          echo "::set-output name=dir::$(npm config get cache)"
+
+      - uses: actions/cache@v2
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
 
       - name: Install dependencies
         run: npm install
