@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - 'release/**'
-      - feature/fastlane
 
 jobs:
   release-ios:
@@ -22,7 +21,7 @@ jobs:
       - name: Use Ruby
         uses: actions/setup-ruby@v1
         with:
-          ruby-version: 2.7.1
+          ruby-version: 2.7
 
       - name: Install Node.js dependencies
         run: npm install
@@ -30,5 +29,5 @@ jobs:
       - name: Install Ruby dependencies
         run: bundle install
 
-      - name: Run fastlane release
-        run: bundle exec fastlane release
+      - name: Run fastlane beta
+        run: bundle exec fastlane beta
