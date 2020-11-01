@@ -26,12 +26,13 @@ platform :ios do
     desc "Bump #{part} version"
     lane "bump_#{part}".to_sym do
       sh("npm version #{part} --no-git-tag-version")
-      increment_version_number(
+      new_version = increment_version_number(
         xcodeproj: xcodeproj,
         bump_type: part
       )
       commit_version_bump(
         xcodeproj: xcodeproj,
+        message: "Bump version to #{new_version}"
       )
     end
   end
