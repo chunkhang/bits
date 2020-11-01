@@ -32,6 +32,7 @@ platform :ios do
       )
       commit_version_bump(
         xcodeproj: xcodeproj,
+        include: %w(package.json package-lock.json),
         message: "Bump version to #{new_version}"
       )
     end
