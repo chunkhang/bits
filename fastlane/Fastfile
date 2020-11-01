@@ -28,7 +28,6 @@ platform :ios do
     :scheme => "Bits",
     :build_directory => "./ios/build",
     :build_name => "bits.ipa",
-    :readonly => is_ci,
   }
 
   desc "Build and archive app"
@@ -39,7 +38,7 @@ platform :ios do
       app_identifier: options[:release] ?
         config[:app_identifier][:release] :
         config[:app_identifier][:debug],
-      readonly: config[:readonly]
+      readonly: is_ci,
     )
     build_ios_app(
       configuration: options[:release] ?
