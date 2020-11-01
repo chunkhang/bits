@@ -8,7 +8,15 @@
   },
   "scripts": {
     "start": "react-native start",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "fastlane": "bundle exec fastlane",
+    "install": "bundle exec fastlane install",
+    "major": "bundle exec fastlane major",
+    "minor": "bundle exec fastlane minor",
+    "patch": "bundle exec fastlane patch",
+    "beta": "bundle exec fastlane beta",
+    "release": "bundle exec fastlane release",
+    "clean": "bundle exec fastlane clean"
   },
   "dependencies": {
     "@react-native-community/async-storage": "^1.8.0",
