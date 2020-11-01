@@ -18,40 +18,26 @@ default_platform(:ios)
 platform :ios do
   xcodeproj = "./ios/Bits.xcodeproj"
 
-  lane :major do
-    increment_version_number(
-      xcodeproj: xcodeproj,
-      bump_type: "major"
-    )
-    commit
+  # TODO: develop lane
+
+  %w(major minor patch).each do |part|
+    desc "Bump #{part} version"
+    lane "bump_#{part}".to_sym do
+      increment_version_number(
+        xcodeproj: xcodeproj,
+        bump_type: part
+      )
+      commit_version_bump(
+        xcodeproj: xcodeproj,
+      )
+    end
   end
 
-  lane :minor do
-    increment_version_number(
-      xcodeproj: xcodeproj,
-      bump_type: "minor"
-    )
-    commit
-  end
-
-  lane :patch do
-    increment_version_number(
-      xcodeproj: xcodeproj,
-      bump_type: "patch"
-    )
-    commit
-  end
-
-  private_lane :commit do
-    commit_version_bump(
-      xcodeproj: xcodeproj,
-    )
-  end
-
+  desc "Upload build to TestFlight"
   lane :release do
-    ensure_git_branch(
-      branch: "^release/.*$"
-    )
+    # ensure_git_branch(
+    #   branch: "^release/.*$"
+    # )
     sync_code_signing(
       type: "appstore",
       readonly: true
@@ -70,7 +56,5 @@ platform :ios do
     upload_to_testflight
   end
 
-  # lane :review do
-  #   upload_to_app_store
-  # end
+  # TODO: Submit lane
 end
