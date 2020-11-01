@@ -26,6 +26,9 @@ jobs:
         with:
           node-version: 12.16.1
 
+      - name: Check cache
+        run: ls ~/.npm
+
       - uses: actions/cache@v2
         with:
           path: ~/.npm
@@ -34,7 +37,7 @@ jobs:
             ${{ runner.os }}-node-
 
       - name: Install dependencies
-        run: npm install
+        run: npm ci
 
       - name: Check cache
         run: ls ~/.npm
