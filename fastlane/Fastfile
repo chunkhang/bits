@@ -52,7 +52,7 @@ platform :ios do
       clean: true,
       silent: true,
     )
-    sh "rm -r '#{lane_context[SharedValues::XCODEBUILD_ARCHIVE]}'"
+    sh "rm -rf '#{lane_context[SharedValues::XCODEBUILD_ARCHIVE]}'"
   end
 
   desc "Install new build to device"
