@@ -16,6 +16,38 @@
 default_platform(:ios)
 
 platform :ios do
+  xcodeproj = "./ios/Bits.xcodeproj"
+
+  lane :major do
+    increment_version_number(
+      xcodeproj: xcodeproj,
+      bump_type: "major"
+    )
+    commit
+  end
+
+  lane :minor do
+    increment_version_number(
+      xcodeproj: xcodeproj,
+      bump_type: "minor"
+    )
+    commit
+  end
+
+  lane :patch do
+    increment_version_number(
+      xcodeproj: xcodeproj,
+      bump_type: "patch"
+    )
+    commit
+  end
+
+  private_lane :commit do
+    commit_version_bump(
+      xcodeproj: xcodeproj,
+    )
+  end
+
   lane :release do
     ensure_git_branch(
       branch: "^release/.*$"
@@ -25,11 +57,11 @@ platform :ios do
       readonly: true
     )
     increment_build_number(
-      xcodeproj: "./ios/Bits.xcodeproj",
+      xcodeproj: xcodeproj,
       build_number: `date +%s`
     )
     build_ios_app(
-      project: "./ios/Bits.xcodeproj",
+      project: xcodeproj,
       scheme: "Bits",
     )
     changelog_from_git_commits(

@@ -16,14 +16,14 @@ or alternatively using `brew install fastlane`
 
 # Available Actions
 ## iOS
+### ios minor
+```
+fastlane ios minor
+```
+
 ### ios release
 ```
 fastlane ios release
-```
-
-### ios review
-```
-fastlane ios review
 ```
 
 
