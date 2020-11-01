@@ -132,4 +132,10 @@ platform :ios do
       submit_for_review: true,
     )
   end
+
+  desc "Clean up build artifacts"
+  lane :clean do
+    sh "rm -rf #{config[:build_directory]}"
+    clear_derived_data
+  end
 end
