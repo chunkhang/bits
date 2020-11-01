@@ -13,50 +13,91 @@
 # Uncomment the line if you want fastlane to automatically update itself
 # update_fastlane
 
+skip_docs
+
 default_platform(:ios)
 
 platform :ios do
-  xcodeproj = "./ios/Bits.xcodeproj"
+  config = {
+    :app_identifier => {
+      :debug => "com.chunkhang.bits.debug",
+      :release => "com.chunkhang.bits",
+    },
+    :project => "./ios/Bits.xcodeproj",
+    :workspace => "./ios/Bits.xcworkspace",
+    :scheme => "Bits",
+    :build_directory => "./ios/build",
+    :build_name => "bits.ipa",
+    :readonly => is_ci,
+  }
 
-  skip_docs
+  desc "Build and archive app"
+  private_lane :build do |options|
+    sync_code_signing(
+      type: options[:release] ?
+        "appstore" : "development",
+      app_identifier: options[:release] ?
+        config[:app_identifier][:release] :
+        config[:app_identifier][:debug],
+      readonly: config[:readonly]
+    )
+    build_ios_app(
+      configuration: options[:release] ?
+        "Release" : "Debug",
+      export_method: options[:release] ?
+        "app-store" : "development",
+      workspace: config[:workspace],
+      scheme: config[:scheme],
+      output_directory: config[:build_directory],
+      output_name: config[:build_name],
+      clean: true,
+      silent: true,
+    )
+    sh("rm -r '#{lane_context[SharedValues::XCODEBUILD_ARCHIVE]}'")
+  end
 
-  # TODO: develop lane
+  desc "Install app onto device"
+  lane :install do
+    build(release: false)
+    install_on_device(
+      ipa: "#{config[:build_directory]}/#{config[:build_name]}",
+      skip_wifi: true,
+    )
+  end
 
   %w(major minor patch).each do |part|
     desc "Bump #{part} version"
-    lane "bump_#{part}".to_sym do
+    lane part.to_sym do
       sh("npm version #{part} --no-git-tag-version")
       new_version = increment_version_number(
-        xcodeproj: xcodeproj,
-        bump_type: part
+        xcodeproj: config[:project],
+        bump_type: part,
       )
       commit_version_bump(
-        xcodeproj: xcodeproj,
+        xcodeproj: config[:project],
         include: %w(package.json package-lock.json),
-        message: "Bump version to #{new_version}"
+        message: "Bump version to #{new_version}",
       )
     end
   end
 
   desc "Upload build to TestFlight"
-  lane :release do
-    sync_code_signing(
-      type: "appstore",
-      readonly: true
-    )
+  lane :beta do
+    build(release: true)
     increment_build_number(
-      xcodeproj: xcodeproj,
-      build_number: `date +%s`
-    )
-    build_ios_app(
-      project: xcodeproj,
-      scheme: "Bits",
+      xcodeproj: config[:project],
+      build_number: `date +%s`,
     )
     changelog_from_git_commits(
-      merge_commit_filtering: "exclude_merges"
+      merge_commit_filtering: "exclude_merges",
     )
-    upload_to_testflight
+    upload_to_testflight(
+      ipa: "#{config[:build_directory]}/#{config[:build_name]}",
+    )
   end
 
-  # TODO: Submit lane
+  # desc "Promote latest build to App Store"
+  # lane :release do
+  #   upload_to_apps_store
+  # end
 end
