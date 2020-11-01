@@ -25,6 +25,7 @@ platform :ios do
   %w(major minor patch).each do |part|
     desc "Bump #{part} version"
     lane "bump_#{part}".to_sym do
+      sh("npm version #{part} --no-git-tag-version")
       increment_version_number(
         xcodeproj: xcodeproj,
         bump_type: part
@@ -37,9 +38,6 @@ platform :ios do
 
   desc "Upload build to TestFlight"
   lane :release do
-    # ensure_git_branch(
-    #   branch: "^release/.*$"
-    # )
     sync_code_signing(
       type: "appstore",
       readonly: true
