@@ -36,5 +36,8 @@ jobs:
       - name: Install dependencies
         run: npm install
 
+      - name: Check cache
+        run: ls ~/.npm
+
       - name: Lint
         run: npm run lint
