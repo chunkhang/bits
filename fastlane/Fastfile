@@ -1,0 +1,141 @@
+# This file contains the fastlane.tools configuration
+# You can find the documentation at https://docs.fastlane.tools
+#
+# For a list of all available actions, check out
+#
+#     https://docs.fastlane.tools/actions
+#
+# For a list of all available plugins, check out
+#
+#     https://docs.fastlane.tools/plugins/available-plugins
+#
+
+# Uncomment the line if you want fastlane to automatically update itself
+# update_fastlane
+
+skip_docs
+
+default_platform(:ios)
+
+platform :ios do
+  config = {
+    :app_identifier => {
+      :debug => "com.chunkhang.bits.debug",
+      :release => "com.chunkhang.bits",
+    },
+    :project => "./ios/Bits.xcodeproj",
+    :workspace => "./ios/Bits.xcworkspace",
+    :scheme => "Bits",
+    :build_directory => "./ios/build",
+    :build_name => "bits.ipa",
+  }
+
+  desc "Build and archive app"
+  private_lane :build do |options|
+    sync_code_signing(
+      type: options[:release] ?
+        "appstore" : "development",
+      app_identifier: options[:release] ?
+        config[:app_identifier][:release] :
+        config[:app_identifier][:debug],
+      readonly: is_ci,
+    )
+    build_ios_app(
+      configuration: options[:release] ?
+        "Release" : "Debug",
+      export_method: options[:release] ?
+        "app-store" : "development",
+      workspace: config[:workspace],
+      scheme: config[:scheme],
+      output_directory: config[:build_directory],
+      output_name: config[:build_name],
+      clean: true,
+      silent: true,
+    )
+    sh "rm -r '#{lane_context[SharedValues::XCODEBUILD_ARCHIVE]}'"
+  end
+
+  desc "Install new build to device"
+  lane :install do
+    build(release: false)
+    install_on_device(
+      ipa: "#{config[:build_directory]}/#{config[:build_name]}",
+      skip_wifi: true,
+    )
+  end
+
+  %w(major minor patch).each do |part|
+    desc "Bump #{part} version"
+    lane part.to_sym do
+      ensure_git_status_clean
+      sh "npm version #{part} --no-git-tag-version"
+      new_version = increment_version_number(
+        xcodeproj: config[:project],
+        bump_type: part,
+      )
+      commit_version_bump(
+        xcodeproj: config[:project],
+        include: %w(package.json package-lock.json),
+        message: "Bump version to #{new_version}",
+      )
+    end
+  end
+
+  desc "Upload new build to TestFlight"
+  lane :beta do
+    ensure_git_status_clean
+    increment_build_number(
+      xcodeproj: config[:project],
+      build_number: `date +%s`,
+    )
+    build(release: true)
+    upload_to_testflight(
+      ipa: "#{config[:build_directory]}/#{config[:build_name]}",
+      skip_waiting_for_build_processing: true,
+    )
+    reset_git_repo
+  end
+
+  desc "Promote latest TestFlight build to App Store"
+  lane :release do
+    version = get_version_number(
+      xcodeproj: config[:project],
+      target: config[:scheme],
+    )
+    build_number = latest_testflight_build_number(
+      version: version,
+      initial_build_number: 0,
+    )
+    if build_number == 0
+      UI.error "No build found for version #{version} on TestFlight"
+      next
+    end
+    release_notes = prompt(
+      text: "What's New in This Version:",
+      multi_line_end_keyword: "END",
+    )
+    upload_to_app_store(
+      app_version: version,
+      build_number: build_number.to_s,
+      run_precheck_before_submit: false,
+      force: true,
+      skip_metadata: false,
+      skip_screenshots: true,
+      skip_binary_upload: true,
+      submission_information: {
+        add_id_info_uses_idfa: false,
+      },
+      release_notes: {
+        "en-US": release_notes,
+      },
+      automatic_release: true,
+      submit_for_review: true,
+    )
+  end
+
+  desc "Clean up build artifacts"
+  lane :clean do
+    sh "rm -rf #{config[:build_directory]}"
+    clear_derived_data
+  end
+end
