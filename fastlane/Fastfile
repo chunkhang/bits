@@ -93,7 +93,9 @@ platform :ios do
       ipa: "#{config[:build_directory]}/#{config[:build_name]}",
       skip_waiting_for_build_processing: true,
     )
-    reset_git_repo
+    reset_git_repo(
+      skip_clean: true,
+    )
   end
 
   desc "Promote latest TestFlight build to App Store"
