@@ -5,6 +5,12 @@ on:
     branches:
       - master
       - develop
+  pull_request:
+    branches:
+      - develop
+    types:
+      - opened
+      - synchronize
 
 jobs:
   build:
