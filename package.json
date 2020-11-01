@@ -10,7 +10,7 @@
     "start": "react-native start",
     "lint": "eslint .",
     "fastlane": "bundle exec fastlane",
-    "install": "bundle exec fastlane install",
+    "build": "bundle exec fastlane install",
     "major": "bundle exec fastlane major",
     "minor": "bundle exec fastlane minor",
     "patch": "bundle exec fastlane patch",
