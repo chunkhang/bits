@@ -85,11 +85,11 @@ platform :ios do
   desc "Upload build to TestFlight"
   lane :beta do
     ensure_git_status_clean
-    build(release: true)
     increment_build_number(
       xcodeproj: config[:project],
       build_number: `date +%s`,
     )
+    build(release: true)
     upload_to_testflight(
       ipa: "#{config[:build_directory]}/#{config[:build_name]}",
     )
