@@ -16,11 +16,6 @@ or alternatively using `brew install fastlane`
 
 # Available Actions
 ## iOS
-### ios staging
-```
-fastlane ios staging
-```
-
 ### ios release
 ```
 fastlane ios release
