@@ -68,6 +68,7 @@ platform :ios do
   %w(major minor patch).each do |part|
     desc "Bump #{part} version"
     lane part.to_sym do
+      ensure_git_status_clean
       sh("npm version #{part} --no-git-tag-version")
       new_version = increment_version_number(
         xcodeproj: config[:project],
@@ -83,17 +84,16 @@ platform :ios do
 
   desc "Upload build to TestFlight"
   lane :beta do
+    ensure_git_status_clean
     build(release: true)
     increment_build_number(
       xcodeproj: config[:project],
       build_number: `date +%s`,
     )
-    changelog_from_git_commits(
-      merge_commit_filtering: "exclude_merges",
-    )
     upload_to_testflight(
       ipa: "#{config[:build_directory]}/#{config[:build_name]}",
     )
+    reset_git_repo
   end
 
   # desc "Promote latest build to App Store"
