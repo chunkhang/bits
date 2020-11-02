@@ -78,7 +78,7 @@ const TaskDetailScreen = ({
         <View style={classes.itemContainer}>
           <View style={[classes.dot, { backgroundColor: color }]} />
           <Input
-            value={value}
+            defaultValue={originalValue}
             onChangeText={onChangeText}
             onSubmitEditing={onSubmitEditing}
             returnKeyType="done"
