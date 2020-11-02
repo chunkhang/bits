@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import PropTypes from 'prop-types'
 import { KeyboardAvoidingView, Keyboard, View } from 'react-native'
 import { Input } from 'react-native-elements'
@@ -16,6 +16,8 @@ const AddTaskScreen = ({ title }) => {
   const classes = useStyles(styles)
   const theme = useTheme()
 
+  const [originalValue] = useState(layoutStore.addTaskInput)
+
   const inputRef = useRef(null)
   useEffect(() => {
     inputRef.current.focus()
@@ -31,6 +33,7 @@ const AddTaskScreen = ({ title }) => {
 
     todayStore.addTask({ name })
 
+    inputRef.current.setNativeProps({ text: '' })
     layoutStore.setAddTaskInput('')
 
     DingSound.play()
@@ -58,7 +61,7 @@ const AddTaskScreen = ({ title }) => {
             ]}
           />
           <Input
-            value={layoutStore.addTaskInput}
+            defaultValue={originalValue}
             onChangeText={onChangeText}
             onSubmitEditing={onSubmitEditing}
             clearButtonMode="while-editing"
