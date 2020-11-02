@@ -1,6 +1,6 @@
 {
   "name": "Bits",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "private": true,
   "engines": {
     "node": "12.16.1",
@@ -10,7 +10,7 @@
     "start": "react-native start",
     "lint": "eslint .",
     "fastlane": "bundle exec fastlane",
-    "install": "bundle exec fastlane install",
+    "build": "bundle exec fastlane install",
     "major": "bundle exec fastlane major",
     "minor": "bundle exec fastlane minor",
     "patch": "bundle exec fastlane patch",
