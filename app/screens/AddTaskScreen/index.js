@@ -31,10 +31,10 @@ const AddTaskScreen = ({ title }) => {
     const name = layoutStore.addTaskInput.trim()
     if (!name) return
 
-    todayStore.addTask({ name })
-
     inputRef.current.setNativeProps({ text: '' })
     layoutStore.setAddTaskInput('')
+
+    todayStore.addTask({ name })
 
     DingSound.play()
   }
