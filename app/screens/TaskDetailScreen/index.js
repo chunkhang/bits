@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import PropTypes from 'prop-types'
 import {
   ScrollView,
@@ -37,6 +37,8 @@ const TaskDetailScreen = ({
     })
   }, [])
 
+  const inputRef = useRef(null)
+
   const [originalValue, setOriginalValue] = useState('')
   const [value, setValue] = useState('')
 
@@ -65,6 +67,7 @@ const TaskDetailScreen = ({
   const onSubmitEditing = () => {
     if (!value.trim()) {
       setValue(originalValue)
+      inputRef.current.setNativeProps({ text: originalValue })
     }
   }
 
@@ -78,13 +81,14 @@ const TaskDetailScreen = ({
         <View style={classes.itemContainer}>
           <View style={[classes.dot, { backgroundColor: color }]} />
           <Input
-            value={value}
+            defaultValue={originalValue}
             onChangeText={onChangeText}
             onSubmitEditing={onSubmitEditing}
             returnKeyType="done"
             containerStyle={classes.containerStyle}
             inputContainerStyle={classes.inputContainerStyle}
             inputStyle={classes.inputStyle}
+            ref={inputRef}
           />
         </View>
       </ScrollView>
