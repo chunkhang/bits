@@ -112,10 +112,26 @@ platform :ios do
       UI.error "No build found for version #{version} on TestFlight"
       next
     end
-    release_notes = prompt(
-      text: "What's New in This Version:",
-      multi_line_end_keyword: "END",
-    )
+    header = <<~HEREDOC
+      Thank you for using Bits. \
+      Every new version brings new improvements and bug fixes.
+    HEREDOC
+    release_notes_parts = [header]
+    improvements = prompt(
+      text: "List improvements for this version (separate with newline):",
+      multi_line_end_keyword: ".",
+    ).split("\n").map { |line| "• New: #{line}" }
+    if improvements.length > 0
+      release_notes_parts.append(improvements.join("\n"))
+    end
+    fixes = prompt(
+      text: "List fixes for this version (separate with newline):",
+      multi_line_end_keyword: ".",
+    ).split("\n").map { |line| "• Fixed: #{line}" }
+    if fixes.length > 0
+      release_notes_parts.append(fixes.join("\n"))
+    end
+    release_notes = release_notes_parts.join("\n")
     upload_to_app_store(
       app_version: version,
       build_number: build_number.to_s,
