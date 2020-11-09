@@ -22,6 +22,12 @@ const BackButton = () => {
     <TouchableOpacity
       style={classes.iconContainer}
       onPress={onPress}
+      hitSlop={{
+        left: 20,
+        right: 20,
+        top: 10,
+        bottom: 10,
+      }}
     >
       <Icon
         type="feather"

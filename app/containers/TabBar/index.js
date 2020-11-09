@@ -5,9 +5,9 @@ import {
   PanResponder,
   Animated,
   TouchableWithoutFeedback,
+  TouchableOpacity,
   useWindowDimensions,
 } from 'react-native'
-import { Button } from 'react-native-elements'
 import { observer } from 'mobx-react'
 import { Actions } from 'react-native-router-flux'
 import { SafeAreaView } from 'react-native-safe-area-context'
@@ -148,20 +148,22 @@ const TabBar = ({ navigation }) => {
                   >
                     <View style={classes.tabContainer}>
                       {i === 1 ? (
-                        <Button
-                          icon={(
+                        <TouchableOpacity
+                          style={classes.addButtonContainer}
+                          onPress={onPressAdd}
+                          disabled={navigation.state.index !== i}
+                        >
+                          <View
+                            style={[
+                              classes.button,
+                              { backgroundColor, opacity },
+                            ]}
+                          >
                             <PlusIcon
                               size={theme.globals.tabBarHeight / 2}
                             />
-                          )}
-                          buttonStyle={[
-                            classes.button,
-                            { backgroundColor, opacity },
-                          ]}
-                          onPress={onPressAdd}
-                          disabled={navigation.state.index !== i}
-                          disabledStyle={{ backgroundColor }}
-                        />
+                          </View>
+                        </TouchableOpacity>
                       ) : (
                         <View
                           style={[

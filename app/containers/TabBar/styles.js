@@ -43,6 +43,13 @@ const styles = (theme) => {
       borderRadius: 4,
       width: theme.globals.tabBarHeight,
       height: theme.globals.tabBarHeight,
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
+
+    addButtonContainer: {
+      flex: 1,
+      alignItems: 'center',
     },
   }
 }
